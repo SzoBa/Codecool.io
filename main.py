@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO, join_room, leave_room, emit
+import json
+import queries
 
 
 app = Flask(__name__)
@@ -20,6 +22,13 @@ def game():
 @app.route('/room')
 def room():
     return render_template('room.html')
+
+
+@socketio.on('create-room')
+def create_room(data):
+    username = json.loads(data)['username']
+    queries.insert_new_user(username)
+    queries.insert_new_room()
 
 
 if __name__ == '__main__':
