@@ -19,11 +19,22 @@ def room():
 def create_room(data):
     player_name = data['username']
     room_id = queries.insert_new_room()
-    player_id = queries.insert_new_player(player_name, room_id)
+    player_id = queries.insert_new_player(player_name, room_id, is_drawer=True)
     join_room(room_id)
     response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
     emit('own-room-created', response_data)
     emit('new-room-created', response_data, broadcast=True, include_self=False)
+
+
+@socketio.on('join-room')
+def join_to_room(data):
+    player_name = data['username']
+    room_id = data['room_id']
+    player_id = queries.insert_new_player(player_name, room_id)
+    join_room(room_id)
+    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
+    emit('player-joined-my-room', response_data)
+    emit('joined-to-room', response_data, broadcast=True, include_self=False)
 
 
 @app.route('/game')
