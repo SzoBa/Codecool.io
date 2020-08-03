@@ -1,9 +1,9 @@
-ALTER TABLE IF EXISTS ONLY public.user DROP CONSTRAINT IF EXISTS pk_user_id CASCADE;
+ALTER TABLE IF EXISTS ONLY public.player DROP CONSTRAINT IF EXISTS pk_player_id CASCADE;
 ALTER TABLE IF EXISTS ONLY public.room DROP CONSTRAINT IF EXISTS pk_room_id CASCADE;
-ALTER TABLE IF EXISTS ONLY public.user DROP CONSTRAINT IF EXISTS fk_room_id CASCADE;
+ALTER TABLE IF EXISTS ONLY public.player DROP CONSTRAINT IF EXISTS fk_room_id CASCADE;
 
-DROP TABLE IF EXISTS public.user;
-CREATE TABLE user (
+DROP TABLE IF EXISTS public.player;
+CREATE TABLE player (
     id serial NOT NULL,
     name text,
     password text,
@@ -22,11 +22,11 @@ CREATE TABLE room (
     is_open boolean NOT NULL DEFAULT true
 );
 
-ALTER TABLE ONLY user
-    ADD CONSTRAINT pk_user_id PRIMARY KEY (id);
+ALTER TABLE ONLY player
+    ADD CONSTRAINT pk_player_id PRIMARY KEY (id);
 
 ALTER TABLE ONLY room
     ADD CONSTRAINT pk_room_id PRIMARY KEY (id);
 
-ALTER TABLE ONLY user
+ALTER TABLE ONLY player
     ADD CONSTRAINT fk_room_id FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE;
