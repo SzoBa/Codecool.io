@@ -9,9 +9,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/design')
+@app.route('/game')
 def design():
-    return render_template('design.html')
+    return render_template('game-page.html')
 
 
 def main():
