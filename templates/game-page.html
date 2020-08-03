@@ -28,6 +28,7 @@
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/gameplay.css') }}">
 
 </head>
 
@@ -47,22 +48,36 @@
         <h1 class="title text-center">Game</h1>
         <div class="card container">
             <div class="header">
-                <div class="time"></div>
-                <div class="word"></div>
+                <div class="time">Idő</div>
+                <div class="word">Hashed word</div>
+                <div class="empty">Empty</div>
             </div>
             <div class="body">
-                <div class="players-container"></div>
-                <div class="canvas-container">
-                    <canvas width="600" height="800"></canvas>
+                <div class="players-container">
+                    <div class="player">Player1</div>
+                    <div class="player">Player2</div>
+                    <div class="player">Player3</div>
                 </div>
-                <div class="extras"></div>
+                <div class="canvas-container">
+                    <div class="canvas"><canvas width="700" height="400"></canvas></div>
+                    <div class="extras">
+                        <div>Red</div>
+                        <div>Blue</div>
+                        <div>Green</div>
+                    </div>
+                </div>
+                <div class="chat-container">
+                    <div>Message1</div>
+                    <div>Message2</div>
+                    <div>Message3</div>
+                </div>
             </div>
-            <div class="chat-container"></div>
+
         </div>
     </section>
-    <footer>
+{#    <footer>
         Copyright, bla-bla
-    </footer>
+    </footer>#}
 </div>
 <div class="background">
     <div class="dark-blue-layer"></div>
