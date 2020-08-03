@@ -14,18 +14,23 @@ function init() {
 }
 
 function startDrawing(event) {
-    let mouseX = event.pageX - this.offsetLeft;
-    let mouseY = event.pageY - this.offsetTop;
-
+    // let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
+    // let mouseY = event.pageY - document.querySelector('.card').offsetTop;
+    let cRect = document.querySelector("canvas").getBoundingClientRect();
+    let canvasX = Math.round(event.clientX - cRect.left);
+    let canvasY = Math.round(event.clientY - cRect.top);
     canvasElements.paint = true;
-    addClick(mouseX, mouseY);
+    addClick(canvasX, canvasY);
     draw();
 
 }
 
 function checkIfDrawing(event) {
+    let cRect = document.querySelector("canvas").getBoundingClientRect();
+    let canvasX = Math.round(event.clientX - cRect.left);
+    let canvasY = Math.round(event.clientY - cRect.top);
     if (canvasElements.paint) {
-        addClick(event.pageX - this.offsetLeft, event.pageY - this.offsetTop, true);
+        addClick(canvasX, canvasY, true);
         draw();
     }
 }
