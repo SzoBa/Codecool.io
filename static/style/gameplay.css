@@ -12,7 +12,7 @@ body {
 
 .players-container {
     width: 100px;
-    height: 900;
+    height: 900px;
     display: flex;
     flex-direction: column;
 }
