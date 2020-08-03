@@ -27,12 +27,22 @@ function addListenerToButton(socket) {
 
 function addSocketListenerCreatedRoom(socket) {
     socket.addEventListener('own-room-created', (event) => {
-        console.log(event.data);
-        let roomDiv = document.querySelector('#room_div').innerHTML = "";
+        console.log(event);
+        localStorage['player_id'] = event.player_id;
+        let roomDiv = document.querySelector('#room_div');
+        roomDiv.innerHTML = ""
+        let createTable = `
+        <button>Create Room</button>`
+        roomDiv.insertAdjacentHTML('beforeend', createTable);
 
     })
     socket.addEventListener('new-room-created', (event) => {
-        let roomDiv = document.querySelector('#room_div').innerHTML = "";
+        localStorage['player_id'] = event.player_id;
+        let roomDiv = document.querySelector('#room_div');
+        roomDiv.innerHTML = ""
+        let createTable = `
+        <button>Join Room</button>`
+        roomDiv.insertAdjacentHTML('beforeend', createTable);
 
     })
 }
