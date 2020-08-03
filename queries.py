@@ -18,7 +18,10 @@ def insert_new_room(cursor):
 def insert_new_player(cursor, player_name, room_id):
     query = '''
         INSERT INTO player
-        (name, room_id, is_drawer)
-        VALUES (%(username)s, %(room_id)s, TRUE)
+        (id, name, room_id, is_drawer)
+        VALUES (DEFAULT, %(username)s, %(room_id)s, TRUE)
+        RETURNING id
         '''
     cursor.execute(query, {'username': player_name, 'room_id': room_id})
+    return cursor.fetchone()['id']
+
