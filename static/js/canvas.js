@@ -14,8 +14,10 @@ function init() {
 }
 
 function startDrawing(event) {
-    let mouseX = event.pageX - this.offsetLeft;
-    let mouseY = event.pageY - this.offsetTop;
+    console.log(canvasElements.clickDrag)
+    console.log(canvasElements.clickX)
+    let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
+    let mouseY = event.pageY - document.querySelector('.card').offsetTop;
 
     canvasElements.paint = true;
     addClick(mouseX, mouseY);
@@ -25,7 +27,7 @@ function startDrawing(event) {
 
 function checkIfDrawing(event) {
     if (canvasElements.paint) {
-        addClick(event.pageX - this.offsetLeft, event.pageY - this.offsetTop, true);
+        addClick(event.pageX - document.querySelector('.card').offsetLeft, event.pageY - document.querySelector('.card').offsetTop, true);
         draw();
     }
 }
