@@ -10,6 +10,7 @@ function init() {
     })
 
     addListenerToButton(socket);
+    addSocketListenerCreatedRoom(socket);
 }
 
 
@@ -17,9 +18,33 @@ function addListenerToButton(socket) {
     let button = document.querySelector('#username_button')
     button.addEventListener('click', () => {
         let username = document.querySelector('#username').value;
-        localStorage['username'] = username;
-        let userdata = {'username': username};
-        socket.emit('create-room', userdata);
+        if (username) {
+            localStorage['username'] = username;
+            let userdata = {'username': username};
+            socket.emit('create-room', userdata);
+        }
     })
 
+}
+
+function addSocketListenerCreatedRoom(socket) {
+    socket.addEventListener('own-room-created', (event) => {
+        console.log(event);
+        localStorage['player_id'] = event.player_id;
+        let roomDiv = document.querySelector('#room_div');
+        roomDiv.innerHTML = ""
+        let createTable = `
+        <button>Create Room</button>`
+        roomDiv.insertAdjacentHTML('beforeend', createTable);
+
+    })
+    socket.addEventListener('new-room-created', (event) => {
+        localStorage['player_id'] = event.player_id;
+        let roomDiv = document.querySelector('#room_div');
+        roomDiv.innerHTML = ""
+        let createTable = `
+        <button>Join Room</button>`
+        roomDiv.insertAdjacentHTML('beforeend', createTable);
+
+    })
 }
