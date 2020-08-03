@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, join_room, leave_room, emit
 
 
 app = Flask(__name__)
+app.debug = True
 socketio = SocketIO(app)
 
 
