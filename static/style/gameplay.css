@@ -11,46 +11,100 @@
 }
 
 .header {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 5px;
 }
 
 .time, .empty {
-    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
     height: 50px;
-    background: red;
+    background: #C5D3F5;
+}
+
+.time {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.empty {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.time-number {
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .word {
-    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
     height: 50px;
-    background: #4c97ca;
+    background: #C5D3F5;
+    font: normal normal normal 30px/30px Montserrat, serif;
 }
 
 .body {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.players-container {
-    width: 20%;
+.players-container, .chat-container {
+    width: 260px;
     height: 450px;
     display: flex;
     flex-direction: column;
-    background: #777777;
+    background: #C5D3F5;
     align-items: center;
+    border-radius: 15px;
+}
+
+.players-container {
+    margin-right: 5px;
 }
 
 .player {
-    width: 90px;
+    width: 85%;
     height: 30px;
     border-radius: 5px;
     background: #4c97ca;
     color: #edf3f7;
     padding: 10px;
     margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.points {
+
+}
+
+.chat-container {
+    margin-left: 5px;
+}
+
+.message {
+
+}
+
+
 
 .drawing {
     display: flex;
@@ -58,11 +112,10 @@
 }
 
 .canvas-container {
-    width: 60%;
+    width: 800px;
 }
 
 .canvas {
-    /*width: 600px;*/
     height: 350px;
     background: lightcoral;
 }
@@ -73,10 +126,11 @@
     background: #4c97ca;
 }
 
+/*
 .chat-container {
-    width: 20%;
+    width: 260px;
     height: 450px;
     display: flex;
     flex-direction: column;
     background: blueviolet;
-}
+}*/
