@@ -26,9 +26,9 @@ def room():
 
 @socketio.on('create-room')
 def create_room(data):
-    username = json.loads(data)['username']
-    queries.insert_new_user(username)
-    queries.insert_new_room()
+    player_name = json.loads(data)['username']
+    room_id = queries.insert_new_room()
+    queries.insert_new_player(player_name, room_id)
 
 
 if __name__ == '__main__':
