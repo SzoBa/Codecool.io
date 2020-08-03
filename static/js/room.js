@@ -18,9 +18,11 @@ function addListenerToButton(socket) {
     let button = document.querySelector('#username_button')
     button.addEventListener('click', () => {
         let username = document.querySelector('#username').value;
-        localStorage['username'] = username;
-        let userdata = {'username': username};
-        socket.emit('create-room', userdata);
+        if (username) {
+            localStorage['username'] = username;
+            let userdata = {'username': username};
+            socket.emit('create-room', userdata);
+        }
     })
 
 }
