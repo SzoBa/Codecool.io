@@ -8,7 +8,18 @@ function init() {
     socket.addEventListener('close', (event) => {
         console.log('connection closed')
     })
+
+    addListenerToButton(socket);
 }
 
 
-// username: key - name
+function addListenerToButton(socket) {
+    let button = document.querySelector('#username_button')
+    button.addEventListener('click', () => {
+        let username = document.querySelector('#username').value;
+        localStorage['username'] = username;
+        let userdata = {'username': username};
+        socket.emit('create-room', userdata);
+    })
+
+}
