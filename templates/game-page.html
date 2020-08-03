@@ -46,7 +46,7 @@
         </div>
     </header>
     <section>
-        <h1 class="title text-center">Game</h1>
+        {#<h1 class="title text-center">Game</h1>#}
         <div class="card container">
             <div class="header">
                 <div class="time">Time:&nbsp;<span class="time-number">54</span>s left</div>
@@ -81,23 +81,83 @@
                     </div>
                 </div>
                 <div class="canvas-container">
-                    <div class="canvas"><canvas width="800" height="350"></canvas></div>
+                    <div class="canvas">
+                        <canvas width="800" height="390"></canvas>
+                    </div>
                     <div class="extras">
-                        <div>Red</div>
-                        <div>Blue</div>
-                        <div>Green</div>
+                        <div class="palette">
+                            <div class="line-1">
+                                <div class="white color-box"></div>
+                                <div class="lightgray color-box"></div>
+                                <div class="red color-box"></div>
+                                <div class="orange color-box"></div>
+                                <div class="yellow color-box"></div>
+                                <div class="green color-box"></div>
+                                <div class="blue color-box"></div>
+                                <div class="darker-blue-2 color-box"></div>
+                                <div class="purple color-box"></div>
+                                <div class="pink color-box"></div>
+                                <div class="brown color-box"></div>
+                            </div>
+                            <div class="line-2">
+                                <div class="black color-box"></div>
+                                <div class="gray color-box"></div>
+                                <div class="darkred color-box"></div>
+                                <div class="darkorange color-box"></div>
+                                <div class="dark-yellow color-box"></div>
+                                <div class="darkgreen color-box"></div>
+                                <div class="darker-blue-1 color-box"></div>
+                                <div class="dark-blue color-box"></div>
+                                <div class="dark-purple color-box"></div>
+                                <div class="dark-pink color-box"></div>
+                                <div class="dark-brown color-box"></div>
+                            </div>
+                        </div>
+                        <div class="draw-type">
+                            <div class="pen"><img src="{{ url_for('static', filename='canvas_img/pen.png') }}"
+                                                  width="40" height="40"></div>
+                            <div class="rubber"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
+                                                     width="40" height="40"></div>
+                        </div>
+                        <div class="sizes">
+                            <div class="size-box">
+                                <div class="size-five"></div>
+                            </div>
+                            <div class="size-box">
+                                <div class="size-ten"></div>
+                            </div>
+                            <div class="size-box">
+                                <div class="size-fifteen"></div>
+                            </div>
+                            <div class="size-box">
+                                <div class="size-twenty"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="chat-container">
                     <div class="message">Message1</div>
                     <div class="message">Message2</div>
                     <div class="message">Message3</div>
+                    <div class="message">Message4</div>
+                    <div class="message">Message5</div>
+                    <div class="message">This message is a bit longer to see the box size</div>
+                    <div class="message">Message7</div>
+                    <div class="message">Message8</div>
+                    <div class="message">Message9</div>
+                    <div class="message">Message10</div>
+                    <div class="message">Message11</div>
+                    <div class="message">Message12</div>
+                    <div class="message">Message13</div>
+                    <div class="message">Message14</div>
+                    <form class="input-field">
+                        <input type="text" id="text" name="text">
+                    </form>
                 </div>
-            </div>
 
-        </div>
+            </div>
     </section>
-{#    <footer>
+    {#    <footer>
         Copyright, bla-bla
     </footer>#}
 </div>
