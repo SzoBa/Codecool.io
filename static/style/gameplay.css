@@ -1,28 +1,55 @@
 /* Do not forget to add background.css too! */
 
-body {
+/*body {
     padding: 0;
     margin: 0;
-}
+}*/
 
 .container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.time, .empty {
+    width: 20%;
+    height: 50px;
+    background: red;
+}
+
+.word {
+    width: 60%;
+    height: 50px;
+    background: #4c97ca;
+}
+
+.body {
     display: flex;
     flex-direction: row;
 }
 
 .players-container {
-    width: 100px;
-    height: 900px;
+    width: 20%;
+    height: 450px;
     display: flex;
     flex-direction: column;
+    background: #777777;
+    align-items: center;
 }
 
 .player {
     width: 90px;
-    height: 50px;
+    height: 30px;
     border-radius: 5px;
     background: #4c97ca;
     color: #edf3f7;
+    padding: 10px;
+    margin: 10px;
 }
 
 .drawing {
@@ -30,19 +57,26 @@ body {
     flex-direction: column;
 }
 
+.canvas-container {
+    width: 60%;
+}
+
 .canvas {
-    width: 600px;
-    height: 800px;
+    /*width: 600px;*/
+    height: 350px;
+    background: lightcoral;
 }
 
 .extras {
-    width: 600px;
+    /*width: 600px;*/
     height: 100px;
+    background: #4c97ca;
 }
 
 .chat-container {
-    width: 100px;
-    height: 900px;
+    width: 20%;
+    height: 450px;
     display: flex;
     flex-direction: column;
+    background: blueviolet;
 }
