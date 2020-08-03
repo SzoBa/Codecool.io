@@ -16,10 +16,6 @@ def design():
     return render_template('design.html')
 
 
-def main():
-    app.run(debug=True)
-
-
 if __name__ == '__main__':
     socketio.run(app)
 
