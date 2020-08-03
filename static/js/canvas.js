@@ -14,8 +14,8 @@ function init() {
 }
 
 function startDrawing(event) {
-    let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
-    let mouseY = event.pageY - document.querySelector('.card').offsetTop;
+    // let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
+    // let mouseY = event.pageY - document.querySelector('.card').offsetTop;
     let cRect = document.querySelector("canvas").getBoundingClientRect();
     let canvasX = Math.round(event.clientX - cRect.left);
     let canvasY = Math.round(event.clientY - cRect.top);
