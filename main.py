@@ -1,7 +1,9 @@
 from flask import Flask, render_template, url_for
+from flask_socketio import SocketIO, join_room, leave_room, emit
 
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 
 @app.route('/')
@@ -24,5 +26,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    socketio.run(app)
 
