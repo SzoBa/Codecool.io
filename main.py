@@ -17,7 +17,7 @@ def room():
 
 @socketio.on('create-room')
 def create_room(data):
-    username = json.loads(data)['username']
+    username = data['username']
     queries.insert_new_user(username)
     queries.insert_new_room()
 

@@ -1,14 +1,6 @@
 init();
 
 function init() {
-    addSocket();
-    addListenerToButton();
-}
-
-
-// username: key - name
-
-function addSocket() {
     let socket = io('http://127.0.0.1:5000')
     socket.addEventListener('connect', (event) => {
         console.log('we are connected to server')
@@ -17,9 +9,11 @@ function addSocket() {
         console.log('connection closed')
     })
 
+    addListenerToButton(socket);
 }
 
-function addListenerToButton() {
+
+function addListenerToButton(socket) {
     let button = document.querySelector('#username_button')
     button.addEventListener('click', () => {
         let username = document.querySelector('#username').value;
