@@ -10,6 +10,7 @@ function init() {
     })
 
     addListenerToButton(socket);
+    addSocketListenerCreatedRoom(socket);
 }
 
 
@@ -22,4 +23,16 @@ function addListenerToButton(socket) {
         socket.emit('create-room', userdata);
     })
 
+}
+
+function addSocketListenerCreatedRoom(socket) {
+    socket.addEventListener('own-room-created', (event) => {
+        console.log(event.data);
+        let roomDiv = document.querySelector('#room_div').innerHTML = "";
+
+    })
+    socket.addEventListener('new-room-created', (event) => {
+        let roomDiv = document.querySelector('#room_div').innerHTML = "";
+
+    })
 }
