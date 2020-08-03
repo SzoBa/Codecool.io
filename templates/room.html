@@ -4,14 +4,33 @@
     <meta charset="UTF-8">
     <title>Rooms</title>
 
+{#    CSS for back-end testing purposes#}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/codecool-logo.png')  }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/room.css') }}">
+
+{#    CSS for back-end testing purposes#}
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" defer></script>
     <script type="module" src="{{ url_for('static', filename='js/room.js') }}" defer></script>
 </head>
 <body>
-    <div class="card" id="room_div">
-        <label for="username">Username:</label>
-        <input id="username" required>
-        <button type="button" id="username_button">Test button</button>
+    <div class="container">
+        <div id="current_room">
+            <p>Current room</p>
+        </div>
+        <div id="waiting_room">
+            <p>Waiting</p>
+        </div>
+        <div id="playing_room">
+            <p>Playing</p>
+        </div>
+    </div>
+    <div id="room_div" class="">
+        <div id="room_div_inner">
+            <label for="username">Username:</label>
+            <input id="username" required>
+            <button type="button" id="username_button">Set username</button>
+        </div>
     </div>
 </body>
 </html>
