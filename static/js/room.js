@@ -2,7 +2,6 @@ let socket = io('http://127.0.0.1:5000');
 init();
 
 function init() {
-
     addSocketConnectionListeners();
     addListenerToButton();
     addSocketListenerCreatedRoom();
@@ -14,8 +13,10 @@ function addSocketConnectionListeners() {
     });
     socket.addEventListener('close', () => {
         console.log('connection closed')
-    })
-
+    });
+    socket.addEventListener('save-my-id', (data) => {
+        localStorage.setItem('user_id', data)
+    });
 }
 
 function addListenerToButton() {
