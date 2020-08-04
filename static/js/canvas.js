@@ -81,6 +81,18 @@ function draw() {
         } else {
             context.moveTo(canvasElements.clickX[i] - 1, canvasElements.clickY[i]);
         }
+        let radius
+        if(canvasElements.drawSizes[i] === "small"){
+			radius = 2;
+		}else if(canvasElements.drawSizes[i] === "normal"){
+			radius = 5;
+		}else if(canvasElements.drawSizes[i] === "large"){
+			radius = 10;
+		}else if(canvasElements.drawSizes[i] === "huge"){
+			radius = 20;
+		}else{
+			radius = 0;
+		}
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
         context.strokeStyle = canvasElements.drawColors[i];
