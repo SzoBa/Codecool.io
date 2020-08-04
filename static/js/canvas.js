@@ -29,6 +29,10 @@ function changeDrawingColor(event) {
     canvasElements.currentColor = event.target.dataset.colour;
 }
 
+function changeDrawingSize(event) {
+    canvasElements.currentSize = event.target.dataset.size;
+}
+
 function startDrawing(event) {
     // let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
     // let mouseY = event.pageY - document.querySelector('.card').offsetTop;
