@@ -14,16 +14,18 @@ let canvasElements = {
 
 function init() {
     let canvas = document.querySelector("canvas");
-    canvas.addEventListener('mousedown', startDrawing)
-    canvas.addEventListener('mousemove', checkIfDrawing)
-    canvas.addEventListener('mouseup', endDrawing)
-    canvas.addEventListener('mouseleave', endDrawing)
+    if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
+        canvas.addEventListener('mousedown', startDrawing)
+        canvas.addEventListener('mousemove', checkIfDrawing)
+        canvas.addEventListener('mouseup', endDrawing)
+        canvas.addEventListener('mouseleave', endDrawing)
+    }
     let colorBoxes = document.querySelectorAll(".color-box")
-    for (let colorBox of colorBoxes){
+    for (let colorBox of colorBoxes) {
         colorBox.addEventListener('click', changeDrawingColor)
     }
     let sizeBoxes = document.querySelectorAll('.size-box')
-    for (let sizeBox of sizeBoxes){
+    for (let sizeBox of sizeBoxes) {
         sizeBox.addEventListener('click', changeDrawingSize)
     }
     let changeMarkerBtns = document.querySelectorAll(".change-marker")
