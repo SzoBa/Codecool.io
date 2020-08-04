@@ -19,16 +19,17 @@ function addSocketConnectionListeners(socket) {
 
 function addListenerToButton(socket) {
     let button = document.querySelector('#username_button')
-    button.addEventListener('click', () => {
-        let username = document.querySelector('#username').value;
-        if (username) {
-            localStorage['username'] = username;
-            //get room data if not exists - create, else join (or both - later)
-            let userdata = {'username': username};
-            socket.emit('create-room', userdata);
-        }
-    })
-
+    if (button) {
+        button.addEventListener('click', () => {
+            let username = document.querySelector('#username').value;
+            if (username) {
+                localStorage['username'] = username;
+                //get room data if not exists - create, else join (or both - later)
+                let userdata = {'username': username};
+                socket.emit('create-room', userdata);
+            }
+        })
+    }
 }
 
 function addSocketListenerCreatedRoom(socket) {
