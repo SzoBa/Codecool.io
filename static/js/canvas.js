@@ -19,6 +19,11 @@ function init() {
     }
 }
 
+function changeDrawingColor(event) {
+    let colour = event.target.dataset.colour;
+    canvasElements.currentColor = colour;
+}
+
 function startDrawing(event) {
     // let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
     // let mouseY = event.pageY - document.querySelector('.card').offsetTop;
