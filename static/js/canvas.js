@@ -2,7 +2,7 @@ canvasElements = {
     paint: false,
     drawColors: [],
     currentColor: "black",
-    currentSize: "5",
+    currentSize: "small",
     drawSizes: [],
     clickX: [],
     clickY: [],
