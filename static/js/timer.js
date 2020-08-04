@@ -3,7 +3,7 @@ let timeCounter
 function gameInit() {
     getGameInfo()
     initTimer()
-
+    initRounds()
 }
 
 function initTimer() {
@@ -54,10 +54,19 @@ function displayPlayers(players){
     playersContainer.innerHTML = playersToAdd
     let timeLimit = players[0]["drawing_time"]
     setTimerLimit(timeLimit)
+    let rounds = players[0]["max_round"]
+    initRounds(rounds);
 }
 
 function setTimerLimit(timeLimit) {
     document.querySelector(".time-number").textContent = timeLimit
+}
+
+
+function initRounds(rounds) {
+    let roundsContainer = document.querySelector(".empty");
+    console.log(roundsContainer);
+    roundsContainer.innerText = `Round 1 of ${rounds}`;
 }
 
 gameInit()
