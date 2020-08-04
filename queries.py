@@ -8,7 +8,8 @@ def get_existing_room(cursor):
     query = '''
             SELECT
                 room.id AS room_id,
-                player.name as player_name
+                player.name AS player_name,
+                player.id AS player_id
             FROM room
             JOIN player
                 ON room.id = player.room_id
@@ -43,3 +44,13 @@ def insert_new_player(cursor, player_name, room_id, is_drawer=False):
                                          room_id=sql.Literal(room_id),
                                          drawer_boolean=sql.SQL(drawer_boolean)))
     return cursor.fetchone()['id']
+
+
+@connection.connection_handler
+def close_room(cursor, room_id):
+    query = '''
+            UPDATE room
+            SET is_open = FALSE
+            WHERE id = %(room_id)s
+            '''
+    cursor.execute(query, {'room_id': room_id})

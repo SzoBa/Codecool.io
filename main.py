@@ -13,11 +13,12 @@ socketio = SocketIO(app)
 @app.route('/room')
 def room():
     existing_room = queries.get_existing_room()
-    players, existing_room_id = None, None
+    players, existing_room_id, owner_id = None, None, None
     if existing_room:
         players = [record['player_name'] for record in existing_room]
         existing_room_id = existing_room[0]['room_id']
-    return render_template('room.html', room_id=existing_room_id, players=players)
+        owner_id = existing_room[0]['player_id']
+    return render_template('room.html', room_id=existing_room_id, players=players, owner_id=owner_id)
 
 
 @socketio.on('create-room')
@@ -35,11 +36,18 @@ def create_room(data):
 def join_to_room(data):
     player_name = data['username']
     room_id = data['room_id']
+    owner_id = data['owner_id']
     player_id = queries.insert_new_player(player_name, room_id)
     join_room(room_id)
-    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
-    emit('joined-to-room', response_data)
-    emit('user-joined-a-room', response_data, broadcast=True, include_self=False)
+    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id}
+    emit('user-joined-room', response_data, broadcast=True, include_self=False)
+
+
+@socketio.on('ready-to-start')
+def init_game_start(data):
+    room_id = data['room_id']
+    queries.close_room(room_id)
+    emit('start-game', room=room_id)
 
 
 @app.route('/game')
