@@ -16,21 +16,39 @@ function init() {
     canvas.addEventListener('mouseup', endDrawing)
     canvas.addEventListener('mouseleave', endDrawing)
     let colorBoxes = document.querySelectorAll(".color-box")
-    for (let colorBox of colorBoxes){
+    for (let colorBox of colorBoxes) {
         colorBox.addEventListener('click', changeDrawingColor)
     }
     let sizeBoxes = document.querySelectorAll('.size-box')
-    for (let sizeBox of sizeBoxes){
+    for (let sizeBox of sizeBoxes) {
         sizeBox.addEventListener('click', changeDrawingSize)
     }
+    let changeMarkerBtns = document.querySelectorAll(".change-marker")
+    for (let changeMarkerBtn of changeMarkerBtns) {
+        changeMarkerBtn.addEventListener('click', changeDrawingColor)
+    }
+
+    document.querySelector(".clear").addEventListener('click', clearCanvas)
+
 }
 
 function changeDrawingColor(event) {
+    // alert('changeDrawingColor')
     canvasElements.currentColor = event.target.dataset.colour;
 }
 
 function changeDrawingSize(event) {
     canvasElements.currentSize = event.target.dataset.size;
+}
+
+function clearCanvas(event) {
+    let context = document.querySelector("canvas").getContext("2d");
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    canvasElements.clickDrag = []
+    canvasElements.clickX = []
+    canvasElements.clickY = []
+    canvasElements.drawColors = []
+    canvasElements.drawSizes = []
 }
 
 function startDrawing(event) {
@@ -81,17 +99,17 @@ function draw() {
             context.moveTo(canvasElements.clickX[i] - 1, canvasElements.clickY[i]);
         }
         let radius
-        if(canvasElements.drawSizes[i] === "small"){
-			radius = 2;
-		}else if(canvasElements.drawSizes[i] === "normal"){
-			radius = 5;
-		}else if(canvasElements.drawSizes[i] === "large"){
-			radius = 10;
-		}else if(canvasElements.drawSizes[i] === "huge"){
-			radius = 20;
-		}else{
-			radius = 0;
-		}
+        if (canvasElements.drawSizes[i] === "small") {
+            radius = 2;
+        } else if (canvasElements.drawSizes[i] === "normal") {
+            radius = 5;
+        } else if (canvasElements.drawSizes[i] === "large") {
+            radius = 10;
+        } else if (canvasElements.drawSizes[i] === "huge") {
+            radius = 20;
+        } else {
+            radius = 0;
+        }
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
         context.lineWidth = radius;
