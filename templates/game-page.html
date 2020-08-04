@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/gameplay.css') }}">
     <script src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
 
 </head>
 
@@ -158,9 +159,9 @@
                         <div class="message">Message13</div>
                         <div class="message">Message14</div>
                     </div>
-                    <form class="input-field">
-                        <input type="text" id="text" name="text">
-                    </form>
+                    <div class="input-field">
+                        <input id="chat-input" type="text">
+                    </div>
                 </div>
             </div>
         </div>
