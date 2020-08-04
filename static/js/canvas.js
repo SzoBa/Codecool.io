@@ -13,6 +13,7 @@ let canvasElements = {
 }
 
 function init() {
+    addSocketFunctionality();
     let canvas = document.querySelector("canvas");
     if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
         canvas.addEventListener('mousedown', startDrawing)
@@ -34,6 +35,12 @@ function init() {
 
         document.querySelector(".clear").addEventListener('click', clearCanvas);
     }
+}
+
+function addSocketFunctionality() {
+    socket.addEventListener('user-draw', function (data) {
+        console.log('dik')
+    })
 }
 
 function displayCurrentColour() {
@@ -97,8 +104,9 @@ function addClick(x, y, dragging) {
     canvasElements.clickX.push(x);
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
-    canvasElements.drawColors.push(canvasElements.currentColor)
+    canvasElements.drawColors.push(canvasElements.currentColor);
     canvasElements.drawSizes.push(canvasElements.currentSize);
+    socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
 function draw() {
