@@ -13,6 +13,10 @@ function init() {
     canvas.addEventListener('mousemove', checkIfDrawing)
     canvas.addEventListener('mouseup', endDrawing)
     canvas.addEventListener('mouseleave', endDrawing)
+    let colorBoxes = document.querySelectorAll(".color-box")
+    for (let colorBox of colorBoxes){
+        colorBox.addEventListener('click', changeDrawingColor)
+    }
 }
 
 function startDrawing(event) {
