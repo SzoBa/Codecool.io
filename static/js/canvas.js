@@ -17,11 +17,11 @@ function init() {
     canvas.addEventListener('mouseup', endDrawing)
     canvas.addEventListener('mouseleave', endDrawing)
     let colorBoxes = document.querySelectorAll(".color-box")
-    for (let colorBox of colorBoxes) {
+    for (let colorBox of colorBoxes){
         colorBox.addEventListener('click', changeDrawingColor)
     }
     let sizeBoxes = document.querySelectorAll('.size-box')
-    for (let sizeBox of sizeBoxes) {
+    for (let sizeBox of sizeBoxes){
         sizeBox.addEventListener('click', changeDrawingSize)
     }
     let changeMarkerBtns = document.querySelectorAll(".change-marker")
@@ -30,6 +30,11 @@ function init() {
     }
 
     document.querySelector(".clear").addEventListener('click', clearCanvas);
+}
+
+function displayCurrentColour() {
+    let currentColourBox = document.querySelector('.current-color')
+    currentColourBox.style.background = canvasElements.currentColor
 }
 
 function changeDrawingColor(event) {
@@ -41,13 +46,14 @@ function changeDrawingColor(event) {
     } else {
         canvasElements.currentColor = event.target.dataset.colour;
     }
+    displayCurrentColour()
 }
 
 function changeDrawingSize(event) {
     canvasElements.currentSize = event.target.dataset.size;
 }
 
-function clearCanvas(event) {
+function clearCanvas() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     canvasElements.clickDrag = []
