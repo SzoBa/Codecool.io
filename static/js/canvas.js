@@ -54,6 +54,7 @@ function addClick(x, y, dragging) {
     canvasElements.clickX.push(x);
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
+    canvasElements.drawColors.push(canvasElements.currentColor)
 }
 
 function draw() {
