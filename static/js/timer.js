@@ -37,19 +37,21 @@ function getGameInfo(){
 }
 
 function displayPlayers(players){
-    let playersContainer =  document.querySelector(".players-container")
-    let playersToAdd = ``
+    let playersContainer =  document.querySelector(".players-container");
+    let playersToAdd = ``;
+    let smurfCount = 1;
     for (let i = 0; i < players.length;i++){
-        let player = players[i]
+        let player = players[i];
         let playerInfo = `<div class="player">
                         <span class="placement">#${i+1}</span>
                         <div class="player-info">
                             <span class="player-name">${player.name}</span>
                             <span class="points">${player.points}</span>
                         </div>
-                        <span><img src="static/avatars/smurf_${i+1}.png" width="40" height="40"></span>
+                        <span><img src="static/avatars/smurf_${smurfCount}.png" width="40" height="40"></span>
                         </div>`
-        playersToAdd += playerInfo
+        playersToAdd += playerInfo;
+        if (smurfCount < 20) {smurfCount++};
     }
     playersContainer.innerHTML = playersToAdd
     let timeLimit = players[0]["drawing_time"]
