@@ -104,7 +104,11 @@ h1 {
 
 .chat-container {
     margin-left: 5px;
-    overflow: scroll;
+}
+
+.message-container {
+    overflow-y: scroll;
+    transform: rotateX(180deg);
 }
 
 .chat-container::-webkit-scrollbar {
@@ -130,6 +134,7 @@ h1 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    -webkit-transform: rotateX(180deg);
 }
 
 
