@@ -2,6 +2,8 @@ canvasElements = {
     paint: false,
     drawColors: [],
     currentColor: "black",
+    currentSize: "small",
+    drawSizes: [],
     clickX: [],
     clickY: [],
     clickDrag: []
@@ -17,11 +19,18 @@ function init() {
     for (let colorBox of colorBoxes){
         colorBox.addEventListener('click', changeDrawingColor)
     }
+    let sizeBoxes = document.querySelectorAll('.size-box')
+    for (let sizeBox of sizeBoxes){
+        sizeBox.addEventListener('click', changeDrawingSize)
+    }
 }
 
 function changeDrawingColor(event) {
-    let colour = event.target.dataset.colour;
-    canvasElements.currentColor = colour;
+    canvasElements.currentColor = event.target.dataset.colour;
+}
+
+function changeDrawingSize(event) {
+    canvasElements.currentSize = event.target.dataset.size;
 }
 
 function startDrawing(event) {
@@ -55,6 +64,7 @@ function addClick(x, y, dragging) {
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
     canvasElements.drawColors.push(canvasElements.currentColor)
+    canvasElements.drawSizes.push(canvasElements.currentSize);
 }
 
 function draw() {
@@ -62,7 +72,6 @@ function draw() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
     context.lineJoin = "round";
-    context.lineWidth = 5;
 
     for (let i = 0; i < canvasElements.clickX.length; i++) {
         context.beginPath();
@@ -71,8 +80,21 @@ function draw() {
         } else {
             context.moveTo(canvasElements.clickX[i] - 1, canvasElements.clickY[i]);
         }
+        let radius
+        if(canvasElements.drawSizes[i] === "small"){
+			radius = 2;
+		}else if(canvasElements.drawSizes[i] === "normal"){
+			radius = 5;
+		}else if(canvasElements.drawSizes[i] === "large"){
+			radius = 10;
+		}else if(canvasElements.drawSizes[i] === "huge"){
+			radius = 20;
+		}else{
+			radius = 0;
+		}
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
+        context.lineWidth = radius;
         context.strokeStyle = canvasElements.drawColors[i];
         context.stroke();
     }
