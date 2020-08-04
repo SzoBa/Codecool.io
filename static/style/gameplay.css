@@ -109,7 +109,7 @@ h1 {
 
 .message-container {
     overflow-y: scroll;
-
+    word-break: break-all;
 }
 
 /*.message-container::-webkit-scrollbar {*/
