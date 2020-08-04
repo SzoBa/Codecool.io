@@ -8,11 +8,11 @@ function initTimer() {
     if (currentTime <= 1){
         //the round ends
         clearInterval(timeCounter);
-        timerElement.classList.remove("blinking");
+        timerElement.classList.remove("time-running-out");
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
     }else if (currentTime <= 10){
-        timerElement.classList.add("blinking");
+        timerElement.classList.add("time-running-out");
         timerElement.classList.add("shake");
         clock.classList.add("shake");
     }
