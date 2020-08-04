@@ -59,7 +59,7 @@ def close_room(cursor, room_id):
 
 
 @connection.connection_handler
-def get_players_data(room_id):
+def get_players_data(cursor, room_id):
     query = """
     SELECT name, points, is_drawer, word, max_round, round_counter, drawing_time
     FROM player
