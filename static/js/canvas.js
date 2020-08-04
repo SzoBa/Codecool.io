@@ -6,7 +6,8 @@ canvasElements = {
     drawSizes: [],
     clickX: [],
     clickY: [],
-    clickDrag: []
+    clickDrag: [],
+    beforeRubber: "black"
 }
 
 function init() {
@@ -33,8 +34,12 @@ function init() {
 }
 
 function changeDrawingColor(event) {
-    // alert('changeDrawingColor')
+    if (event.target.classList.contains("pen")) {
+       beforeRubber = canvasElements.currentColor
+        canvasElements.currentColor = beforeRubber;
+    }else {
     canvasElements.currentColor = event.target.dataset.colour;
+    }
 }
 
 function changeDrawingSize(event) {
