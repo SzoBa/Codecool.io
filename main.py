@@ -55,5 +55,11 @@ def init_game_start(room_id):
     emit('start-game', room=int(room_id))
 
 
+@socketio.on('join-game-start')
+def join_game_start(room_id):
+    join_room(int(room_id))
+    emit('alert')
+
+
 if __name__ == '__main__':
     socketio.run(app)
