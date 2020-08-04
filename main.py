@@ -53,6 +53,12 @@ def join_to_room(data):
 def init_game_start(room_id):
     queries.close_room(room_id)
     emit('start-game', room=int(room_id))
+    
+    
+@app.route('/get-players/<room_id>')
+def get_players(room_id):
+    players_info_in_room = queries.get_players_data(room_id)
+    return jsonify(players_info_in_room)
 
 
 if __name__ == '__main__':

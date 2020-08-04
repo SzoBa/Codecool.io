@@ -1,4 +1,6 @@
 import bcrypt
+from psycopg2._psycopg import cursor
+
 import connection
 from psycopg2 import sql
 
@@ -54,3 +56,15 @@ def close_room(cursor, room_id):
             WHERE id = %(room_id)s
             '''
     cursor.execute(query, {'room_id': room_id})
+
+
+@connection.connection_handler
+def get_players_data(room_id):
+    query = """
+    SELECT name, points, is_drawer, word, max_round, round_counter, drawing_time
+    FROM player
+    JOIN room ON player.room_id = room.id
+    WHERE room.id = %(room_id)s
+    """
+    cursor.execute(query, {"room_id": room_id})
+    return cursor.fetchall()
