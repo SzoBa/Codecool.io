@@ -8,7 +8,8 @@ def get_existing_room(cursor):
     query = '''
             SELECT
                 room.id AS room_id,
-                player.name as player_name
+                player.name AS player_name,
+                player.id AS player_id
             FROM room
             JOIN player
                 ON room.id = player.room_id
