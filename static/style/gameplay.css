@@ -114,6 +114,7 @@ h1 {
 .message-container {
     overflow-y: scroll;
     height: 510px;
+    word-break: break-all;
 }
 
 /*.message-container::-webkit-scrollbar {*/
