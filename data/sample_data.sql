@@ -19,6 +19,7 @@ CREATE TABLE room (
     max_round integer DEFAULT 3,
     round_counter integer DEFAULT 0,
     drawing_time integer DEFAULT 60,
+    owner_id integer,
     is_open boolean NOT NULL DEFAULT true
 );
 

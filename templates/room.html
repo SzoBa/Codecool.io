@@ -21,18 +21,6 @@
         </div>
         <div id="waiting_room">
             <p>Waiting</p>
-            {% if room_id %}
-                <div class="room" data-room="{{ room_id }}">
-                    <p>Players:</p>
-                    <ul>
-                        {% for player in players %}
-                            <li>{{ player }}</li>
-                        {% endfor %}
-                    </ul>
-                <input id="username" required>
-                <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
-                </div>
-            {% endif %}
         </div>
         <div id="playing_room">
             <p>Playing</p>

@@ -31,6 +31,7 @@ def create_room(data):
     player_name = data['username']
     room_id = queries.insert_new_room()
     player_id = queries.insert_new_player(player_name, room_id, is_drawer=True)
+    queries.insert_owner_id_to_room(player_id, room_id)
     join_room(room_id)
     response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
     emit('own-room-created', response_data)
@@ -53,6 +54,12 @@ def join_to_room(data):
 def init_game_start(room_id):
     queries.close_room(room_id)
     emit('start-game', room=int(room_id))
+
+
+@app.route('/get-rooms')
+def get_rooms():
+    rooms = queries.get_rooms()
+    return rooms
 
 
 if __name__ == '__main__':

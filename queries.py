@@ -54,3 +54,27 @@ def close_room(cursor, room_id):
             WHERE id = %(room_id)s
             '''
     cursor.execute(query, {'room_id': room_id})
+
+
+@connection.connection_handler
+def get_rooms(cursor):
+    query = '''
+    SELECT STRING_AGG(player.id::text, ',')   AS player_id,
+        player.room_id,
+       STRING_AGG(player.name, ',') AS player_name,
+       room.is_open,
+       room.owner_id
+    FROM player
+        JOIN room ON player.room_id = room.id
+    GROUP BY player.room_id, room.is_open, room.owner_id;
+    '''
+    cursor.execute(query)
+
+@connection.connection_handler
+def insert_owner_id_to_room(cursor, player_id, room_id):
+    query = '''
+            UPDATE room
+            SET owner_id = %(player_id)s
+            WHERE id = %(room_id)s
+            '''
+    cursor.execute(query, {'room_id': room_id, 'player_id': player_id})
