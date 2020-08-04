@@ -34,8 +34,19 @@ function getGameInfo(){
             credentials: 'same-origin'
         })
         .then(response => response.json())
-        .then(json_response => displayPlayers(json_response));
+        .then(json_response => initGameFlow(json_response));
 }
+
+
+function initGameFlow(data){
+    displayPlayers(data)
+    let timeLimit = data[0]["drawing_time"]
+    setTimerLimit(timeLimit)
+    let rounds = data[0]["max_round"]
+    initRounds(rounds);
+
+}
+
 
 function displayPlayers(players){
     let playersContainer =  document.querySelector(".players-container");
