@@ -73,6 +73,7 @@ function draw() {
         }
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
+        context.strokeStyle = canvasElements.drawColors[i];
         context.stroke();
     }
 }
