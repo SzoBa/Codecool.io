@@ -63,8 +63,7 @@ def join_game_start(room_id):
 @socketio.on('drawing')
 def drawing(data):
     response = json.loads(data)
-    print(response['roomId'])
-    emit('user-draw', response['data'], room=response['roomId'], include_self=False)
+    emit('user-draw', json.dumps(response['data']), room=response['roomId'], include_self=False)
 
 
 if __name__ == '__main__':

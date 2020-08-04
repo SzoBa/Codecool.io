@@ -39,7 +39,7 @@ function init() {
 
 function addSocketFunctionality() {
     socket.addEventListener('user-draw', function (data) {
-        canvasElements = data
+        canvasElements = JSON.parse(data)
         draw()
     })
 }
