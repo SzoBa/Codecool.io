@@ -26,11 +26,10 @@ function init() {
     }
     let changeMarkerBtns = document.querySelectorAll(".change-marker")
     for (let changeMarkerBtn of changeMarkerBtns) {
-        changeMarkerBtn.addEventListener('click', changeDrawingColor)
+        changeMarkerBtn.addEventListener('click', changeDrawingColor);
     }
 
-    document.querySelector(".clear").addEventListener('click', clearCanvas)
-
+    document.querySelector(".clear").addEventListener('click', clearCanvas);
 }
 
 function changeDrawingColor(event) {
