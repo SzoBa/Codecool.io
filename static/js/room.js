@@ -74,14 +74,12 @@ function addSocketListenerCreatedRoom(socket) {
         roomInnerDiv.remove();
     });
     socket.addEventListener('user-joined-a-room', (event) => {
-        console.log(event)
+        let player = `<li>${event.username}</li>`
+        document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
 
     });
     socket.addEventListener('start-game', (event) => {
-    if (event.owner_id == localStorage.player_id) {
-        let player = `<li>${event.username}</li>`
-        document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
-    }
+
 
     })
 }
