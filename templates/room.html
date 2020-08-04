@@ -42,6 +42,7 @@
         <div class="container card">
             <div class="first-col">
                 <div class="profile">
+                    <p class="col-title">Profile</p>
                     {% if not room_id %}
                         <div id="room_div" class="">
                             <div id="room_div_inner">
@@ -54,21 +55,25 @@
                 </div>
 
                 <div class="ingame" id="playing_room">
-                    <p>In game</p>
+                    <p class="col-title">In game</p>
                 </div>
 
             </div>
 
             <div class="second-col">
                 <div id="waiting_room" class="waiting">
-                    <p>Waiting</p>
+                    <p class="col-title">Waiting</p>
                     {% if room_id %}
                         <div class="room" data-room="{{ room_id }}">
-                            <p>Players:</p>
+                            <p class="room-players">Players:</p>
                             <ul>
                                 {% for player in players %}
                                     <li>{{ player }}</li>
                                 {% endfor %}
+                                <li>Józsi</li>
+                                <li>Józsi</li>
+                                <li>Józsi</li>
+                                <li>Józsi</li>
                             </ul>
                             <input id="username" required>
                             <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
@@ -79,7 +84,7 @@
 
             <div class="third-col">
                 <div id="current_room" class="current">
-                    <p>Current room</p>
+                    <p class="col-title">Current room</p>
                 </div>
             </div>
 
