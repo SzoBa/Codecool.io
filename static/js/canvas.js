@@ -39,7 +39,8 @@ function init() {
 
 function addSocketFunctionality() {
     socket.addEventListener('user-draw', function (data) {
-        console.log('dik')
+        canvasElements = data
+        draw()
     })
 }
 
