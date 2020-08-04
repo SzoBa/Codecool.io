@@ -34,16 +34,18 @@ h1 {
 .time {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    align-items: flex-end;
+}
+
+.time-number {
+    position: absolute;
+    margin-bottom: 13px;
+    font-size: 23px;
 }
 
 .empty {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-}
-
-.time-number {
-    font-weight: 400;
-    font-size: 20px;
 }
 
 .word {
