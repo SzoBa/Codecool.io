@@ -31,6 +31,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/gameplay.css') }}">
     <script src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>
 
+
+    <!-- timer -->
+    <script src=" {{ url_for('static', filename='js/timer.js') }}" defer></script>
+
 </head>
 
 <body>
@@ -51,7 +55,7 @@
             <div class="header">
                 <div class="time"><img src="{{ url_for('static', filename='canvas_img/clock.png') }}"
                                        width="70" height="70">
-                    <div class="time-number">54</div>
+                    <div class="time-number">60</div>
                 </div>
                 <div class="word">_ _ _ _ &nbsp _ _ _</div>
                 <div class="empty">Round 2 of 3</div>
