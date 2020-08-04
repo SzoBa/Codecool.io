@@ -53,7 +53,12 @@ function addSocketListenerCreatedRoom() {
         currentRoom.insertAdjacentHTML("beforeend", startButton);
         let player = `<li>${event.username}</li>`
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
-    })
+        document.querySelector('#start_game').addEventListener('click', (event) => {
+            let roomData = event.room_id;
+            socket.emit('ready-to-start', roomData);
+
+        });
+    });
     socket.addEventListener('new-room-created', (event) => {
         //it receives the creator's data
         let creatorName = event['username'];
@@ -76,11 +81,16 @@ function addSocketListenerCreatedRoom() {
         let roomInnerDiv = document.querySelector('#room_div');
         roomInnerDiv.classList.add('display-none');
         roomInnerDiv.remove();
+    });
+    socket.addEventListener('user-joined-room', (event) => {
+        let player = `<li>${event.username}</li>`
+        document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
+
+    });
+    socket.addEventListener('start-game', (event) => {
+
+
     })
-}
-
-function createRoom() {
-
 }
 
 function joinRoom(event) {
@@ -92,7 +102,8 @@ function joinRoom(event) {
         //get room data if not exists - create, else join (or both - later)
         let userdata = {'username': username, 'room_id': roomId, 'owner_id': ownerId};
         socket.emit('join-room', userdata);
+        this.closest('div').querySelector('input').remove();
+        this.remove();
+        document.querySelector('.room ul').insertAdjacentHTML('beforeend', `<li>${username}</li>`);
     }
-
 }
-
