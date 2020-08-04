@@ -7,28 +7,6 @@ body {
     padding: 0;
 }
 
-/*#room_div {*/
-/*    position: fixed;*/
-/*    z-index: 1;*/
-/*    padding-top: 10%;*/
-/*    left: 0;*/
-/*    top: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    overflow: auto;*/
-/*    background-color: rgb(0,0,0);*/
-/*    background-color: rgba(0,0,0,0.4);*/
-/*}*/
-
-/*#room_div_inner {*/
-/*    background-color: #fefefe;*/
-/*    margin: auto;*/
-/*    padding: 5%;*/
-/*    border: 1px solid #888;*/
-/*    width: 30%;*/
-/*    height: 10%;;*/
-/*}*/
-
 .display-none {
     display: none;
 }
@@ -51,14 +29,18 @@ body {
     bottom: 0;
 }
 
-
-
 .second-col, .third-col {
     width: 33%;
-    height: 615px;
+    height: 600px;
     background: #C5D3F5;
     border-radius: 20px;
     margin: 15px;
+    overflow: scroll;
+}
+
+.second-col::-webkit-scrollbar,
+.third-col::-webkit-scrollbar {
+    width: 0;
 }
 
 .first-col {
@@ -69,7 +51,7 @@ body {
 }
 
 .profile, .ingame {
-    height: 50%;
+    height: calc(50% - 7.5px);
     width: 100%;
     background: #C5D3F5;
     border-radius: 20px;
@@ -89,6 +71,8 @@ body {
     margin: 0;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
+    position: sticky;
+    top: 0;
 }
 
 .room {
@@ -100,4 +84,56 @@ body {
 
 .room-players {
     text-align: center;
+}
+
+.room ul li {
+    list-style-type: none;
+}
+
+.player-datas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-name {
+    height: 50%;
+
+    font-size: 80%;
+    word-break: break-all;
+    padding: 3px;
+    text-align: center;
+}
+
+.players-icon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    height: 50%;
+}
+
+.avatar img {
+    position: relative;
+    bottom: 3px;
+}
+
+.players-icon li {
+    width: 70px;
+    height: 70px;
+    background: #8AC2FF;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.join {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.join button {
+    margin-left: 10px;
 }

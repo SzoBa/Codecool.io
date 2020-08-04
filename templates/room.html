@@ -66,17 +66,78 @@
                     {% if room_id %}
                         <div class="room" data-room="{{ room_id }}">
                             <p class="room-players">Players:</p>
-                            <ul>
+                            <ul class="players-icon">
                                 {% for player in players %}
-                                    <li>{{ player }}</li>
+                                    <li class="player-datas">
+                                        <span class="player-name">{{ player }}</span>
+                                        <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                    </li>
                                 {% endfor %}
-                                <li>Józsi</li>
-                                <li>Józsi</li>
-                                <li>Józsi</li>
-                                <li>Józsi</li>
+                                <li class="player-datas">
+                                    <span class="player-name">Géza</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Kicsigéza</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Béluska</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Timothyasdasd</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Pumbika</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
                             </ul>
-                            <input id="username" required>
-                            <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
+
+                            <div class="join">
+                                <input id="username" required>
+                                <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
+                            </div>
+
+                        </div>
+
+                        <div class="room" data-room="{{ room_id }}">
+                            <p class="room-players">Players:</p>
+                            <ul class="players-icon">
+                                {% for player in players %}
+                                    <li class="player-datas">
+                                        <span class="player-name">{{ player }}</span>
+                                        <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                    </li>
+                                {% endfor %}
+                                <li class="player-datas">
+                                    <span class="player-name">Géza</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Kicsigéza</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Béluska</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Timothyasdasd</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                                <li class="player-datas">
+                                    <span class="player-name">Pumbika</span>
+                                    <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
+                                </li>
+                            </ul>
+
+                            <div class="join">
+                                <input id="username" required>
+                                <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
+                            </div>
+
                         </div>
                     {% endif %}
                 </div>
