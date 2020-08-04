@@ -108,7 +108,8 @@ h1 {
 }
 
 .message-container {
-    overflow-y: hidden;
+    overflow-y: scroll;
+
 }
 
 /*.message-container::-webkit-scrollbar {*/
