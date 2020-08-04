@@ -1,5 +1,7 @@
 canvasElements = {
     paint: false,
+    drawColors: [],
+    currentColor: "black",
     clickX: [],
     clickY: [],
     clickDrag: []
@@ -11,6 +13,15 @@ function init() {
     canvas.addEventListener('mousemove', checkIfDrawing)
     canvas.addEventListener('mouseup', endDrawing)
     canvas.addEventListener('mouseleave', endDrawing)
+    let colorBoxes = document.querySelectorAll(".color-box")
+    for (let colorBox of colorBoxes){
+        colorBox.addEventListener('click', changeDrawingColor)
+    }
+}
+
+function changeDrawingColor(event) {
+    let colour = event.target.dataset.colour;
+    canvasElements.currentColor = colour;
 }
 
 function startDrawing(event) {
@@ -43,13 +54,13 @@ function addClick(x, y, dragging) {
     canvasElements.clickX.push(x);
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
+    canvasElements.drawColors.push(canvasElements.currentColor)
 }
 
 function draw() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
-    context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     context.lineWidth = 5;
 
@@ -62,6 +73,7 @@ function draw() {
         }
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
+        context.strokeStyle = canvasElements.drawColors[i];
         context.stroke();
     }
 }

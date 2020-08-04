@@ -88,53 +88,54 @@
                         <canvas width="800" height="390"></canvas>
                     </div>
                     <div class="extras">
+                        <div class="current-color"></div>
                         <div class="palette">
                             <div class="line-1">
-                                <div class="white color-box"></div>
-                                <div class="lightgray color-box"></div>
-                                <div class="red color-box"></div>
-                                <div class="orange color-box"></div>
-                                <div class="yellow color-box"></div>
-                                <div class="green color-box"></div>
-                                <div class="blue color-box"></div>
-                                <div class="darker-blue-2 color-box"></div>
-                                <div class="purple color-box"></div>
-                                <div class="pink color-box"></div>
-                                <div class="brown color-box"></div>
+                                <div class="white color-box" data-colour="white"></div>
+                                <div class="lightgray color-box" data-colour="lightgray"></div>
+                                <div class="red color-box" data-colour="red"></div>
+                                <div class="orange color-box" data-colour="orange"></div>
+                                <div class="yellow color-box" data-colour="yellow"></div>
+                                <div class="green color-box" data-colour="green"></div>
+                                <div class="blue color-box" data-colour="blue"></div>
+                                <div class="darker-blue-2 color-box" data-colour="#0000ac"></div>
+                                <div class="purple color-box" data-colour="purple"></div>
+                                <div class="pink color-box" data-colour="#f5a5b2"></div>
+                                <div class="brown color-box" data-colour="#a26f41"></div>
                             </div>
                             <div class="line-2">
-                                <div class="black color-box"></div>
-                                <div class="gray color-box"></div>
-                                <div class="darkred color-box"></div>
-                                <div class="darkorange color-box"></div>
-                                <div class="dark-yellow color-box"></div>
-                                <div class="darkgreen color-box"></div>
-                                <div class="darker-blue-1 color-box"></div>
-                                <div class="dark-blue color-box"></div>
-                                <div class="dark-purple color-box"></div>
-                                <div class="dark-pink color-box"></div>
-                                <div class="dark-brown color-box"></div>
+                                <div class="black color-box" data-colour="black"></div>
+                                <div class="gray color-box" data-colour="gray"></div>
+                                <div class="darkred color-box" data-colour="darkred"></div>
+                                <div class="darkorange color-box" data-colour="#d67600"></div>
+                                <div class="dark-yellow color-box" data-colour="#d4d400"></div>
+                                <div class="darkgreen color-box" data-colour="darkgreen"></div>
+                                <div class="darker-blue-1 color-box" data-colour="#0d0dbf"></div>
+                                <div class="dark-blue color-box" data-colour="#00007e"></div>
+                                <div class="dark-purple color-box" data-colour="rebeccapurple"></div>
+                                <div class="dark-pink color-box" data-colour="#e069a2"></div>
+                                <div class="dark-brown color-box" data-colour="saddlebrown"></div>
                             </div>
                         </div>
                         <div class="draw-type">
-                            <div class="pen"><img src="{{ url_for('static', filename='canvas_img/pen.png') }}"
+                            <div class="pen change-marker"><img src="{{ url_for('static', filename='canvas_img/pen.png') }}"
                                                   width="40" height="40"></div>
-                            <div class="rubber"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
+                            <div class="rubber change-marker" data-colour="white"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
                                                      width="40" height="40"></div>
-                            <div class="rubber"><img src="{{ url_for('static', filename='canvas_img/dustbin.png') }}"
+                            <div class="clear"><img src="{{ url_for('static', filename='canvas_img/dustbin.png') }}"
                                                      width="40" height="40"></div>
                         </div>
                         <div class="sizes">
-                            <div class="size-box">
+                            <div class="size-box" data-size="5">
                                 <div class="size-five"></div>
                             </div>
-                            <div class="size-box">
+                            <div class="size-box" data-size="10">
                                 <div class="size-ten"></div>
                             </div>
-                            <div class="size-box">
+                            <div class="size-box" data-size="15">
                                 <div class="size-fifteen"></div>
                             </div>
-                            <div class="size-box">
+                            <div class="size-box" data-size="20">
                                 <div class="size-twenty"></div>
                             </div>
                         </div>
@@ -161,12 +162,9 @@
                         <input type="text" id="text" name="text">
                     </form>
                 </div>
-
             </div>
+        </div>
     </section>
-    {#    <footer>
-        Copyright, bla-bla
-    </footer>#}
 </div>
 <div class="background">
     <div class="dark-blue-layer"></div>
