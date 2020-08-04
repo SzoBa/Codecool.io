@@ -40,18 +40,21 @@
         <span id="header-title" class="title">
                         Codecool.io
                     </span>
-        <div id="header-auth">
+{#        <div id="header-auth">
             <button type="button" id="bt_register">Register</button>
             <button type="button" id="bt_login">Login</button>
-        </div>
+        </div>#}
     </header>
     <section>
         {#<h1 class="title text-center">Game</h1>#}
         <div class="card container">
             <div class="header">
-                <div class="time">Time:&nbsp;<span class="time-number">54</span>s left</div>
+                <div class="time"><img src="{{ url_for('static', filename='canvas_img/clock.png') }}"
+                                       width="70" height="70">
+                    <div class="time-number">54</div>
+                </div>
                 <div class="word">_ _ _ _ &nbsp _ _ _</div>
-                <div class="empty">Empty</div>
+                <div class="empty">Round 2 of 3</div>
             </div>
             <div class="body">
                 <div class="players-container">
@@ -118,6 +121,8 @@
                                                   width="40" height="40"></div>
                             <div class="rubber"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
                                                      width="40" height="40"></div>
+                            <div class="rubber"><img src="{{ url_for('static', filename='canvas_img/dustbin.png') }}"
+                                                     width="40" height="40"></div>
                         </div>
                         <div class="sizes">
                             <div class="size-box">
@@ -138,16 +143,16 @@
                 <div class="chat-container">
                     <div class="message">Message1</div>
                     <div class="message">Message2</div>
-                    <div class="message">Message3</div>
+                    <div class="message">I have no idea what to do next</div>
                     <div class="message">Message4</div>
                     <div class="message">Message5</div>
                     <div class="message">This message is a bit longer to see the box size</div>
                     <div class="message">Message7</div>
                     <div class="message">Message8</div>
                     <div class="message">Message9</div>
-                    <div class="message">Message10</div>
+                    <div class="message">My guess is Codecole.io</div>
                     <div class="message">Message11</div>
-                    <div class="message">Message12</div>
+                    <div class="message">You can scroll these down</div>
                     <div class="message">Message13</div>
                     <div class="message">Message14</div>
                     <form class="input-field">
