@@ -53,14 +53,15 @@ function addSocketListenerCreatedRoom(socket) {
         let newRoom = document.createElement('div');
         newRoom.classList.add('room');
         newRoom.innerHTML = `<p>Players:</p>
-                               <ul><li>${creatorData}</li></ul>`;
+                             <ul><li>${creatorData}</li></ul>
+                             <input id="username" required>
+                             <button id="join_room_button" data-creator=${creatorData}>Join Room</button>`;
         waitingRoom.appendChild(newRoom);
-
-        let roomInnerDiv = document.querySelector('#room_div_inner');
-        roomInnerDiv.innerHTML = "";
-        let createTable = `<button id="join_room_button" data-creator=${creatorData}>Join Room</button>`;
-        roomInnerDiv.insertAdjacentHTML('beforeend', createTable);
         document.querySelector('#join_room_button').addEventListener('click', joinRoom);
+
+        let roomInnerDiv = document.querySelector('#room_div');
+        roomInnerDiv.classList.add('display-none');
+        roomInnerDiv.remove();
     })
 }
 
