@@ -41,13 +41,18 @@ function addSocketListenerCreatedRoom() {
     socket.addEventListener('own-room-created', (event) => {
         localStorage['player_id'] = event.player_id;
         document.querySelector('#room_div').classList.add('display-none');
-        // let roomInnerDiv = document.querySelector('#room_div_inner');
-        // roomInnerDiv.innerHTML = ""
-        // let createTable = `
-        // <button id="create_room_button">Create Room</button>`
-        // roomInnerDiv.insertAdjacentHTML('beforeend', createTable);
-        // document.querySelector('#create_room_button').addEventListener('click', createRoom);
-        //she/he is already in the room, no need for create button here
+        console.log(event)
+        let currentRoom = document.querySelector('#current_room');
+        let createdRoom = `
+        <div class="room" data-room="${event.room_id}">
+        <p>Room (number: ${event.room_id})</p>
+        <p>Players:</p>
+        <ul></ul></div>`
+        currentRoom.insertAdjacentHTML('beforeend', createdRoom);
+        let startButton = `<div id="start_game" class=""><button>START GAME</button></div>`
+        currentRoom.insertAdjacentHTML("beforeend", startButton);
+        let player = `<li>${event.username}</li>`
+        document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
     })
     socket.addEventListener('new-room-created', (event) => {
         //it receives the creator's data
