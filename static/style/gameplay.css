@@ -105,12 +105,15 @@ h1 {
 
 .chat-container {
     margin-left: 5px;
-    overflow: scroll;
 }
 
-.chat-container::-webkit-scrollbar {
-  display: none;
+.message-container {
+    overflow-y: hidden;
 }
+
+/*.message-container::-webkit-scrollbar {*/
+/*  display: none;*/
+/*}*/
 
 .input-field{
     margin: 5px 0 10px 0;
@@ -126,7 +129,7 @@ h1 {
     background: rgba(103, 148, 172, 0.42);
     color: #2b2b2b;
     padding: 5px;
-    margin: 3px;
+    margin: 3px 3px 3px 14px;
     display: flex;
     flex-direction: row;
     align-items: center;
