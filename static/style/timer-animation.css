@@ -1,15 +1,6 @@
-.blinking{
-    animation:blinkingText 1.2s infinite;
+.time-running-out{
+    color: red;
 }
-
-@keyframes blinkingText{
-    0%{     color: #000;}
-    49%{    color: #000;}
-    60%{    color: red; }
-    99%{    color: red; }
-    100%{   color: #000;}
-}
-
 
 .shake{
     animation: shake 1s infinite;
