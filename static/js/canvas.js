@@ -19,21 +19,21 @@ function init() {
         canvas.addEventListener('mousemove', checkIfDrawing)
         canvas.addEventListener('mouseup', endDrawing)
         canvas.addEventListener('mouseleave', endDrawing)
-    }
-    let colorBoxes = document.querySelectorAll(".color-box")
-    for (let colorBox of colorBoxes) {
-        colorBox.addEventListener('click', changeDrawingColor)
-    }
-    let sizeBoxes = document.querySelectorAll('.size-box')
-    for (let sizeBox of sizeBoxes) {
-        sizeBox.addEventListener('click', changeDrawingSize)
-    }
-    let changeMarkerBtns = document.querySelectorAll(".change-marker")
-    for (let changeMarkerBtn of changeMarkerBtns) {
-        changeMarkerBtn.addEventListener('click', changeDrawingColor);
-    }
+        let colorBoxes = document.querySelectorAll(".color-box")
+        for (let colorBox of colorBoxes) {
+            colorBox.addEventListener('click', changeDrawingColor)
+        }
+        let sizeBoxes = document.querySelectorAll('.size-box')
+        for (let sizeBox of sizeBoxes) {
+            sizeBox.addEventListener('click', changeDrawingSize)
+        }
+        let changeMarkerBtns = document.querySelectorAll(".change-marker")
+        for (let changeMarkerBtn of changeMarkerBtns) {
+            changeMarkerBtn.addEventListener('click', changeDrawingColor);
+        }
 
-    document.querySelector(".clear").addEventListener('click', clearCanvas);
+        document.querySelector(".clear").addEventListener('click', clearCanvas);
+    }
 }
 
 function displayCurrentColour() {
