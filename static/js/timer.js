@@ -14,6 +14,7 @@ function initTimer() {
     if (currentTime <= 1){
         //the round ends
         clearInterval(timeCounter);
+        changeCurrentRound();
         timerElement.classList.remove("time-running-out");
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
@@ -65,8 +66,18 @@ function setTimerLimit(timeLimit) {
 
 function initRounds(rounds) {
     let roundsContainer = document.querySelector(".empty");
-    console.log(roundsContainer);
+    roundsContainer.dataset.currentRound = 1;
+    roundsContainer.dataset.maxRounds = rounds;
     roundsContainer.innerText = `Round 1 of ${rounds}`;
+}
+
+function changeCurrentRound () {
+    let endRound = document.querySelector(".empty").dataset.currentRound;
+    let maximumRounds = document.querySelector(".empty").dataset.maxRounds;
+    let currentRound = parseInt(endRound) + 1;
+    endRound = currentRound;
+    let newRound = document.querySelector(".empty");
+    newRound.textContent = `Round ${endRound} of ${maximumRounds}`
 }
 
 gameInit()
