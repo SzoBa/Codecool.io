@@ -1,5 +1,7 @@
 canvasElements = {
     paint: false,
+    drawColors: [],
+    currentColor: "black",
     clickX: [],
     clickY: [],
     clickDrag: []
