@@ -24,6 +24,17 @@ function init() {
     for (let sizeBox of sizeBoxes){
         sizeBox.addEventListener('click', changeDrawingSize)
     }
+    let changeMarkerBtns = document.querySelectorAll(".change-marker")
+    for (let changeMarkerBtn of changeMarkerBtns) {
+        changeMarkerBtn.addEventListener('click', changeDrawingColor);
+    }
+
+    document.querySelector(".clear").addEventListener('click', clearCanvas);
+}
+
+function displayCurrentColour() {
+    let currentColourBox = document.querySelector('.current-color')
+    currentColourBox.style.background = canvasElements.currentColor
 }
 
 function changeDrawingColor(event) {
@@ -35,6 +46,7 @@ function changeDrawingColor(event) {
     } else {
         canvasElements.currentColor = event.target.dataset.colour;
     }
+    displayCurrentColour()
 }
 
 function changeDrawingSize(event) {
@@ -99,17 +111,17 @@ function draw() {
             context.moveTo(canvasElements.clickX[i] - 1, canvasElements.clickY[i]);
         }
         let radius
-        if(canvasElements.drawSizes[i] === "small"){
-			radius = 2;
-		}else if(canvasElements.drawSizes[i] === "normal"){
-			radius = 5;
-		}else if(canvasElements.drawSizes[i] === "large"){
-			radius = 10;
-		}else if(canvasElements.drawSizes[i] === "huge"){
-			radius = 20;
-		}else{
-			radius = 0;
-		}
+        if (canvasElements.drawSizes[i] === "small") {
+            radius = 2;
+        } else if (canvasElements.drawSizes[i] === "normal") {
+            radius = 5;
+        } else if (canvasElements.drawSizes[i] === "large") {
+            radius = 10;
+        } else if (canvasElements.drawSizes[i] === "huge") {
+            radius = 20;
+        } else {
+            radius = 0;
+        }
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
         context.lineWidth = radius;
