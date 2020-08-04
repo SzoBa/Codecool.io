@@ -34,11 +34,13 @@ function init() {
 }
 
 function changeDrawingColor(event) {
-    if (event.target.classList.contains("pen")) {
-       beforeRubber = canvasElements.currentColor
-        canvasElements.currentColor = beforeRubber;
-    }else {
-    canvasElements.currentColor = event.target.dataset.colour;
+    if (event.target.classList.contains("rubber")) {
+        canvasElements.beforeRubber = canvasElements.currentColor
+        canvasElements.currentColor = event.target.dataset.colour;
+    } else if (event.target.classList.contains("pen")) {
+        canvasElements.currentColor = canvasElements.beforeRubber;
+    } else {
+        canvasElements.currentColor = event.target.dataset.colour;
     }
 }
 
