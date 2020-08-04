@@ -7,6 +7,6 @@ function init() {
     socket.emit('join-game-start', roomId);
 
     socket.addEventListener('alert', ()=> {
-        alert('hello');
+        console.log('ngego');
     })
 }
