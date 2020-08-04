@@ -19,6 +19,4 @@ function initTimer() {
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
 }
 
-
-
 initTimer()
