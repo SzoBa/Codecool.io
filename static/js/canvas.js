@@ -53,7 +53,7 @@ function changeDrawingSize(event) {
     canvasElements.currentSize = event.target.dataset.size;
 }
 
-function clearCanvas(event) {
+function clearCanvas() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     canvasElements.clickDrag = []
