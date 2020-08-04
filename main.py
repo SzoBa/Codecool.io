@@ -38,7 +38,7 @@ def join_to_room(data):
     room_id = data['room_id']
     owner_id = data['owner_id']
     player_id = queries.insert_new_player(player_name, room_id)
-    join_room(room_id)
+    join_room(int(room_id))
     response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id}
     emit('user-joined-room', response_data, broadcast=True, include_self=False)
 
@@ -57,4 +57,3 @@ def game():
 
 if __name__ == '__main__':
     socketio.run(app)
-
