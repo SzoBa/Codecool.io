@@ -6,7 +6,8 @@ canvasElements = {
     drawSizes: [],
     clickX: [],
     clickY: [],
-    clickDrag: []
+    clickDrag: [],
+    beforeRubber: "black"
 }
 
 function init() {
@@ -26,11 +27,26 @@ function init() {
 }
 
 function changeDrawingColor(event) {
+    if (event.target.classList.contains("pen")) {
+       beforeRubber = canvasElements.currentColor
+        canvasElements.currentColor = beforeRubber;
+    }else {
     canvasElements.currentColor = event.target.dataset.colour;
+    }
 }
 
 function changeDrawingSize(event) {
     canvasElements.currentSize = event.target.dataset.size;
+}
+
+function clearCanvas(event) {
+    let context = document.querySelector("canvas").getContext("2d");
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    canvasElements.clickDrag = []
+    canvasElements.clickX = []
+    canvasElements.clickY = []
+    canvasElements.drawColors = []
+    canvasElements.drawSizes = []
 }
 
 function startDrawing(event) {
