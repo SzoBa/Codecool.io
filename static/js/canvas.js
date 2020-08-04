@@ -19,6 +19,10 @@ function init() {
     for (let colorBox of colorBoxes){
         colorBox.addEventListener('click', changeDrawingColor)
     }
+    let sizeBoxes = document.querySelectorAll('.size-box')
+    for (let sizeBox of sizeBoxes){
+        sizeBox.addEventListener('click', changeDrawingSize)
+    }
 }
 
 function changeDrawingColor(event) {
