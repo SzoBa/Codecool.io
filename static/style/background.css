@@ -14,7 +14,7 @@
     position: relative;
     z-index: 2;
 
-    height: 200px;
+    height: 250px;
 
     -webkit-transform: rotate(-1.5deg) scale(2);
             transform: rotate(-1.5deg) scale(2);
@@ -25,7 +25,7 @@
 .background .light-blue-layer {
     z-index: 1;
 
-    height: 330px;
+    height: 380px;
 
     -webkit-transform: rotate(1.5deg) scale(1.2);
             transform: rotate(1.5deg) scale(1.2);

@@ -16,12 +16,12 @@
 form input,
 form select {
     padding: 4px 6px;
-
+    width: 220px;
     cursor: pointer;
 
     border: 1px solid #4c97ca;
     -webkit-border-radius: 0;
-            border-radius: 2px;
+            border-radius: 8px;
     background: #fff;
 
     -webkit-appearance: none;

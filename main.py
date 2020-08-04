@@ -20,6 +20,11 @@ def room():
         owner_id = existing_room[0]['player_id']
     return render_template('room.html', room_id=existing_room_id, players=players, owner_id=owner_id)
 
+  
+@app.route('/game')
+def game():
+  return render_template('game-page.html')
+
 
 @socketio.on('create-room')
 def create_room(data):
@@ -48,11 +53,6 @@ def join_to_room(data):
 def init_game_start(room_id):
     queries.close_room(room_id)
     emit('start-game', room=int(room_id))
-
-
-@app.route('/game')
-def game():
-    return render_template('game.html')
 
 
 if __name__ == '__main__':
