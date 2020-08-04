@@ -26,8 +26,7 @@ function init() {
 }
 
 function changeDrawingColor(event) {
-    let colour = event.target.dataset.colour;
-    canvasElements.currentColor = colour;
+    canvasElements.currentColor = event.target.dataset.colour;
 }
 
 function startDrawing(event) {
