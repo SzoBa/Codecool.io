@@ -44,10 +44,9 @@ def join_to_room(data):
 
 
 @socketio.on('ready-to-start')
-def init_game_start(data):
-    room_id = data['room_id']
+def init_game_start(room_id):
     queries.close_room(room_id)
-    emit('start-game', room=room_id)
+    emit('start-game', room=int(room_id))
 
 
 @app.route('/game')

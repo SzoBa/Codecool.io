@@ -54,9 +54,8 @@ function addSocketListenerCreatedRoom() {
         let player = `<li>${event.username}</li>`
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
         document.querySelector('#start_game').addEventListener('click', (event) => {
-            let roomData = event.room_id;
+            let roomData = event.target.closest('#current_room').querySelector('.room').dataset.room;
             socket.emit('ready-to-start', roomData);
-
         });
     });
     socket.addEventListener('new-room-created', (event) => {
@@ -88,9 +87,8 @@ function addSocketListenerCreatedRoom() {
 
     });
     socket.addEventListener('start-game', (event) => {
-
-
-    })
+        window.location.replace('/game');
+    });
 }
 
 function joinRoom(event) {
