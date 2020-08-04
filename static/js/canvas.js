@@ -1,4 +1,6 @@
-canvasElements = {
+import {socket} from './socket.js'
+
+let canvasElements = {
     paint: false,
     drawColors: [],
     currentColor: "black",
