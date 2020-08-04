@@ -1,0 +1,327 @@
+/* Do not forget to add background.css too! */
+
+/*body {
+    padding: 0;
+    margin: 0;
+}*/
+
+h1 {
+    margin: 0 0 10px 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.time, .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+    height: 50px;
+    background: #C5D3F5;
+}
+
+.time {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    align-items: flex-end;
+}
+
+.time-number {
+    position: absolute;
+    padding-bottom: 13px;
+    font-size: 23px;
+}
+
+.empty {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.word {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 50px;
+    background: #C5D3F5;
+    font: normal normal normal 30px/30px Montserrat, serif;
+}
+
+.body {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.players-container, .chat-container {
+    width: 260px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    background: #C5D3F5;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.players-container {
+    margin-right: 5px;
+}
+
+.player {
+    width: 85%;
+    height: 30px;
+    border-radius: 5px;
+    background: #4c97ca;
+    color: #edf3f7;
+    padding: 5px;
+    margin: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.points {
+    color: #eaeaea;
+}
+
+.chat-container {
+    margin-left: 5px;
+}
+
+.message-container::-webkit-scrollbar {
+  display: none;
+}
+
+.message-container {
+    overflow-y: scroll;
+    height: 510px;
+    word-break: break-all;
+}
+
+/*.message-container::-webkit-scrollbar {*/
+/*  display: none;*/
+/*}*/
+
+.input-field{
+    margin: 5px 0 10px 0;
+    width: 260px;
+    display: flex;
+    justify-content: center;
+}
+
+.message {
+    width: 85%;
+    height: auto;
+    border-radius: 5px;
+    background: rgba(103, 148, 172, 0.42);
+    color: #2b2b2b;
+    padding: 5px;
+    margin: 3px 3px 3px 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.drawing {
+    display: flex;
+    flex-direction: column;
+}
+
+.canvas-container {
+    width: calc(100% - 520px);
+}
+
+.canvas {
+    height: 490px;
+    border: 1px solid #C5D3F5;
+}
+
+.extras {
+    /*width: 600px;*/
+    margin-top: 3px;
+    height: 57px;
+    background: #4c97ca;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+.current-color {
+    width: 40px;
+    height: 40px;
+    background: #2b2b2b;
+}
+
+.line-1, .line-2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+}
+
+.white {
+    background: white;
+}
+
+.black {
+    background: black;
+}
+
+.lightgray {
+    background: lightgray;
+}
+
+.gray {
+    background: gray;
+}
+
+.red {
+    background: red;
+}
+
+.darkred {
+    background: darkred;
+}
+
+.orange {
+    background: orange;
+}
+
+.darkorange {
+    background: #d67600;
+}
+
+.yellow {
+    background: yellow;
+}
+
+.dark-yellow {
+    background: #d4d400;
+}
+
+.green {
+    background: green;
+}
+
+.darkgreen {
+    background: darkgreen;
+}
+
+.blue {
+    background: blue;
+}
+
+.darker-blue-1 {
+    background: #0d0dbf;
+}
+
+.darker-blue-2 {
+    background: #0000ac;
+}
+
+.dark-blue {
+    background: #00007e
+}
+
+.purple {
+    background: purple;
+}
+
+.dark-purple {
+    background: rebeccapurple;
+}
+
+.pink {
+    background: #f5a5b2;
+}
+
+.dark-pink {
+    background: #e069a2;
+}
+
+.brown {
+    background: #a26f41;
+}
+
+.dark-brown {
+    background: saddlebrown;
+}
+
+.pen, .rubber, .clear {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #C5D3F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+}
+
+.sizes,.draw-type {
+    display: flex;
+    flex-direction: row;
+}
+
+.size-box {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #C5D3F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+}
+
+.size-five {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: black;
+}
+
+.size-ten {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: black;
+}
+
+.size-fifteen {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: black;
+}
+
+.size-twenty {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: black;
+}

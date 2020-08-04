@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Codecool.io</title>
+
+    <!-- Import Montserrat font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- Normalize.css fixes lot of differences between browsers default styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"/>
+
+    <!-- project wide styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+
+    <!-- page specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/gameplay.css') }}">
+    <script src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
+
+
+    <!-- timer -->
+    <script src=" {{ url_for('static', filename='js/timer.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/timer-animation.css') }}">
+</head>
+
+<body>
+<div id="body-wrapper">
+    <header class="clearfix">
+        <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
+        <span id="header-title" class="title">
+                        Codecool.io
+                    </span>
+{#        <div id="header-auth">
+            <button type="button" id="bt_register">Register</button>
+            <button type="button" id="bt_login">Login</button>
+        </div>#}
+    </header>
+    <section>
+        {#<h1 class="title text-center">Game</h1>#}
+        <div class="card container">
+            <div class="header">
+                <div class="time"><img src="{{ url_for('static', filename='canvas_img/clock.png') }}"
+                                       width="70" height="70" id="clock-img">
+                    <div class="time-number">15</div>
+                </div>
+                <div class="word">_ _ _ _ &nbsp _ _ _</div>
+                <div class="empty">Round 2 of 3</div>
+            </div>
+            <div class="body">
+                <div class="players-container">
+                    <div class="player">
+                        <span class="placement">#2</span>
+                        <div class="player-info">
+                            <span class="player-name">Player1</span>
+                            <span class="points">1234 points</span>
+                        </div>
+                        <span><img src="{{ url_for('static', filename='avatars/smurf_1.png') }}" width="40" height="40"></span>
+                    </div>
+                    <div class="player">
+                        <span class="placement">#3</span>
+                        <div class="player-info">
+                            <span class="player-name">Player2</span>
+                            <span class="points">2341 points</span>
+                        </div>
+                        <span><img src="{{ url_for('static', filename='avatars/smurf_2.png') }}" width="40" height="40"></span>
+                    </div>
+                    <div class="player">
+                        <span class="placement">#1</span>
+                        <div class="player-info">
+                            <span class="player-name">Player3</span>
+                            <span class="points">569 points</span>
+                        </div>
+                        <span><img src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40"></span>
+                    </div>
+                </div>
+                <div class="canvas-container">
+                    <div class="canvas">
+                        <canvas width="800" height="390"></canvas>
+                    </div>
+                    <div class="extras">
+                        <div class="current-color"></div>
+                        <div class="palette">
+                            <div class="line-1">
+                                <div class="white color-box" data-colour="white"></div>
+                                <div class="lightgray color-box" data-colour="lightgray"></div>
+                                <div class="red color-box" data-colour="red"></div>
+                                <div class="orange color-box" data-colour="orange"></div>
+                                <div class="yellow color-box" data-colour="yellow"></div>
+                                <div class="green color-box" data-colour="green"></div>
+                                <div class="blue color-box" data-colour="blue"></div>
+                                <div class="darker-blue-2 color-box" data-colour="#0000ac"></div>
+                                <div class="purple color-box" data-colour="purple"></div>
+                                <div class="pink color-box" data-colour="#f5a5b2"></div>
+                                <div class="brown color-box" data-colour="#a26f41"></div>
+                            </div>
+                            <div class="line-2">
+                                <div class="black color-box" data-colour="black"></div>
+                                <div class="gray color-box" data-colour="gray"></div>
+                                <div class="darkred color-box" data-colour="darkred"></div>
+                                <div class="darkorange color-box" data-colour="#d67600"></div>
+                                <div class="dark-yellow color-box" data-colour="#d4d400"></div>
+                                <div class="darkgreen color-box" data-colour="darkgreen"></div>
+                                <div class="darker-blue-1 color-box" data-colour="#0d0dbf"></div>
+                                <div class="dark-blue color-box" data-colour="#00007e"></div>
+                                <div class="dark-purple color-box" data-colour="rebeccapurple"></div>
+                                <div class="dark-pink color-box" data-colour="#e069a2"></div>
+                                <div class="dark-brown color-box" data-colour="saddlebrown"></div>
+                            </div>
+                        </div>
+                        <div class="draw-type">
+                            <div class="pen change-marker" data-colour="canvasElements.currentColor"><img src="{{ url_for('static', filename='canvas_img/pen.png') }}"
+                                                  width="40" height="40" class="pen"></div>
+                            <div class="rubber change-marker" data-colour="white"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
+                                                     width="40" height="40" data-colour="white" class="rubber"></div>
+                            <div class="clear"><img src="{{ url_for('static', filename='canvas_img/dustbin.png') }}"
+                                                     width="40" height="40"></div>
+                        </div>
+                        <div class="sizes">
+                            <div class="size-box" data-size="small">
+                                <div class="size-five" data-size="small"></div>
+                            </div>
+                            <div class="size-box" data-size="normal">
+                                <div class="size-ten" data-size="normal"></div>
+                            </div>
+                            <div class="size-box" data-size="large">
+                                <div class="size-fifteen" data-size="large"></div>
+                            </div>
+                            <div class="size-box" data-size="huge">
+                                <div class="size-twenty" data-size="huge"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-container">
+                    <div class="message-container">
+                        <div class="message">Message1</div>
+                        <div class="message">Message2</div>
+                        <div class="message">I have no idea what to do next</div>
+                        <div class="message">Message4</div>
+                        <div class="message">Message5</div>
+                        <div class="message">This message is a bit longer to see the box size</div>
+                        <div class="message">Message7</div>
+                        <div class="message">Message8</div>
+                        <div class="message">Message9</div>
+                        <div class="message">My guess is Codecole.io</div>
+                        <div class="message">Message11</div>
+                        <div class="message">You can scroll these down</div>
+                        <div class="message">Message13</div>
+                        <div class="message">Message14</div>
+                    </div>
+                    <div class="input-field">
+                        <input id="chat-input" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="background">
+    <div class="dark-blue-layer"></div>
+    <div class="light-blue-layer"></div>
+</div>
+</body>
+</html>
