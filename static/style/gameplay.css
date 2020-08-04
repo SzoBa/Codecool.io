@@ -39,7 +39,7 @@ h1 {
 
 .time-number {
     position: absolute;
-    margin-bottom: 13px;
+    padding-bottom: 13px;
     font-size: 23px;
 }
 
@@ -144,7 +144,7 @@ h1 {
 }
 
 .canvas-container {
-    width: 800px;
+    width: calc(100% - 520px);
 }
 
 .canvas {
