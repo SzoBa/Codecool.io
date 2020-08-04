@@ -160,7 +160,7 @@ h1 {
     border-radius: 10px;
 }
 
-.actual-color {
+.current-color {
     width: 40px;
     height: 40px;
     background: #2b2b2b;
@@ -264,7 +264,7 @@ h1 {
     background: saddlebrown;
 }
 
-.pen, .rubber, .dustbin, .actual-color {
+.pen, .rubber, .clear {
     width: 40px;
     height: 40px;
     border: 1px solid #C5D3F5;
