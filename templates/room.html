@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
 
     {#    CSS for back-end testing purposes#}
-    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/codecool-logo.png')  }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/codecool-logo.png') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/room.css') }}">
 
     {#    CSS for back-end testing purposes#}
@@ -33,29 +33,38 @@
     <script type="module" src="{{ url_for('static', filename='js/room.js') }}" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div id="current_room">
-            <p>Current room</p>
-        </div>
-        <div id="waiting_room">
-            <p>Waiting</p>
-            {% if room_id %}
-                <div class="room" data-room="{{ room_id }}">
-                    <p>Players:</p>
-                    <ul>
-                        {% for player in players %}
-                            <li>{{ player }}</li>
-                        {% endfor %}
-                    </ul>
-                <input id="username" required>
-                <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
+    <section id="body-wrapper">
+        <header class="clearfix">
+            <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
+            <span id="header-title" class="title">Codecool.io</span>
+        </header>
+        <section>
+            <div class="container card">
+                <div id="waiting_room" class="waiting">
+                    <p>Waiting</p>
+                    {% if room_id %}
+                        <div class="room" data-room="{{ room_id }}">
+                            <p>Players:</p>
+                            <ul>
+                                {% for player in players %}
+                                    <li>{{ player }}</li>
+                                {% endfor %}
+                            </ul>
+                            <input id="username" required>
+                            <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-        </div>
-        <div id="playing_room">
-            <p>Playing</p>
-        </div>
-    </div>
+
+                <div id="current_room" class="current">
+                    <p>Current room</p>
+                </div>
+
+                <div id="playing_room">
+                    <p>Playing</p>
+                </div>
+            </div>
+        </section>
     {% if not room_id %}
         <div id="room_div" class="">
             <div id="room_div_inner">
@@ -65,5 +74,10 @@
             </div>
         </div>
     {% endif %}
+    </section>
+    <div class="background">
+        <div class="dark-blue-layer"></div>
+        <div class="light-blue-layer"></div>
+    </div>
 </body>
 </html>

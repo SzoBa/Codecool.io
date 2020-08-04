@@ -1,11 +1,11 @@
 /*back-end testing purposes*/
-html,
+/*html,
 body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-}
+}*/
 
 #room_div {
     position: fixed;
@@ -41,6 +41,9 @@ body {
 .container {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 #current_room {
@@ -75,4 +78,9 @@ body {
 
 .room {
     border: solid black 1px;
+}
+
+.waiting {
+    width: calc(1320px / 3);
+    height: 600px;
 }
