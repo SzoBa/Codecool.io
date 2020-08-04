@@ -95,6 +95,7 @@ function draw() {
 		}
         context.lineTo(canvasElements.clickX[i], canvasElements.clickY[i]);
         context.closePath();
+        context.lineWidth = radius;
         context.strokeStyle = canvasElements.drawColors[i];
         context.stroke();
     }
