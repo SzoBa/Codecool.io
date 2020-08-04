@@ -14,9 +14,6 @@ let canvasElements = {
 
 function init() {
     addSocketFunctionality();
-    setInterval(function () {
-        socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
-    }, 17)
     let canvas = document.querySelector("canvas");
     if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
         canvas.addEventListener('mousedown', startDrawing)
@@ -76,6 +73,7 @@ function clearCanvas() {
     canvasElements.clickY = []
     canvasElements.drawColors = []
     canvasElements.drawSizes = []
+    socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
 function startDrawing(event) {
@@ -110,6 +108,7 @@ function addClick(x, y, dragging) {
     canvasElements.clickDrag.push(dragging);
     canvasElements.drawColors.push(canvasElements.currentColor);
     canvasElements.drawSizes.push(canvasElements.currentSize);
+    socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
 function draw() {
