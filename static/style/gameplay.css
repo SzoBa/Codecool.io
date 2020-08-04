@@ -67,7 +67,7 @@ h1 {
 
 .players-container, .chat-container {
     width: 260px;
-    height: 450px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     background: #C5D3F5;
@@ -107,9 +107,13 @@ h1 {
     margin-left: 5px;
 }
 
+.message-container::-webkit-scrollbar {
+  display: none;
+}
+
 .message-container {
     overflow-y: scroll;
-
+    height: 510px;
 }
 
 /*.message-container::-webkit-scrollbar {*/
@@ -148,7 +152,7 @@ h1 {
 }
 
 .canvas {
-    height: 390px;
+    height: 490px;
     border: 1px solid #C5D3F5;
 }
 
