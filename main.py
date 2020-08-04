@@ -66,5 +66,12 @@ def drawing(data):
     emit('user-draw', json.dumps(response['data']), room=response['roomId'], include_self=False)
 
 
+@socketio.on('send-chat-message')
+def send_chat_message(data):
+    message_data = json.loads(data)
+    room_id = message_data.pop('room_id')
+    emit('new-chat-message', json.dumps(message_data), room=room_id, broadcast=True)
+
+
 if __name__ == '__main__':
     socketio.run(app)
