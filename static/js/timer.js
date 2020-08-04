@@ -3,7 +3,7 @@ let timeCounter
 function gameInit() {
     getGameInfo()
     initTimer()
-
+    initRounds()
 }
 
 function initTimer() {
@@ -14,6 +14,7 @@ function initTimer() {
     if (currentTime <= 1){
         //the round ends
         clearInterval(timeCounter);
+        changeCurrentRound();
         timerElement.classList.remove("time-running-out");
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
@@ -56,10 +57,29 @@ function displayPlayers(players){
     playersContainer.innerHTML = playersToAdd
     let timeLimit = players[0]["drawing_time"]
     setTimerLimit(timeLimit)
+    let rounds = players[0]["max_round"]
+    initRounds(rounds);
 }
 
 function setTimerLimit(timeLimit) {
     document.querySelector(".time-number").textContent = timeLimit
+}
+
+
+function initRounds(rounds) {
+    let roundsContainer = document.querySelector(".empty");
+    roundsContainer.dataset.currentRound = 1;
+    roundsContainer.dataset.maxRounds = rounds;
+    roundsContainer.innerText = `Round 1 of ${rounds}`;
+}
+
+function changeCurrentRound () {
+    let endRound = document.querySelector(".empty").dataset.currentRound;
+    let maximumRounds = document.querySelector(".empty").dataset.maxRounds;
+    let currentRound = parseInt(endRound) + 1;
+    endRound = currentRound;
+    let newRound = document.querySelector(".empty");
+    newRound.textContent = `Round ${endRound} of ${maximumRounds}`
 }
 
 gameInit()
