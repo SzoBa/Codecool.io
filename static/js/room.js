@@ -1,10 +1,74 @@
+// import {socket} from './roominit.js';
 let socket = io('http://127.0.0.1:5000');
-init();
 
 function init() {
-    addSocketConnectionListeners();
-    addListenerToButton();
-    addSocketListenerCreatedRoom();
+    createSocketRooms();
+    loadRooms();
+    // addSocketConnectionListeners();
+    // addListenerToButton();
+    // addSocketListenerCreatedRoom();
+}
+
+function createSocketRooms() {
+    socket.emit('create-existing-room', parseInt(localStorage['room_id']));
+}
+
+function loadRooms() {
+    fetch('get-rooms')
+        .then(response => response.json())
+        .then(data => displayRooms(data))
+        .then(addSocketConnectionListeners)
+        .then(addListenerToButton)
+        .then(addSocketListenerCreatedRoom)
+}
+
+function displayRooms(rooms) {
+    let section;
+    for (let room of rooms) {
+        let players = room.player_name.split(',')
+        let playersHtml = '';
+        for (let player of players) {
+            playersHtml += `<li>${player}</li>`
+        }
+        if (room.is_open === false) {
+            section = document.querySelector('#playing_room')
+            let newRoomContent = `<div class="room" data-room="${room.room_id}">
+                    <p>Players:</p>
+                    <ul>
+                        ${playersHtml}
+                    </ul>
+                </div>`
+            section.insertAdjacentHTML("beforeend", newRoomContent);
+        } else if (parseInt(room['owner_id']) === parseInt(localStorage.user_id)) {
+            section = document.querySelector('#current_room')
+            let newRoomContent = `<div class="room" data-room="${room.room_id}">
+                    <p>Players:</p>
+                    <ul>
+                        ${playersHtml}
+                    </ul>
+                </div>
+                <div id="start_game" class=""><button>START GAME</button></div>`
+            section.insertAdjacentHTML("beforeend", newRoomContent);
+            let startButton = document.querySelector('#start_game');
+            startButton.addEventListener('click', (event) => {
+                let roomData = event.target.closest('#current_room').querySelector('.room').dataset.room;
+                socket.emit('ready-to-start', roomData);
+            });
+        } else {
+            section = document.querySelector('#waiting_room')
+            let newRoomContent = `<div class="room" data-room="${room.room_id}">
+                    <p>Players:</p>
+                    <ul>
+                        ${playersHtml}
+                    </ul>
+                <input id="username" required>
+                <button id="join_room_button" data-creator=${room.owner_id}>Join Room</button>
+                </div>`
+            section.insertAdjacentHTML("beforeend", newRoomContent);
+            document.querySelector('#join_room_button').addEventListener('click', joinRoom);
+        }
+    }
+
 }
 
 function addSocketConnectionListeners() {
@@ -48,10 +112,10 @@ function addSocketListenerCreatedRoom() {
         document.querySelector('#room_div').classList.add('display-none');
         let currentRoom = document.querySelector('#current_room');
         let createdRoom = `
-        <div class="room" data-room="${event.room_id}">
-        <p>Room (number: ${event.room_id})</p>
-        <p>Players:</p>
-        <ul></ul></div>`
+                            <div class="room" data-room="${event.room_id}">
+                            <p>Room (number: ${event.room_id})</p>
+                            <p>Players:</p>
+                            <ul></ul></div>`
         currentRoom.insertAdjacentHTML('beforeend', createdRoom);
         let startButton = `<div id="start_game" class=""><button>START GAME</button></div>`
         currentRoom.insertAdjacentHTML("beforeend", startButton);
@@ -107,3 +171,5 @@ function joinRoom(event) {
     }
 
 }
+
+init();

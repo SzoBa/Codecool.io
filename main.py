@@ -52,14 +52,19 @@ def join_to_room(data):
 
 @socketio.on('ready-to-start')
 def init_game_start(room_id):
-    queries.close_room(room_id)
+    queries.close_room(int(room_id))
     emit('start-game', room=int(room_id))
 
 
 @app.route('/get-rooms')
 def get_rooms():
     rooms = queries.get_rooms()
-    return rooms
+    return jsonify(rooms)
+
+
+@socketio.on('create-existing-room')
+def create_existing_room(room_id):
+    join_room(room_id)
 
 
 if __name__ == '__main__':

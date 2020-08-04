@@ -69,6 +69,7 @@ def get_rooms(cursor):
     GROUP BY player.room_id, room.is_open, room.owner_id;
     '''
     cursor.execute(query)
+    return cursor.fetchall()
 
 @connection.connection_handler
 def insert_owner_id_to_room(cursor, player_id, room_id):
