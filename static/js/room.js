@@ -15,7 +15,8 @@ function addSocketConnectionListeners() {
         console.log('connection closed')
     });
     socket.addEventListener('save-my-id', (data) => {
-        localStorage.setItem('user_id', data)
+        localStorage.setItem('user_id', data.player_id)
+        localStorage.setItem('owner_id', data.owner_id)
     });
 }
 
@@ -66,7 +67,6 @@ function addSocketListenerCreatedRoom() {
         let creatorName = event['username'];
         let creatorId = event['player_id'];
         let roomId = event['room_id'];
-        localStorage['owner_id'] = event.player_id;
         let waitingRoom = document.querySelector('#waiting_room');
         let newRoom = document.createElement('div');
         newRoom.classList.add('room');
