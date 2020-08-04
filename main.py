@@ -12,7 +12,12 @@ socketio = SocketIO(app)
 @app.route('/')
 @app.route('/room')
 def room():
-    return render_template('room.html')
+    existing_room = queries.get_existing_room()
+    players, existing_room_id = None, None
+    if existing_room:
+        players = [record['player_name'] for record in existing_room]
+        existing_room_id = existing_room[0]['room_id']
+    return render_template('room.html', room_id=existing_room_id, players=players)
 
 
 @socketio.on('create-room')

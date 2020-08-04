@@ -4,6 +4,21 @@ from psycopg2 import sql
 
 
 @connection.connection_handler
+def get_existing_room(cursor):
+    query = '''
+            SELECT
+                room.id AS room_id,
+                player.name as player_name
+            FROM room
+            JOIN player
+                ON room.id = player.room_id
+            ORDER BY player.id ASC
+        '''
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection.connection_handler
 def insert_new_room(cursor):
     query = '''
         INSERT INTO room
