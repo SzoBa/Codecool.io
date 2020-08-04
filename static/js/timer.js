@@ -1,5 +1,11 @@
 let timeCounter
 
+function gameInit() {
+    initTimer()
+    getPlayers()
+
+}
+
 function initTimer() {
     timeCounter = setInterval(function (){
     let clock = document.querySelector("#clock-img");
@@ -19,4 +25,20 @@ function initTimer() {
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
 }
 
-initTimer()
+function getPlayers(){
+    let room_id = localStorage.getItem('room_id')
+    let url =  "get-players/" + room_id
+    fetch(url, {
+            method: 'GET',
+            credentials: 'same-origin'
+        })
+        .then(response => response.json())
+        .then(json_response => displayPlayers(json_response));
+}
+
+function displayPlayers(players){
+    console.log(players)
+}
+
+
+gameInit()
