@@ -40,8 +40,8 @@ function addListenerToButton() {
 function addSocketListenerCreatedRoom() {
     socket.addEventListener('own-room-created', (event) => {
         localStorage['player_id'] = event.player_id;
+        localStorage['room_id'] = event.room_id;
         document.querySelector('#room_div').classList.add('display-none');
-        console.log(event)
         let currentRoom = document.querySelector('#current_room');
         let createdRoom = `
         <div class="room" data-room="${event.room_id}">
@@ -63,9 +63,7 @@ function addSocketListenerCreatedRoom() {
         let creatorName = event['username'];
         let creatorId = event['player_id'];
         let roomId = event['room_id'];
-        console.log(event)
         localStorage['player_id'] = event.player_id;
-
         let waitingRoom = document.querySelector('#waiting_room');
         let newRoom = document.createElement('div');
         newRoom.classList.add('room');
@@ -94,6 +92,7 @@ function addSocketListenerCreatedRoom() {
 function joinRoom(event) {
     let username = document.querySelector('#username').value;
     let roomId = event.target.closest('div').dataset.room;
+    localStorage['room_id'] = roomId;
     let ownerId = event.target.closest('div').querySelector('#join_room_button').dataset.creator;
     if (username) {
         localStorage['username'] = username;
