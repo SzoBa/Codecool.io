@@ -118,24 +118,24 @@
                             </div>
                         </div>
                         <div class="draw-type">
-                            <div class="pen"><img src="{{ url_for('static', filename='canvas_img/pen.png') }}"
+                            <div class="pen change-marker"><img src="{{ url_for('static', filename='canvas_img/pen.png') }}"
                                                   width="40" height="40"></div>
-                            <div class="rubber"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
+                            <div class="rubber change-marker" data-colour="white"><img src="{{ url_for('static', filename='canvas_img/rubber.png') }}"
                                                      width="40" height="40"></div>
-                            <div class="dustbin"><img src="{{ url_for('static', filename='canvas_img/dustbin.png') }}"
+                            <div class="clear"><img src="{{ url_for('static', filename='canvas_img/dustbin.png') }}"
                                                      width="40" height="40"></div>
                         </div>
                         <div class="sizes">
-                            <div class="size-box">
+                            <div class="size-box" data-size="5">
                                 <div class="size-five"></div>
                             </div>
-                            <div class="size-box">
+                            <div class="size-box" data-size="10">
                                 <div class="size-ten"></div>
                             </div>
-                            <div class="size-box">
+                            <div class="size-box" data-size="15">
                                 <div class="size-fifteen"></div>
                             </div>
-                            <div class="size-box">
+                            <div class="size-box" data-size="20">
                                 <div class="size-twenty"></div>
                             </div>
                         </div>
