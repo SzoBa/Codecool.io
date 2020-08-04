@@ -21,7 +21,7 @@
         <div id="waiting_room">
             <p>Waiting</p>
             {% if room_id %}
-                <div class="room">
+                <div class="room" data-room="{{ room_id }}">
                     <p>Players:</p>
                     <ul>
                         {% for player in players %}
