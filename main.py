@@ -35,11 +35,11 @@ def create_room(data):
 def join_to_room(data):
     player_name = data['username']
     room_id = data['room_id']
+    owner_id = data['owner_id']
     player_id = queries.insert_new_player(player_name, room_id)
     join_room(room_id)
-    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
-    emit('joined-to-room', response_data)
-    emit('user-joined-a-room', response_data, broadcast=True, include_self=False)
+    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id}
+    emit('user-joined-room', response_data, broadcast=True, include_self=False)
 
 
 @app.route('/game')
