@@ -23,7 +23,7 @@ def room():
   
 @app.route('/game')
 def game():
-  return render_template('game-page.html')
+    return render_template('game-page.html')
 
 
 @socketio.on('create-room')
