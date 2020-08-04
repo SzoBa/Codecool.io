@@ -64,7 +64,7 @@ def join_game_start(room_id):
 def drawing(data):
     response = json.loads(data)
     print(response['roomId'])
-    emit('user-draw', jsonify(response['data']), room=int(response['roomId']), include_self=False)
+    emit('user-draw', response['data'], room=response['roomId'], include_self=False)
 
 
 if __name__ == '__main__':
