@@ -1,8 +1,8 @@
 let timeCounter
 
 function gameInit() {
+    getGameInfo()
     initTimer()
-    getPlayers()
 
 }
 
@@ -25,9 +25,9 @@ function initTimer() {
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
 }
 
-function getPlayers(){
+function getGameInfo(){
     let room_id = localStorage.getItem('room_id')
-    let url =  "get-players/" + room_id
+    let url =  "/get-players/" + room_id
     fetch(url, {
             method: 'GET',
             credentials: 'same-origin'
@@ -37,9 +37,27 @@ function getPlayers(){
 }
 
 function displayPlayers(players){
-    console.log(players)
+    let playersContainer =  document.querySelector(".players-container")
+    let playersToAdd = ``
+    for (let i = 0; i < players.length;i++){
+        let player = players[i]
+        let playerInfo = `<div class="player">
+                        <span class="placement">#${i+1}</span>
+                        <div class="player-info">
+                            <span class="player-name">${player.name}</span>
+                            <span class="points">${player.points}</span>
+                        </div>
+                        <span><img src="static/avatars/smurf_${i+1}.png" width="40" height="40"></span>
+                        </div>`
+        playersToAdd += playerInfo
+    }
+    playersContainer.innerHTML = playersToAdd
+    let timeLimit = players[0]["drawing_time"]
+    setTimerLimit(timeLimit)
 }
 
-
+function setTimerLimit(timeLimit) {
+    document.querySelector(".time-number").textContent = timeLimit
+}
 
 gameInit()
