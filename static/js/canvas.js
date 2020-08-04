@@ -72,7 +72,6 @@ function draw() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
     context.lineJoin = "round";
-    context.lineWidth = 5;
 
     for (let i = 0; i < canvasElements.clickX.length; i++) {
         context.beginPath();
