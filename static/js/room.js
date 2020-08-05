@@ -140,7 +140,7 @@ function addSocketListenerCreatedRoom() {
         localStorage['user_id'] = event.player_id;
         localStorage['owner_id'] = event.player_id;
         localStorage['room_id'] = event.room_id;
-        document.querySelector('#room_div').classList.add('display-none');
+        // document.querySelector('#room_div').classList.add('display-none');
         let currentRoom = document.querySelector('#current_room');
         let createdRoom = `<div class="room" data-room="${event.room_id}">
                                 <p class="room-players">Players:</p>
