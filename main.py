@@ -61,5 +61,18 @@ def get_players(room_id):
     return jsonify(players_info_in_room)
 
 
+@app.route('/update-drawer', methods=['PUT'])
+def update_drawer():
+    new_drawer_id = request.get_json()
+    queries.update_drawer(new_drawer_id)
+
+
+@app.route('/get-current-drawer')
+def get_current_drawer():
+    drawer_id = queries.get_drawer()
+    return jsonify(drawer_id)
+
+
+
 if __name__ == '__main__':
     socketio.run(app)
