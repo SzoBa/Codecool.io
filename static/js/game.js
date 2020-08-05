@@ -6,6 +6,7 @@ function init() {
     if (localStorage.getItem('owner_id') === localStorage.getItem('player_id')) {
         getWord();
     }
+    addSocketListenerPoints();
 }
 
 function getWord() {
@@ -22,4 +23,12 @@ function getWord() {
 
 function useTheWord(word) {
     document.querySelector('.word').innerHTML = word;
+}
+
+function addSocketListenerPoints() {
+    let playerId = localStorage.getItem('player_id');
+    socket.addEventListener('increase-points', data => {
+        let playerDiv = document.querySelector(`[data-playerid=${playerId}]`);
+        playerDiv.querySelector('.points').innerHTML = data;
+    })
 }
