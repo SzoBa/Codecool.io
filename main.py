@@ -83,6 +83,7 @@ def get_word():
     room_id = request.args.get("room")
     word_id = request.args.get("word")
     word = queries.get_word(word_id, room_id)
+    send_word_length(word, room_id)
     return jsonify(word)
 
 
@@ -93,6 +94,11 @@ def update_points(data):
     player_id = message_data.pop('player_id')
     queries.update_points(player_id)
     emit('increase-points', player_id, room=room_id)
+
+
+def send_word_length(word, room_id):
+    length = len(word)
+    emit('word-length', length, room=room_id, broadcast=True)
 
 
 if __name__ == '__main__':
