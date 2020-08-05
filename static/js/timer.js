@@ -1,4 +1,6 @@
 import {socket} from './socket.js'
+import {addAllEventListeners} from './canvas.js'
+import {removeAllEventListeners} from './canvas.js'
 
 let timeCounter
 
@@ -148,7 +150,13 @@ function switchDrawer(){
     let currentDrawerId = localStorage.getItem("drawer_id");
     let nextDrawerId = getNextDrawerId(currentDrawerId)
     let myId = localStorage.getItem("user_id");
+    if (myId === currentDrawerId) {
+        removeAllEventListeners();
+    } else if (myId === nextDrawerId) {
+        addAllEventListeners();
+    }
     if (currentDrawerId === myId){
+
         fetch("/update-drawer", {
             method: 'PUT',
             credentials: 'same-origin',

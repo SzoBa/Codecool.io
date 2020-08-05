@@ -12,29 +12,53 @@ let canvasElements = {
     beforeRubber: "black"
 }
 
-function init() {
+function init(ownerId, userId) {
     addSocketFunctionality();
-    let canvas = document.querySelector("canvas");
-    if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
-        canvas.addEventListener('mousedown', startDrawing)
-        canvas.addEventListener('mousemove', checkIfDrawing)
-        canvas.addEventListener('mouseup', endDrawing)
-        canvas.addEventListener('mouseleave', endDrawing)
-        let colorBoxes = document.querySelectorAll(".color-box")
-        for (let colorBox of colorBoxes) {
-            colorBox.addEventListener('click', changeDrawingColor)
-        }
-        let sizeBoxes = document.querySelectorAll('.size-box')
-        for (let sizeBox of sizeBoxes) {
-            sizeBox.addEventListener('click', changeDrawingSize)
-        }
-        let changeMarkerBtns = document.querySelectorAll(".change-marker")
-        for (let changeMarkerBtn of changeMarkerBtns) {
-            changeMarkerBtn.addEventListener('click', changeDrawingColor);
-        }
-
-        document.querySelector(".clear").addEventListener('click', clearCanvas);
+    if (ownerId === userId) {
+        addAllEventListeners()
     }
+}
+
+export function addAllEventListeners() {
+    let canvas = document.querySelector("canvas");
+    canvas.addEventListener('mousedown', startDrawing)
+    canvas.addEventListener('mousemove', checkIfDrawing)
+    canvas.addEventListener('mouseup', endDrawing)
+    canvas.addEventListener('mouseleave', endDrawing)
+    let colorBoxes = document.querySelectorAll(".color-box")
+    for (let colorBox of colorBoxes) {
+        colorBox.addEventListener('click', changeDrawingColor)
+    }
+    let sizeBoxes = document.querySelectorAll('.size-box')
+    for (let sizeBox of sizeBoxes) {
+        sizeBox.addEventListener('click', changeDrawingSize)
+    }
+    let changeMarkerBtns = document.querySelectorAll(".change-marker")
+    for (let changeMarkerBtn of changeMarkerBtns) {
+        changeMarkerBtn.addEventListener('click', changeDrawingColor);
+    }
+    document.querySelector(".clear").addEventListener('click', clearCanvas);
+}
+
+export function removeAllEventListeners() {
+    let canvas = document.querySelector("canvas");
+    canvas.removeEventListener('mousedown', startDrawing)
+    canvas.removeEventListener('mousemove', checkIfDrawing)
+    canvas.removeEventListener('mouseup', endDrawing)
+    canvas.removeEventListener('mouseleave', endDrawing)
+    let colorBoxes = document.querySelectorAll(".color-box")
+    for (let colorBox of colorBoxes) {
+        colorBox.removeEventListener('click', changeDrawingColor)
+    }
+    let sizeBoxes = document.querySelectorAll('.size-box')
+    for (let sizeBox of sizeBoxes) {
+        sizeBox.removeEventListener('click', changeDrawingSize)
+    }
+    let changeMarkerBtns = document.querySelectorAll(".change-marker")
+    for (let changeMarkerBtn of changeMarkerBtns) {
+        changeMarkerBtn.removeEventListener('click', changeDrawingColor);
+    }
+    document.querySelector(".clear").removeEventListener('click', clearCanvas);
 }
 
 function addSocketFunctionality() {
@@ -144,4 +168,4 @@ function draw() {
     }
 }
 
-init();
+init(localStorage.getItem('owner_id'), localStorage.getItem('user_id'));
