@@ -76,5 +76,15 @@ def refresh_image(data):
     emit('refresh_user_image', response_data, broadcast=True, include_self=True)
 
 
+@app.route('/get-avatar')
+def get_avatar():
+    user_id = request.args['user_id']
+    avatar = queries.get_avatar(user_id)
+    if avatar:
+        avatar_number = avatar['avatar'].split('_')[1].split('.')[0]
+        return jsonify(avatar_number)
+    return jsonify(1)
+
+
 if __name__ == '__main__':
     socketio.run(app)
