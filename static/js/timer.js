@@ -12,9 +12,9 @@ function initTimer() {
     let timerElement = document.querySelector(".time-number");
     let currentTime = parseInt(timerElement.textContent);
     if (currentTime <= 1){
-        //the round ends
+        //the round ends here
         clearInterval(timeCounter);
-        changeCurrentRound();
+        changeCurrentRound();  //this function changes the rounds - needs to be moved once round changes are decided
         timerElement.classList.remove("time-running-out");
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
@@ -78,15 +78,15 @@ function setTimerLimit(timeLimit) {
 
 
 function initRounds(rounds) {
-    let roundsContainer = document.querySelector(".empty");
+    let roundsContainer = document.querySelector(".empty"); // class name needs to be updated
     roundsContainer.dataset.currentRound = 1;
     roundsContainer.dataset.maxRounds = rounds;
     roundsContainer.innerText = `Round 1 of ${rounds}`;
 }
 
 function changeCurrentRound () {
-    let endRound = document.querySelector(".empty").dataset.currentRound;
-    let maximumRounds = document.querySelector(".empty").dataset.maxRounds;
+    let endRound = document.querySelector(".empty").dataset.currentRound; // class name needs to be updated
+    let maximumRounds = document.querySelector(".empty").dataset.maxRounds; // class name needs to be updated
     let currentRound = parseInt(endRound) + 1;
     endRound = currentRound;
     let newRound = document.querySelector(".empty");
