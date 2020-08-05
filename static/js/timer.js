@@ -27,7 +27,6 @@ function initGameFlow(data){
     let rounds = data[0]["max_round"]
     localStorage.setItem('max_rounds', rounds)
     initRounds(rounds);
-
 }
 
 
