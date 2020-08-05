@@ -46,7 +46,7 @@ def join_to_room(data):
     player_id = queries.insert_new_player(player_name, room_id)
     join_room(int(room_id))
     response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id}
-    emit('save-my-id', {'player_id': player_id, 'owner_id': owner_id})
+    emit('save-my-id', {'player_id': player_id, 'owner_id': owner_id, 'username': player_name})
     emit('user-joined-room', response_data, broadcast=True, include_self=False)
 
 
@@ -65,6 +65,15 @@ def get_rooms():
 @socketio.on('create-existing-room')
 def create_existing_room(room_id):
     join_room(room_id)
+
+
+@socketio.on('refresh-image')
+def refresh_image(data):
+    user_id = data['userId']
+    current_image = data['currentImage']
+    queries.refresh_image(user_id, current_image)
+    response_data = {'user_id': user_id, 'current_image': current_image}
+    emit('refresh_user_image', response_data, broadcast=True, include_self=True)
 
 
 if __name__ == '__main__':
