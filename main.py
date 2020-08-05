@@ -53,6 +53,26 @@ def join_to_room(data):
 def init_game_start(room_id):
     queries.close_room(room_id)
     emit('start-game', room=int(room_id))
+    
+    
+@app.route('/get-players/<room_id>')
+def get_players(room_id):
+    players_info_in_room = queries.get_players_data(room_id)
+    return jsonify(players_info_in_room)
+
+
+@app.route('/update-drawer', methods=['PUT'])
+def update_drawer():
+    new_drawer_id = request.get_json()
+    queries.update_drawer(new_drawer_id)
+    return jsonify("")
+
+
+@app.route('/get-current-drawer')
+def get_current_drawer():
+    drawer_id = queries.get_drawer()
+    return jsonify(drawer_id)
+
 
 
 @socketio.on('join-game-start')

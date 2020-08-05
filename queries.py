@@ -1,4 +1,6 @@
 import bcrypt
+from psycopg2._psycopg import cursor
+
 import connection
 from psycopg2 import sql
 
@@ -101,3 +103,42 @@ def update_points(cursor, player_id):
             WHERE id = %(player_id)s
             '''
     cursor.execute(query, {'player_id': player_id})
+
+
+@connection.connection_handler
+def get_players_data(cursor, room_id):
+    query = """
+    SELECT name, points, is_drawer, word, max_round, round_counter, drawing_time, player.id AS player_id
+    FROM player
+    JOIN room ON player.room_id = room.id
+    WHERE room.id = %(room_id)s
+    """
+    cursor.execute(query, {"room_id": room_id})
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def update_drawer(cursor, new_drawer_id):
+    query_old_drawer = """
+            UPDATE player
+            SET is_drawer = false 
+            WHERE is_drawer = true
+            """
+    cursor.execute(query_old_drawer)
+    query_new_drawer = """
+                        UPDATE player
+                        SET is_drawer = true 
+                        WHERE id = %(new_drawer_id)s
+                    """
+    cursor.execute(query_new_drawer, {"new_drawer_id" : new_drawer_id})
+
+
+@connection.connection_handler
+def get_drawer(cursor):
+    query = """
+    SELECT id, name
+    FROM player
+    WHERE is_drawer = true
+    """
+    cursor.execute(query)
+    return cursor.fetchone()
