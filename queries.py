@@ -61,7 +61,7 @@ def close_room(cursor, room_id):
 @connection.connection_handler
 def get_players_data(cursor, room_id):
     query = """
-    SELECT name, points, is_drawer, word, max_round, round_counter, drawing_time
+    SELECT name, points, is_drawer, word, max_round, round_counter, drawing_time, player.id AS player_id
     FROM player
     JOIN room ON player.room_id = room.id
     WHERE room.id = %(room_id)s

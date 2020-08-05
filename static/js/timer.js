@@ -4,6 +4,7 @@ function gameInit() {
     getGameInfo()
     initTimer()
     initRounds()
+    switchDrawer()
 }
 
 
@@ -26,6 +27,7 @@ function initGameFlow(data){
     setTimerLimit(timeLimit)
     let rounds = data[0]["max_round"]
     localStorage.setItem('max_rounds', rounds)
+    localStorage.setItem('current_round', "1")
     initRounds(rounds);
 }
 
@@ -36,7 +38,7 @@ function displayPlayers(players){
     let smurfCount = 1;
     for (let i = 0; i < players.length;i++){
         let player = players[i];
-        let playerInfo = `<div class="player">
+        let playerInfo = `<div class="player" data-playerid="${player.player_id}">
                         <span class="placement">#${i+1}</span>
                         <div class="player-info">
                             <span class="player-name">${player.name}</span>
@@ -52,10 +54,6 @@ function displayPlayers(players){
         }
     }
     playersContainer.innerHTML = playersToAdd
-    let timeLimit = players[0]["drawing_time"]
-    setTimerLimit(timeLimit)
-    let rounds = players[0]["max_round"]
-    initRounds(rounds);
 }
 
 function setTimerLimit(timeLimit) {
@@ -102,6 +100,13 @@ function changeCurrentRound () {
     endRound = currentRound;
     let newRound = document.querySelector(".empty");// class name needs to be updated
     newRound.textContent = `Round ${endRound} of ${maximumRounds}`
+    localStorage.setItem('current_round', endRound.toString())
+
+}
+
+function switchDrawer(){
+    let currentDrawer = localStorage.getItem("drawer")
+
 }
 
 gameInit()
