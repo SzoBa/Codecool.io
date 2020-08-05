@@ -2,7 +2,7 @@ import {socket} from './socket.js'
 
 init();
 
-function init() {
+export function init() {
     if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
         getWord();
     }
@@ -21,6 +21,7 @@ export function getWord() {
 }
 
 export function useTheWord(word) {
+    console.log(word)
     document.querySelector('.word').innerHTML = word;
     socket.emit('word-length', {word: word, room_id: localStorage.getItem('room_id')})
 }
