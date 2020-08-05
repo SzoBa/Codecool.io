@@ -3,7 +3,7 @@ import {socket} from './socket.js'
 init();
 
 function init() {
-    if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
+    if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
         getWord();
     }
     addSocketListenerPoints();
@@ -35,7 +35,7 @@ function addSocketListenerPoints() {
 }
 
 function insertHashedWord(number) {
-    if (localStorage.getItem('owner_id') !== localStorage.getItem('user_id')) {
+    if (localStorage.getItem('drawer_id') !== localStorage.getItem('user_id')) {
         document.querySelector('.word').innerHTML = '_ '.repeat(number);
     }
 }
