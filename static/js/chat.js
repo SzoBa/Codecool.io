@@ -27,7 +27,12 @@ function chatSocketSetup() {
     socket.addEventListener('new-chat-message', (data)=> {
         let messageData = JSON.parse(data);
         let messageContainer = document.querySelector('.message-container');
-        let chatMessageDiv = `<div class="message">${messageData['username']}${messageData['message']}</div>`
+        let chatMessageDiv
+        if (messageData['guessed']){
+            chatMessageDiv = `<div class="message guessed"><div>${messageData['username']}${messageData['message']}</div></div>`
+        } else {
+            chatMessageDiv = `<div class="message"><div><b>${messageData['username']}</b>${messageData['message']}</div></div>`
+        }
         messageContainer.insertAdjacentHTML('beforeend', chatMessageDiv);
         messageContainer.scrollTop = messageContainer.scrollHeight;
     })
