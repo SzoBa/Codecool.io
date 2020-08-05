@@ -145,7 +145,7 @@ def get_drawer(cursor):
 
 
 @connection.connection_handler
-def get_name_by_id(owner_id):
+def get_name_by_id(cursor, owner_id):
     query = """
         SELECT name
         FROM player
