@@ -75,15 +75,15 @@ def send_chat_message(data):
 
 @app.route('/solution/<room_id>')
 def get_solution(room_id):
-    return queries.get_solution(room_id)
+    return jsonify(queries.get_solution(room_id))
 
 
 @app.route('/get-word')
 def get_word():
-    data = request.args.get("data")
-    room_id = data["room_id"]
-    word_id = data["word_number"]
-    return queries.get_word(word_id, room_id)
+    room_id = request.args.get("room")
+    word_id = request.args.get("word")
+    word = queries.get_word(word_id, room_id)
+    return jsonify(word)
 
 
 @socketio.on('update-points')

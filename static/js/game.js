@@ -3,7 +3,7 @@ import {socket} from './socket.js'
 init();
 
 function init() {
-    if (localStorage.getItem('owner_id') === localStorage.getItem('player_id')) {
+    if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
         getWord();
     }
     addSocketListenerPoints();
@@ -12,16 +12,17 @@ function init() {
 function getWord() {
     let wordNumber = Math.floor(Math.random() * 6801) + 1;
     let roomId = localStorage.getItem('room_id');
-    let data = {word_number: wordNumber, room_id: roomId}
     let url = '/get-word';
-    fetch(`${url}?data=${data}`)
+    fetch(`${url}?word=${wordNumber}&room=${roomId}`)
         .then((response) => response.json())
         .then(data => {
+            console.log(data);
             useTheWord(data);
         })
 }
 
 function useTheWord(word) {
+    console.log(word)
     document.querySelector('.word').innerHTML = word;
 }
 
