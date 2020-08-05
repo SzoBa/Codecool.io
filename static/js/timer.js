@@ -1,6 +1,5 @@
 import {socket} from './socket.js'
-import {addAllEventListeners} from './canvas.js'
-import {removeAllEventListeners} from './canvas.js'
+import * as canvas from './canvas.js'
 
 let timeCounter
 
@@ -152,9 +151,9 @@ function switchDrawer(){
     let nextDrawerId = getNextDrawerId(currentDrawerId)
     let myId = localStorage.getItem("user_id");
     if (myId === currentDrawerId) {
-        removeAllEventListeners();
+        canvas.removeAllEventListeners();
     } else if (myId === nextDrawerId) {
-        addAllEventListeners();
+        canvas.addAllEventListeners();
     }
     if (currentDrawerId === myId){
 
