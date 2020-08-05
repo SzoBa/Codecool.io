@@ -137,3 +137,7 @@ body {
 .join button {
     margin-left: 10px;
 }
+
+.avatar-slide {
+    display: none;
+}
