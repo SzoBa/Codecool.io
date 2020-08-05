@@ -60,8 +60,21 @@ function setTimerLimit(timeLimit) {
     document.querySelector(".time-number").textContent = timeLimit
 }
 
+function displayDrawer() {
+    let drawer = localStorage.getItem("username")
+    let modal = document.querySelector(".modal");
+    let modalTextContainer = document.querySelector("#modal-text-container");
+    modalTextContainer.innerHTML = `${drawer} is drawing. GET READY!`
+    modal.style.display = "block";
+    setTimeout(function () {
+        modal.style.display = "none";
+    }, 3000);
+}
+
 function initTimer() {
     //this function is the countdown for the timer
+    displayDrawer();
+    setTimeout(function () {
     timeCounter = setInterval(function (){
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
@@ -80,6 +93,8 @@ function initTimer() {
         clock.classList.add("shake");
     }
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
+    }, 3000)
+
 }
 
 

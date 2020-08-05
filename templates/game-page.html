@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/modal.css') }}">
+
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
@@ -171,7 +173,7 @@
         </div>
         <div id="end-round-modal" class="modal">
             <div class="modal-content">
-                <p>Some text in the Modal..</p>
+                <p id="modal-text-container">Some text in the Modal..</p>
             </div>
         </div>
     </section>
