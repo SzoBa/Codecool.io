@@ -203,6 +203,9 @@ function storeInfo(drawerInfo){
     localStorage.setItem("drawer_id", drawerInfo.id)
     console.log(drawerInfo.name)
     localStorage.setItem("drawer_name", drawerInfo.name)
+    if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
+        game.getWord();
+    }
     roundChangeGameFlow()
 }
 
