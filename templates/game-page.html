@@ -29,9 +29,10 @@
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/gameplay.css') }}">
-    <script src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" defer></script>
+    <script type="module" src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/socket.js') }}" defer></script>
 
     <!-- timer -->
     <script src=" {{ url_for('static', filename='js/timer.js') }}" defer></script>

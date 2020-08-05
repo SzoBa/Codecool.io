@@ -23,7 +23,7 @@ def room():
   
 @app.route('/game')
 def game():
-  return render_template('game-page.html')
+    return render_template('game-page.html')
 
 
 @socketio.on('create-room')
@@ -53,6 +53,24 @@ def join_to_room(data):
 def init_game_start(room_id):
     queries.close_room(room_id)
     emit('start-game', room=int(room_id))
+
+
+@socketio.on('join-game-start')
+def join_game_start(room_id):
+    join_room(room_id)
+
+
+@socketio.on('drawing')
+def drawing(data):
+    response = json.loads(data)
+    emit('user-draw', json.dumps(response['data']), room=response['roomId'], include_self=False)
+
+
+@socketio.on('send-chat-message')
+def send_chat_message(data):
+    message_data = json.loads(data)
+    room_id = message_data.pop('room_id')
+    emit('new-chat-message', json.dumps(message_data), room=room_id, broadcast=True)
 
 
 if __name__ == '__main__':
