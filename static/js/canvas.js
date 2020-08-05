@@ -85,11 +85,11 @@ function changeDrawingColor(event) {
     displayCurrentColour()
 }
 
-function changeDrawingSize(event) {
+export function changeDrawingSize(event) {
     canvasElements.currentSize = event.target.dataset.size;
 }
 
-function clearCanvas() {
+export function clearCanvas() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     canvasElements.clickDrag = []
@@ -100,7 +100,7 @@ function clearCanvas() {
     socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
-function startDrawing(event) {
+export function startDrawing(event) {
     // let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
     // let mouseY = event.pageY - document.querySelector('.card').offsetTop;
     let cRect = document.querySelector("canvas").getBoundingClientRect();
@@ -122,11 +122,11 @@ function checkIfDrawing(event) {
     }
 }
 
-function endDrawing() {
+export function endDrawing() {
     canvasElements.paint = false;
 }
 
-function addClick(x, y, dragging) {
+export function addClick(x, y, dragging) {
     canvasElements.clickX.push(x);
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
@@ -135,7 +135,7 @@ function addClick(x, y, dragging) {
     socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
-function draw() {
+export function draw() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 

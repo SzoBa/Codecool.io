@@ -151,6 +151,7 @@ function switchDrawer(){
     let nextDrawerId = getNextDrawerId(currentDrawerId)
     let myId = localStorage.getItem("user_id");
     if (myId === currentDrawerId) {
+        canvas.clearCanvas();
         canvas.removeAllEventListeners();
     } else if (myId === nextDrawerId) {
         canvas.addAllEventListeners();
