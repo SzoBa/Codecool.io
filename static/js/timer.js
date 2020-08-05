@@ -99,7 +99,7 @@ function changeCurrentRound () {
     let maximumRounds = document.querySelector(".empty").dataset.maxRounds; // class name needs to be updated
     let currentRound = parseInt(endRound) + 1;
     endRound = currentRound;
-    let newRound = document.querySelector(".empty");
+    let newRound = document.querySelector(".empty");// class name needs to be updated
     newRound.textContent = `Round ${endRound} of ${maximumRounds}`
 }
 
