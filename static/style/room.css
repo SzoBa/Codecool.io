@@ -57,6 +57,15 @@ body {
     border-radius: 20px;
 }
 
+.ingame {
+    overflow: scroll;
+}
+
+.ingame::-webkit-scrollbar {
+    width: 0;
+}
+
+
 .profile {
     margin-bottom: 15px;
 }
@@ -80,6 +89,7 @@ body {
     background: #B1D9FF;
     border-radius: 15px;
     margin: 10px;
+    width: 95%;
 }
 
 .room-players {
@@ -136,4 +146,26 @@ body {
 
 .join button {
     margin-left: 10px;
+}
+
+.waiting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.start-new {
+    margin: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+#start_game {
+    margin: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+input {
+    width: 50%;
 }
