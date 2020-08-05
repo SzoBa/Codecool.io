@@ -45,6 +45,7 @@ function roundChangeGameFlow(){
     let time = localStorage.getItem('drawing_time')
     console.log(time)
     setTimerLimit(time)
+    clearInterval(timeCounter);
     initTimer(true)
 }
 
@@ -150,11 +151,11 @@ function switchDrawer(){
     let currentDrawerId = localStorage.getItem("drawer_id");
     let nextDrawerId = getNextDrawerId(currentDrawerId)
     let myId = localStorage.getItem("user_id");
-    if (myId === currentDrawerId) {
-        removeAllEventListeners();
-    } else if (myId === nextDrawerId) {
-        addAllEventListeners();
-    }
+    // if (myId === currentDrawerId) {
+    //     removeAllEventListeners();
+    // } else if (myId === nextDrawerId) {
+    //     addAllEventListeners();
+    // }
     if (currentDrawerId === myId){
 
         fetch("/update-drawer", {
