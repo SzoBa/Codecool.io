@@ -65,6 +65,7 @@ def get_players(room_id):
 def update_drawer():
     new_drawer_id = request.get_json()
     queries.update_drawer(new_drawer_id)
+    return jsonify("")
 
 
 @app.route('/get-current-drawer')
