@@ -26,6 +26,7 @@ function loadRooms() {
     fetch('get-rooms')
         .then(response => response.json())
         .then(data => displayRooms(data))
+        .then(setAvatar)
         .then(addSocketConnectionListeners)
         .then(addListenerToButton)
         .then(addSocketListenerCreatedRoom)
@@ -37,11 +38,12 @@ function displayRooms(rooms) {
     for (let room of rooms) {
         let players = room.player_name.split(',');
         let ids = room.player_id.split(',');
+        let avatars = room.player_avatar.split(',');
         let playersHtml = '';
         for (let i = 0; i < players.length; i++) {
             playersHtml += `<li class="player-datas" data-userId="${ids[i]}">
                                 <span class="player-name">${players[i]}</span>
-                                <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
+                                <img class="avatar" src="static/avatars/${avatars[i]}" width="40" height="40">
                             </li>`
         }
         if (room.is_open === false) {
@@ -93,6 +95,16 @@ function displayRooms(rooms) {
         }
     }
     createUserProfile(undefined)
+}
+
+function setAvatar() {
+    fetch(`get-avatar?user_id=${localStorage['user_id']}`)
+        .then(response => response.json())
+        .then(data => displayProfileAvatar(data))
+}
+
+function displayProfileAvatar(avatarNumber) {
+    showSlideAvatars(avatarNumber)
 }
 
 function addSocketConnectionListeners() {
@@ -277,7 +289,7 @@ function createUserProfile(userName) {
     let profileContainer = document.querySelector('.profile')
     profileContainer.innerHTML = userProfile
     // profileContainer.insertAdjacentHTML('beforeend', userProfile)
-    showSlideAvatars(slideIndex)
+    // showSlideAvatars(slideIndex)
     slideButtonsEvent()
 };
 
