@@ -1,4 +1,8 @@
 /*back-end testing purposes*/
+* {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+    outline: none !important;
+}
 
 body {
     width: 100%;
@@ -173,8 +177,27 @@ body {
 
 input {
     width: 50%;
+    margin: 10px;
 }
+
+#user-name, label {
+    margin-left: 10px;
+}
+
 
 .avatar-slide {
     display: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 2px #278bc4 solid;
+    border-radius: 20px;
+}
+
+.user-avatar-container {
+    text-align: center;
+}
+
+.user-avatar-container button {
+    text-transform: uppercase;
 }

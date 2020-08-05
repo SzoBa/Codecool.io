@@ -92,7 +92,7 @@ function displayRooms(rooms) {
             document.querySelector('#join_room_button').addEventListener('click', joinRoom);
         }
     }
-
+    createUserProfile(undefined)
 }
 
 function addSocketConnectionListeners() {
@@ -232,8 +232,22 @@ function joinRoom(event) {
 }*/
 
 function createUserProfile(userName) {
-    let userProfile = `
-    <p id="user-name">Username: ${userName}</p>
+    let userProfileFirstPart;
+
+    if (userName !== undefined) {
+        userProfileFirstPart =`
+            <p class="col-title">Profile</p>
+            <p id="user-name">Username: ${userName}</p>`
+    } else {
+        userProfileFirstPart =`
+            <p class="col-title">Profile</p>
+            <div id="room_div_inner">
+                <label for="username">Username:</label>
+                <input type=text id="username" required>
+            </div>`
+    }
+
+    let userProfileSecondPart = `
     <div class="user-avatar-container">
         <img class="avatar-slide" src="/static/avatars/smurf_1.png" height="150" width="150">
         <img class="avatar-slide" src="/static/avatars/smurf_2.png" height="150" width="150">
@@ -255,11 +269,13 @@ function createUserProfile(userName) {
         <img class="avatar-slide" src="/static/avatars/smurf_18.png" height="150" width="150">
         <img class="avatar-slide" src="/static/avatars/smurf_19.png" height="150" width="150">
         <img class="avatar-slide" src="/static/avatars/smurf_20.png" height="150" width="150">
-        <button class="avatar-slide-button" data-slide="-1">Left</button>
-        <button class="avatar-slide-button" data-slide="1">Right</button>
+        <button class="avatar-slide-button fa fa-angle-left" aria-hidden="true" data-slide="-1"></button>
+        <button class="avatar-slide-button fa fa-angle-right" aria-hidden="true" data-slide="1"></button>
     </div>`
+    let userProfile = userProfileFirstPart + userProfileSecondPart
     let profileContainer = document.querySelector('.profile')
-    profileContainer.insertAdjacentHTML('beforeend', userProfile)
+    profileContainer.innerHTML = userProfile
+    // profileContainer.insertAdjacentHTML('beforeend', userProfile)
     showSlideAvatars(slideIndex)
     slideButtonsEvent()
 };
