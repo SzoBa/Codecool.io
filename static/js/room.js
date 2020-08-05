@@ -262,7 +262,8 @@ function createUserProfile(userName) {
     </div>`
     let userProfile = userProfileFirstPart + userProfileSecondPart
     let profileContainer = document.querySelector('.profile')
-    profileContainer.insertAdjacentHTML('beforeend', userProfile)
+    profileContainer.innerHTML = userProfile
+    // profileContainer.insertAdjacentHTML('beforeend', userProfile)
     showSlideAvatars(slideIndex)
     slideButtonsEvent()
 };
