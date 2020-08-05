@@ -11,6 +11,13 @@ function init() {
     // addSocketListenerCreatedRoom();
 }
 
+function clearLocalStorage() {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('room_id');
+    localStorage.removeItem('owner_id');
+}
+
 function createSocketRooms() {
     socket.emit('create-existing-room', parseInt(localStorage['room_id']));
 }
