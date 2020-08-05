@@ -63,25 +63,6 @@
             <div class="second-col">
                 <div id="waiting_room" class="waiting">
                     <p class="col-title">Waiting</p>
-                    {% if room_id %}
-                        <div class="room" data-room="{{ room_id }}">
-                            <p class="room-players">Players:</p>
-                            <ul class="players-icon">
-                                {% for player in players %}
-                                    <li class="player-datas">
-                                        <span class="player-name">{{ player }}</span>
-                                        <img class="avatar" src="{{ url_for('static', filename='avatars/smurf_3.png') }}" width="40" height="40">
-                                    </li>
-                                {% endfor %}
-                            </ul>
-
-                            <div class="join">
-                                <input id="username" required>
-                                <button id="join_room_button" data-creator={{ owner_id }}>Join Room</button>
-                            </div>
-
-                        </div>
-                    {% endif %}
                 </div>
             </div>
 
