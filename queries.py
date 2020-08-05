@@ -62,6 +62,7 @@ def get_rooms(cursor):
     SELECT STRING_AGG(player.id::text, ',') AS player_id,
         player.room_id,
        STRING_AGG(player.name, ',') AS player_name,
+       STRING_AGG(player.avatar, ',') AS player_avatar,
        room.is_open,
        room.owner_id
     FROM player
@@ -89,3 +90,14 @@ def refresh_image(cursor, user_id, image):
             WHERE id = %(user_id)s
             '''
     cursor.execute(query, {'user_id': user_id, 'image': image})
+
+
+@connection.connection_handler
+def get_avatar(cursor, user_id):
+    query = '''
+    SELECT avatar
+    FROM player
+    WHERE id = %(user_id)s;
+    '''
+    cursor.execute(query, {'user_id': user_id})
+    return cursor.fetchone()
