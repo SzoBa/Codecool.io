@@ -59,7 +59,7 @@ def close_room(cursor, room_id):
 @connection.connection_handler
 def get_rooms(cursor):
     query = '''
-    SELECT STRING_AGG(player.id::text, ',')   AS player_id,
+    SELECT STRING_AGG(player.id::text, ',') AS player_id,
         player.room_id,
        STRING_AGG(player.name, ',') AS player_name,
        room.is_open,
@@ -79,3 +79,13 @@ def insert_owner_id_to_room(cursor, player_id, room_id):
             WHERE id = %(room_id)s
             '''
     cursor.execute(query, {'room_id': room_id, 'player_id': player_id})
+
+
+@connection.connection_handler
+def refresh_image(cursor, user_id, image):
+    query = '''
+            UPDATE player
+            SET avatar = %(image)s
+            WHERE id = %(user_id)s
+            '''
+    cursor.execute(query, {'user_id': user_id, 'image': image})
