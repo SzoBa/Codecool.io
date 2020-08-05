@@ -22,6 +22,7 @@ function getWord() {
 
 function useTheWord(word) {
     document.querySelector('.word').innerHTML = word;
+    socket.emit('word-length', {word: word, room_id: localStorage.getItem('room_id'))
 }
 
 function addSocketListenerPoints() {
