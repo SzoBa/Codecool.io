@@ -155,6 +155,7 @@ function switchDrawer(){
         canvas.removeAllEventListeners();
     } else if (myId === nextDrawerId) {
         canvas.addAllEventListeners();
+        game.init()
     }
     if (currentDrawerId === myId){
 
