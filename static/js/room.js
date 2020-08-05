@@ -134,7 +134,16 @@ function addListenerToButton() {
             if (username) {
                 localStorage['username'] = username;
                 //get room data if not exists - create, else join (or both - later)
-                let userdata = {'username': username};
+                let avatar;
+
+                let avatarOptions = document.querySelectorAll('.avatar-slide');
+                for (let avatarOption of avatarOptions) {
+                    if (avatarOption.style.display === 'block') {
+                        avatar = avatarOption.src.split('/').slice(-1)[0]
+                    }
+                }
+
+                let userdata = {'username': username, 'avatar': avatar};
                 socket.emit('create-room', userdata);
                 createUserProfile(username)
             }
@@ -148,11 +157,9 @@ function addListenerToButton() {
 
 function addSocketListenerCreatedRoom() {
     socket.addEventListener('own-room-created', (event) => {
-        console.log(event)
         localStorage['user_id'] = event.player_id;
         localStorage['owner_id'] = event.player_id;
         localStorage['room_id'] = event.room_id;
-        // document.querySelector('#room_div').classList.add('display-none');
         let currentRoom = document.querySelector('#current_room');
         let createdRoom = `<div class="room" data-room="${event.room_id}">
                                 <p class="room-players">Players:</p>
@@ -178,6 +185,7 @@ function addSocketListenerCreatedRoom() {
             let roomData = event.target.closest('#current_room').querySelector('.room').dataset.room;
             socket.emit('ready-to-start', roomData);
         });
+        setAvatar();
     });
     socket.addEventListener('new-room-created', (event) => {
         //it receives the creator's data
@@ -226,23 +234,10 @@ function joinRoom(event) {
         let userdata = {'username': username, 'room_id': roomId, 'owner_id': ownerId};
         socket.emit('join-room', userdata);
         event.target.parentNode.remove();
-        // let newMember = `<li class="player-datas" data-userId="${event.player_id}">
-        //                     <span class="player-name">${username}</span>
-        //                     <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
-        //                 </li>`;
-        // document.querySelector('.room ul').insertAdjacentHTML('beforeend', newMember);
-        // createUserProfile(username)
     }
 
 };
 
-/*function createUserProfile(userName) {
-    let userProfile = `
-    <p id="user-name">Username: ${userName}</p>
-    <div class="user-avatar">avatar..</div>`
-    let profileContainer = document.querySelector('.profile')
-    profileContainer.insertAdjacentHTML('beforeend', userProfile)
-}*/
 
 function createUserProfile(userName) {
     let userProfileFirstPart;

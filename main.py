@@ -29,8 +29,9 @@ def game():
 @socketio.on('create-room')
 def create_room(data):
     player_name = data['username']
+    avatar = data['avatar']
     room_id = queries.insert_new_room()
-    player_id = queries.insert_new_player(player_name, room_id, is_drawer=True)
+    player_id = queries.insert_new_player(player_name, room_id, avatar, is_drawer=True)
     queries.insert_owner_id_to_room(player_id, room_id)
     join_room(room_id)
     response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
