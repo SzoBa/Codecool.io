@@ -8,7 +8,8 @@ function init() {
 }
 
 function chatInputField() {
-    let inputField = document.querySelector('#chat-input');
+    if (localStorage.user_id !== localStorage.owner_id) {
+            let inputField = document.querySelector('#chat-input');
     let messageContainer = document.querySelector('.message-container');
     messageContainer.scrollTop = messageContainer.scrollHeight;
     inputField.addEventListener('keyup', function (event) {
@@ -19,8 +20,9 @@ function chatInputField() {
             socket.emit('send-chat-message', JSON.stringify(data));
             inputField.value = ''
         }
-
     })
+    }
+
 }
 
 function chatSocketSetup() {
