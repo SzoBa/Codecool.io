@@ -174,3 +174,7 @@ body {
 input {
     width: 50%;
 }
+
+.avatar-slide {
+    display: none;
+}
