@@ -97,7 +97,7 @@ function initTimer(roundChange=false) {
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
     let currentTime = parseInt(timerElement.textContent);
-    if (currentTime <= 0){
+    if (currentTime <= 1){
         //the round ends here
         clearInterval(timeCounter);
         timerElement.classList.remove("time-running-out");
