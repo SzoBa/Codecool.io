@@ -94,6 +94,7 @@ function addListenerToButton() {
                 //get room data if not exists - create, else join (or both - later)
                 let userdata = {'username': username};
                 socket.emit('create-room', userdata);
+                createUserProfile(username)
             }
         })
     }
@@ -168,8 +169,17 @@ function joinRoom(event) {
         this.closest('div').querySelector('input').remove();
         this.remove();
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', `<li>${username}</li>`);
+        createUserProfile(username)
     }
 
+};
+
+function createUserProfile(userName) {
+    let userProfile = `
+    <p id="user-name">Username: ${userName}</p>
+    <div class="user-avatar">avatar..</div>`
+    let profileContainer = document.querySelector('.profile')
+    profileContainer.insertAdjacentHTML('beforeend', userProfile)
 }
 
 init();

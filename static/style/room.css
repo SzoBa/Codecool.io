@@ -1,32 +1,10 @@
 /*back-end testing purposes*/
-html,
+
 body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-}
-
-#room_div {
-    position: fixed;
-    z-index: 1;
-    padding-top: 10%;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
-
-#room_div_inner {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 5%;
-    border: 1px solid #888;
-    width: 30%;
-    height: 10%;;
 }
 
 .display-none {
@@ -39,32 +17,10 @@ body {
 }
 
 .container {
-    width: 100%;
     height: 100%;
-}
-
-#current_room {
-    position: absolute;
-    height: 100%;
-    width: 30%;
-    background-color: #4c97ca;
-}
-
-#waiting_room {
-    position: absolute;
-    right: 0;
-    height: 50%;
-    width: 70%;
-    background-color: #888888;
-}
-
-#playing_room {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    height: 50%;
-    width: 70%;
-    background-color: coral;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 #start-game {
@@ -73,6 +29,111 @@ body {
     bottom: 0;
 }
 
+.second-col, .third-col {
+    width: 33%;
+    height: 600px;
+    background: #C5D3F5;
+    border-radius: 20px;
+    margin: 15px;
+    overflow: scroll;
+}
+
+.second-col::-webkit-scrollbar,
+.third-col::-webkit-scrollbar {
+    width: 0;
+}
+
+.first-col {
+    width: 33%;
+    height: 600px;
+    border-radius: 20px;
+    margin: 15px;
+}
+
+.profile, .ingame {
+    height: calc(50% - 7.5px);
+    width: 100%;
+    background: #C5D3F5;
+    border-radius: 20px;
+}
+
+.profile {
+    margin-bottom: 15px;
+}
+
+.col-title {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4c97ca;
+    margin: 0;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    position: sticky;
+    top: 0;
+}
+
 .room {
-    border: solid black 1px;
+    border: solid #278bc4 1px;
+    background: #B1D9FF;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.room-players {
+    text-align: center;
+}
+
+.room ul li {
+    list-style-type: none;
+}
+
+.player-datas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-name {
+    height: 50%;
+
+    font-size: 80%;
+    word-break: break-all;
+    padding: 3px;
+    text-align: center;
+}
+
+.players-icon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    height: 50%;
+}
+
+.avatar img {
+    position: relative;
+    bottom: 3px;
+}
+
+.players-icon li {
+    width: 70px;
+    height: 70px;
+    background: #8AC2FF;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.join {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.join button {
+    margin-left: 10px;
 }
