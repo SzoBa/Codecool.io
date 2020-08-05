@@ -36,6 +36,6 @@ function addSocketListenerPoints() {
 
 function insertHashedWord(number) {
     if (localStorage.getItem('owner_id') !== localStorage.getItem('user_id')) {
-        document.querySelector('.word').innerHTML = '_'.repeat(number);
+        document.querySelector('.word').innerHTML = '_ '.repeat(number);
     }
 }

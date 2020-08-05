@@ -96,7 +96,9 @@ def update_points(data):
 
 
 @socketio.on('word-length')
-def send_word_length(word, room_id):
+def send_word_length(data):
+    word = data['word']
+    room_id = data['room_id']
     length = len(word)
     emit('word-length', length, room=room_id, broadcast=True)
 
