@@ -54,3 +54,50 @@ def close_room(cursor, room_id):
             WHERE id = %(room_id)s
             '''
     cursor.execute(query, {'room_id': room_id})
+
+
+@connection.connection_handler
+def get_solution(cursor, room_id):
+    query = '''
+            SELECT word
+            FROM room
+            WHERE id = %(room_id)s
+            '''
+
+    cursor.execute(query, {'room_id': room_id})
+    return cursor.fetchone()['word']
+
+
+@connection.connection_handler
+def get_word(cursor, word_id, room_id):
+    query = '''
+            SELECT text
+            FROM words
+            WHERE id = %(word_id)s
+            '''
+
+    cursor.execute(query, {'word_id': word_id})
+    word = cursor.fetchone()['text']
+    insert_word(room_id, word)
+    return word
+
+
+@connection.connection_handler
+def insert_word(cursor, room_id, word):
+    query = '''
+            UPDATE room
+            SET word = %(word)s
+            WHERE id = %(room_id)s
+            '''
+
+    cursor.execute(query, {'room_id': room_id, 'word': word})
+
+
+@connection.connection_handler
+def update_points(cursor, player_id):
+    query = '''
+            UPDATE player
+            SET points = points + 1
+            WHERE id = %(player_id)s
+            '''
+    cursor.execute(query, {'player_id': player_id})
