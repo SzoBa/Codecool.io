@@ -73,5 +73,26 @@ def send_chat_message(data):
     emit('new-chat-message', json.dumps(message_data), room=room_id, broadcast=True)
 
 
+@app.route('/solution/<room_id>')
+def get_solution(room_id):
+    return queries.get_solution(room_id)
+
+
+@app.route('/get-word')
+def get_word():
+    room_id = request.args.get("room_id")
+    word_id = request.args.get("word_number")
+    return queries.get_word(word_id, room_id)
+
+
+@socketio.on('update-points')
+def update_points(data):
+    message_data = json.loads(data)
+    room_id = message_data.pop('room_id')
+    player_id = message_data.pop('player_id')
+    queries.update_points(player_id)
+    emit('increase-points', player_id, room=room_id)
+
+
 if __name__ == '__main__':
     socketio.run(app)
