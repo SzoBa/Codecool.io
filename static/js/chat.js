@@ -46,8 +46,10 @@ function checkGuess(roomId, message) {
 
 function compareGuess(solution, message, roomId) {
     let username = localStorage.getItem('username');
+    let guessed = false;
     if (solution.toLowerCase() === message.toLowerCase()) {
         message = ` has guessed the word`;
+        guessed = true
         socket.emit('update-points', JSON.stringify({room_id: roomId, player_id: localStorage.getItem('user_id')}));
     } else {
         message = ': ' + message;
@@ -55,7 +57,8 @@ function compareGuess(solution, message, roomId) {
     let data = {
             message: message,
             username: username,
-            room_id: roomId
+            room_id: roomId,
+            guessed: guessed
         }
     socket.emit('send-chat-message', JSON.stringify(data));
     document.querySelector('#chat-input').value = '';
