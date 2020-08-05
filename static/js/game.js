@@ -9,7 +9,7 @@ function init() {
     addSocketListenerPoints();
 }
 
-function getWord() {
+export function getWord() {
     let wordNumber = Math.floor(Math.random() * 6801) + 1;
     let roomId = localStorage.getItem('room_id');
     let url = '/get-word';
@@ -20,7 +20,7 @@ function getWord() {
         })
 }
 
-function useTheWord(word) {
+export function useTheWord(word) {
     document.querySelector('.word').innerHTML = word;
     socket.emit('word-length', {word: word, room_id: localStorage.getItem('room_id')})
 }

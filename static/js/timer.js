@@ -1,5 +1,6 @@
 import {socket} from './socket.js'
 import * as canvas from './canvas.js'
+import * as game from './game.js'
 
 let timeCounter
 
