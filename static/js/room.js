@@ -1,5 +1,7 @@
 // import {socket} from './roominit.js';
 let socket = io('http://127.0.0.1:5000');
+let slideIndex = 1;
+
 
 function init() {
     createSocketRooms();
@@ -206,12 +208,67 @@ function joinRoom(event) {
 
 };
 
-function createUserProfile(userName) {
+/*function createUserProfile(userName) {
     let userProfile = `
     <p id="user-name">Username: ${userName}</p>
     <div class="user-avatar">avatar..</div>`
     let profileContainer = document.querySelector('.profile')
     profileContainer.insertAdjacentHTML('beforeend', userProfile)
+}*/
+
+function createUserProfile(userName) {
+    let userProfile = `
+    <p id="user-name">Username: ${userName}</p>
+    <div class="user-avatar-container">
+        <img class="avatar-slide" src="/static/avatars/smurf_1.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_2.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_3.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_4.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_5.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_6.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_7.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_8.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_9.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_10.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_11.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_12.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_13.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_14.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_15.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_16.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_17.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_18.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_19.png" height="150" width="150">
+        <img class="avatar-slide" src="/static/avatars/smurf_20.png" height="150" width="150">
+        <button class="avatar-slide-button" data-slide="-1">Left</button>
+        <button class="avatar-slide-button" data-slide="1">Right</button>
+    </div>`
+    let profileContainer = document.querySelector('.profile')
+    profileContainer.insertAdjacentHTML('beforeend', userProfile)
+    showSlideAvatars(slideIndex)
+    slideButtonsEvent()
+};
+
+function slideButtonsEvent() {
+    let slideButtons = document.querySelectorAll('.avatar-slide-button')
+    for (let slideButton of slideButtons) {
+        slideButton.addEventListener('click', function (event) {
+        let slideData = parseInt(slideButton.dataset.slide) + slideIndex
+        showSlideAvatars(slideData)
+        })
+    }
 }
+
+function showSlideAvatars(n) {
+    slideIndex = n;
+    let x = document.getElementsByClassName("avatar-slide");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+}
+
 
 init();
