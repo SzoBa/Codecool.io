@@ -142,3 +142,14 @@ def get_drawer(cursor):
     """
     cursor.execute(query)
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_name_by_id(owner_id):
+    query = """
+        SELECT name
+        FROM player
+        WHERE id = %(owner_id)s
+        """
+    cursor.execute(query, {'owner_id': owner_id})
+    return cursor.fetchone()['name']

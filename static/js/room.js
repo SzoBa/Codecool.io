@@ -17,6 +17,7 @@ function addSocketConnectionListeners() {
     socket.addEventListener('save-my-id', (data) => {
         localStorage.setItem('user_id', data.player_id)
         localStorage.setItem('owner_id', data.owner_id)
+        localStorage.setItem('drawer_name', data.drawer_name)
     });
 }
 
@@ -44,6 +45,7 @@ function addSocketListenerCreatedRoom() {
         console.log(event)
         localStorage['user_id'] = event.player_id;
         localStorage['owner_id'] = event.player_id;
+        localStorage['drawer_name'] = event.username;
         localStorage['room_id'] = event.room_id;
         document.querySelector('#room_div').classList.add('display-none');
         let currentRoom = document.querySelector('#current_room');

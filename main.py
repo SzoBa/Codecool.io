@@ -43,9 +43,10 @@ def join_to_room(data):
     room_id = data['room_id']
     owner_id = data['owner_id']
     player_id = queries.insert_new_player(player_name, room_id)
+    drawer_name = queries.get_name_by_id(owner_id)
     join_room(int(room_id))
     response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id}
-    emit('save-my-id', {'player_id': player_id, 'owner_id': owner_id})
+    emit('save-my-id', {'player_id': player_id, 'owner_id': owner_id, 'drawer_name': drawer_name})
     emit('user-joined-room', response_data, broadcast=True, include_self=False)
 
 
@@ -70,9 +71,8 @@ def update_drawer():
 
 @app.route('/get-current-drawer')
 def get_current_drawer():
-    drawer_id = queries.get_drawer()
-    return jsonify(drawer_id)
-
+    drawer_info = queries.get_drawer()
+    return jsonify(drawer_info)
 
 
 @socketio.on('join-game-start')

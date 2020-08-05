@@ -9,6 +9,9 @@ function gameInit() {
 function getGameInfo(){
     let drawer = localStorage.getItem("owner_id")
     localStorage.setItem('drawer_id', drawer)
+    // fetch('/get-current-drawer')
+    //     .then(response => response.json())
+    //     .then(data => localStorage.setItem('drawer_name', data.name))
     let room_id = localStorage.getItem('room_id')
     let url =  "/get-players/" + room_id
     fetch(url, {
@@ -81,8 +84,8 @@ function displayDrawer() {
 
 function initTimer(roundChange=false) {
     //this function is the countdown for the timer
-    displayDrawer();
     setTimeout(function () {
+    displayDrawer();
     timeCounter = setInterval(function (){
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
@@ -106,7 +109,7 @@ function initTimer(roundChange=false) {
         roundChange = false
     }
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
-    }, 3000)
+    }, 0)
 
 }
 
@@ -131,7 +134,6 @@ function changeCurrentRound () {
     //update drawer
     switchDrawer()
     updateCurrentDrawer()
-    roundChangeGameFlow()
 }
 
 function switchDrawer(){
@@ -156,13 +158,13 @@ function getNextDrawerId(currentDrawerId){
     let newDrawerId
     let drawerSearch = true
     let foundDrawer = false
-    let players = document.querySelectorAll(".player")
     while (drawerSearch){
+        let players = document.querySelectorAll(".player")
         for (let player of players){
             if (foundDrawer) {
                 newDrawerId =  player.dataset.playerid
                 drawerSearch = false
-            } else if (player.dataset.playerid = currentDrawerId){
+            } else if (player.dataset.playerid === currentDrawerId){
                 foundDrawer = true
             }
         }
@@ -183,6 +185,7 @@ function storeInfo(drawerInfo){
     localStorage.setItem("drawer_id", drawerInfo.id)
     console.log(drawerInfo.name)
     localStorage.setItem("drawer_name", drawerInfo.name)
+    roundChangeGameFlow()
 }
 
 
