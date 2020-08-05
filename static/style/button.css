@@ -61,6 +61,6 @@ input[type="text"] {
     cursor: pointer;
 
     border: #278bc4 solid 2px;
-    background: rgba(150, 150, 150, .25);
+    background: rgba(243, 243, 243, 0.55);
     text-shadow: 0 0 4px rgba(255, 255, 255, .5), 0 0 6px rgba(255, 255, 255, .3);
 }
