@@ -227,12 +227,16 @@ function createUserProfile(userName) {
     let userProfileFirstPart;
 
     if (userName !== undefined) {
-        userProfileFirstPart =`<p id="user-name">Username: ${userName}</p>`
+        userProfileFirstPart =`
+            <p class="col-title">Profile</p>
+            <p id="user-name">Username: ${userName}</p>`
     } else {
-        userProfileFirstPart =`<div id="room_div_inner">
-                                    <label for="username">Username:</label>
-                                    <input type=text id="username" required>
-                               </div>`
+        userProfileFirstPart =`
+            <p class="col-title">Profile</p>
+            <div id="room_div_inner">
+                <label for="username">Username:</label>
+                <input type=text id="username" required>
+            </div>`
     }
 
     let userProfileSecondPart = `
