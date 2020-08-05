@@ -16,14 +16,13 @@ function getWord() {
     fetch(`${url}?word=${wordNumber}&room=${roomId}`)
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
             useTheWord(data);
         })
 }
 
 function useTheWord(word) {
-    console.log(word)
     document.querySelector('.word').innerHTML = word;
+    socket.emit('word-length', {word: word, room_id: localStorage.getItem('room_id')})
 }
 
 function addSocketListenerPoints() {
@@ -32,4 +31,11 @@ function addSocketListenerPoints() {
         let playerDiv = document.querySelector(`[data-playerid=${playerId}]`);
         playerDiv.querySelector('.points').innerHTML = data;
     })
+    socket.addEventListener('word-length', insertHashedWord)
+}
+
+function insertHashedWord(number) {
+    if (localStorage.getItem('owner_id') !== localStorage.getItem('user_id')) {
+        document.querySelector('.word').innerHTML = '_'.repeat(number);
+    }
 }
