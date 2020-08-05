@@ -111,8 +111,9 @@ def update_points(data):
     message_data = json.loads(data)
     room_id = message_data.pop('room_id')
     player_id = message_data.pop('player_id')
-    queries.update_points(player_id)
-    emit('increase-points', player_id, room=room_id)
+    points = queries.update_points(player_id)
+    data = {'points': points, 'player_id': player_id}
+    emit('increase-points', data, room=room_id)
 
 
 @socketio.on('word-length')
