@@ -2,13 +2,12 @@ let timeCounter
 
 function gameInit() {
     getGameInfo()
-    initTimer()
-    initRounds()
-    switchDrawer()
 }
 
 
 function getGameInfo(){
+    let drawer = localStorage.getItem("owner_id")
+    localStorage.setItem('drawer_id', drawer)
     let room_id = localStorage.getItem('room_id')
     let url =  "/get-players/" + room_id
     fetch(url, {
@@ -100,13 +99,59 @@ function changeCurrentRound () {
     endRound = currentRound;
     let newRound = document.querySelector(".empty");// class name needs to be updated
     newRound.textContent = `Round ${endRound} of ${maximumRounds}`
-    localStorage.setItem('current_round', endRound.toString())
+    localStorage.setItem('current_round', endRound.toString());
 
 }
 
 function switchDrawer(){
-    let currentDrawer = localStorage.getItem("drawer")
-
+    let currentDrawerId = localStorage.getItem("drawer");
+    let nextDrawerId = getNextDrawerId(currentDrawerId)
+    let myId = localStorage.getItem("user_id");
+    if (currentDrawerId === myId){
+        fetch("/update-drawer", {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nextDrawerId)
+        })
+    }
 }
+
+
+function getNextDrawerId(currentDrawerId){
+    let newDrawerId
+    let drawerSearch = true
+    let foundDrawer = false
+    let players = document.querySelectorAll(".player")
+    while (drawerSearch){
+        for (let player of players){
+            if (foundDrawer) {
+                newDrawerId =  player.dataset.playerid
+                drawerSearch = false
+            } else if (player.dataset.playerid = currentDrawerId){
+                foundDrawer = true
+            }
+        }
+    }
+    return newDrawerId
+}
+
+function updateCurrentDrawer(){
+    fetch('/get-current-drawer', {
+            method: 'GET',
+            credentials: 'same-origin'
+        })
+        .then(response => response.json())
+        .then(json_response => storeInfo(json_response));
+}
+
+function storeInfo(drawerInfo){
+    localStorage.setItem("drawer_id", drawerInfo.id)
+    localStorage.setItem("drawer_name", drawerInfo.name)
+}
+
+
 
 gameInit()
