@@ -192,13 +192,14 @@ function addSocketListenerCreatedRoom() {
         let creatorName = event['username'];
         let creatorId = event['player_id'];
         let roomId = event['room_id'];
+        let avatar = event['avatar'];
         let waitingRoom = document.querySelector('#waiting_room');
         let waitingRoomContent = `<div class="room" data-room="${roomId}">
                                     <p class="room-players">Players:</p>
                                     <ul class="players-icon">
                                         <li class="player-datas" data-userId="${creatorId}">
                                             <span class="player-name">${creatorName}</span>
-                                            <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
+                                            <img class="avatar" src="static/avatars/${avatar}" width="40" height="40">
                                         </li>
                                     </ul>
         
