@@ -54,10 +54,12 @@ function displayPlayers(players){
 }
 
 function setTimerLimit(timeLimit) {
+    //gets drawing time from db and sets the timer accordingly
     document.querySelector(".time-number").textContent = timeLimit
 }
 
 function initTimer() {
+    //this function is the countdown for the timer
     timeCounter = setInterval(function (){
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
@@ -70,6 +72,7 @@ function initTimer() {
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
     }else if (currentTime <= 10){
+        // this adds the animations to the clock
         timerElement.classList.add("time-running-out");
         timerElement.classList.add("shake");
         clock.classList.add("shake");
@@ -79,6 +82,7 @@ function initTimer() {
 
 
 function initRounds(rounds) {
+    // gets max rounds from db
     let roundsContainer = document.querySelector(".empty"); // class name needs to be updated
     roundsContainer.dataset.currentRound = 1;
     roundsContainer.dataset.maxRounds = rounds;
@@ -86,6 +90,7 @@ function initRounds(rounds) {
 }
 
 function changeCurrentRound () {
+    //updates the number of rounds displayed in top left corner
     let endRound = document.querySelector(".empty").dataset.currentRound; // class name needs to be updated
     let maximumRounds = document.querySelector(".empty").dataset.maxRounds; // class name needs to be updated
     let currentRound = parseInt(endRound) + 1;
