@@ -9,20 +9,18 @@ function init() {
 
 function chatInputField() {
     if (localStorage.user_id !== localStorage.owner_id) {
-            let inputField = document.querySelector('#chat-input');
-    let messageContainer = document.querySelector('.message-container');
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-    inputField.addEventListener('keyup', function (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault()
-            let chatMessage = inputField.value
-            let data = {message: chatMessage, username: localStorage.getItem('username'), room_id: localStorage.getItem('room_id')}
-            socket.emit('send-chat-message', JSON.stringify(data));
-            inputField.value = ''
-        }
-    })
+        let inputField = document.querySelector('#chat-input');
+        let messageContainer = document.querySelector('.message-container');
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+        inputField.addEventListener('keyup', function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault()
+                let chatMessage = inputField.value
+                let roomId = localStorage.getItem('room_id');
+                checkGuess(roomId, chatMessage)
+            }
+        })
     }
-
 }
 
 function chatSocketSetup() {
@@ -35,3 +33,21 @@ function chatSocketSetup() {
     })
 }
 
+function checkGuess(roomId, message) {
+    fetch(`/solution/${roomId}`)
+        .then(response => response.json())
+        .then(solution => compareGuess(solution, message))
+}
+
+function compareGuess(solution, message) {
+    if (solution.toLowerCase() === message.toLowerCase()) {
+        let data = {
+            message: chatMessage,
+            username: localStorage.getItem('username'),
+            room_id: roomId
+        }
+        socket.emit('send-chat-message', JSON.stringify(data));
+        inputField.value = ''
+    } else {
+    }
+}
