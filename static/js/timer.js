@@ -22,8 +22,10 @@ function getGameInfo(){
 function initGameFlow(data){
     displayPlayers(data)
     let timeLimit = data[0]["drawing_time"]
+    localStorage.setItem('drawing_time', timeLimit)
     setTimerLimit(timeLimit)
     let rounds = data[0]["max_round"]
+    localStorage.setItem('max_rounds', rounds)
     initRounds(rounds);
 
 }
