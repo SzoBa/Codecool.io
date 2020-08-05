@@ -53,6 +53,8 @@ function compareGuess(solution, message, roomId) {
             guessed = true
             localStorage['can_guess'] = false;
             socket.emit('update-points', JSON.stringify({room_id: roomId, player_id: localStorage.getItem('user_id')}));
+        } else {
+            message = ': ' + message;
         }
     } else {
         message = ': ' + message;
