@@ -44,7 +44,11 @@ function displayPlayers(players){
                         <span><img src="static/avatars/smurf_${smurfCount}.png" width="40" height="40"></span>
                         </div>`
         playersToAdd += playerInfo;
-        if (smurfCount < 20) {smurfCount++};
+        if (smurfCount < 20) {
+            smurfCount++;
+        } else {
+            smurfCount = 0
+        }
     }
     playersContainer.innerHTML = playersToAdd
     let timeLimit = players[0]["drawing_time"]
