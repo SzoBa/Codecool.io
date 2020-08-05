@@ -166,7 +166,7 @@ function addSocketListenerCreatedRoom() {
                                 <ul class="players-icon">
                                     <li class="player-datas" data-userId="${event.player_id}">
                                         <span class="player-name">${event.username}</span>
-                                        <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
+                                        <img class="avatar" src="static/avatars/${event.avatar}" width="40" height="40">
                                     </li>
                                 </ul>
                 

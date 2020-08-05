@@ -34,7 +34,7 @@ def create_room(data):
     player_id = queries.insert_new_player(player_name, room_id, avatar, is_drawer=True)
     queries.insert_owner_id_to_room(player_id, room_id)
     join_room(room_id)
-    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name}
+    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'avatar': avatar}
     emit('own-room-created', response_data)
     emit('new-room-created', response_data, broadcast=True, include_self=False)
 
