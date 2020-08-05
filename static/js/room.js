@@ -2,11 +2,19 @@
 let socket = io('http://127.0.0.1:5000');
 
 function init() {
+    clearLocalStorage();
     createSocketRooms();
     loadRooms();
     // addSocketConnectionListeners();
     // addListenerToButton();
     // addSocketListenerCreatedRoom();
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('room_id');
+    localStorage.removeItem('owner_id');
 }
 
 function createSocketRooms() {
