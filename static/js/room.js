@@ -17,6 +17,7 @@ function addSocketConnectionListeners() {
     socket.addEventListener('save-my-id', (data) => {
         localStorage.setItem('user_id', data.player_id)
         localStorage.setItem('owner_id', data.owner_id)
+        localStorage.setItem('drawer_id', data.owner_id)
         localStorage.setItem('drawer_name', data.drawer_name)
     });
 }

@@ -8,7 +8,7 @@ function init() {
 }
 
 function chatInputField() {
-    if (localStorage.user_id !== localStorage.owner_id) {
+    if (localStorage.user_id !== localStorage.drawer_id) {
         let inputField = document.querySelector('#chat-input');
         let messageContainer = document.querySelector('.message-container');
         messageContainer.scrollTop = messageContainer.scrollHeight;

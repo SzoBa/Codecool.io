@@ -8,6 +8,7 @@ function gameInit() {
     socket.addEventListener('update-drawer', function () {
         updateCurrentDrawer();
     })
+    game.getWord();
     getGameInfo()
     initTimer()
 }
