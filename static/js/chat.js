@@ -36,18 +36,20 @@ function chatSocketSetup() {
 function checkGuess(roomId, message) {
     fetch(`/solution/${roomId}`)
         .then(response => response.json())
-        .then(solution => compareGuess(solution, message))
+        .then(solution => compareGuess(solution, message, roomId))
 }
 
-function compareGuess(solution, message) {
+function compareGuess(solution, message, roomId) {
     if (solution.toLowerCase() === message.toLowerCase()) {
-        let data = {
-            message: chatMessage,
-            username: localStorage.getItem('username'),
+        message = `${username} has guessed the word`;
+        socket.emit('update-points', JSON.stringify({room_id: roomId, player_id: localStorage.getItem('user_id')}));
+    }
+    let username = localStorage.getItem('username');
+    let data = {
+            message: message,
+            username: username,
             room_id: roomId
         }
-        socket.emit('send-chat-message', JSON.stringify(data));
-        inputField.value = ''
-    } else {
-    }
+    socket.emit('send-chat-message', JSON.stringify(data));
+    inputField.value = ''
 }
