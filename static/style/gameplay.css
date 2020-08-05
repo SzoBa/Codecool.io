@@ -129,6 +129,7 @@ h1 {
 }
 
 .message {
+    font-family: "Tahoma", sans-serif !important;
     width: 85%;
     height: auto;
     border-radius: 5px;
