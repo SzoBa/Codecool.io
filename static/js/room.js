@@ -85,6 +85,7 @@ function addSocketListenerCreatedRoom() {
         roomInnerDiv.remove();
     });
     socket.addEventListener('user-joined-room', (event) => {
+        console.log(event);
         let player = `<li>${event.username}</li>`
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
 

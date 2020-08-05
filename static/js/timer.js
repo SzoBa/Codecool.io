@@ -1,6 +1,9 @@
+import {socket} from './socket.js'
+
 let timeCounter
 
 function gameInit() {
+    socket.addEventListener('update-drawer', updateCurrentDrawer)
     getGameInfo()
     initTimer()
 }
@@ -84,8 +87,8 @@ function displayDrawer() {
 
 function initTimer(roundChange=false) {
     //this function is the countdown for the timer
-    setTimeout(function () {
     displayDrawer();
+    setTimeout(function () {
     timeCounter = setInterval(function (){
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
@@ -109,7 +112,7 @@ function initTimer(roundChange=false) {
         roundChange = false
     }
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
-    }, 0)
+    }, 3000)
 
 }
 
@@ -132,9 +135,7 @@ function changeCurrentRound () {
     newRound.textContent = `Round ${endRound} of ${maximumRounds}`
     localStorage.setItem('current_round', endRound.toString());
     //update drawer
-    switchDrawer()
-    updateCurrentDrawer()
-}
+    switchDrawer()}
 
 function switchDrawer(){
     let currentDrawerId = localStorage.getItem("drawer_id");
@@ -150,24 +151,23 @@ function switchDrawer(){
             body: JSON.stringify(nextDrawerId)
         })
             .then(response => response.json())
+            .then(socket.emit('update-drawer', {drawerId: nextDrawerId, roomId: localStorage.getItem('room_id')}))
     }
 }
 
 
 function getNextDrawerId(currentDrawerId){
     let newDrawerId
-    let drawerSearch = true
     let foundDrawer = false
-    while (drawerSearch){
-        let players = document.querySelectorAll(".player")
-        for (let player of players){
-            if (foundDrawer) {
-                newDrawerId =  player.dataset.playerid
-                drawerSearch = false
-            } else if (player.dataset.playerid === currentDrawerId){
-                foundDrawer = true
-            }
+    let players = document.querySelectorAll(".player")
+    for (let i = 0; i < players.length - 1; i++){
+        if (players[i].dataset.playerid === currentDrawerId){
+            newDrawerId =  players[i+1].dataset.playerid
+            foundDrawer = true
         }
+    }
+    if (!foundDrawer) {
+        newDrawerId = localStorage.getItem('owner_id');
     }
     return newDrawerId
 }

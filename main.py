@@ -123,5 +123,10 @@ def send_word_length(data):
     emit('word-length', length, room=room_id, broadcast=True)
 
 
+@socketio.on('update-drawer')
+def update_drawer(data):
+    emit('update-drawer', data['drawerId'], room=data['roomId'])
+
+
 if __name__ == '__main__':
     socketio.run(app)
