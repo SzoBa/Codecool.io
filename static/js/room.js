@@ -29,17 +29,19 @@ function loadRooms() {
         .then(addSocketConnectionListeners)
         .then(addListenerToButton)
         .then(addSocketListenerCreatedRoom)
+        .then(addSocketListenerRefreshImage)
 }
 
 function displayRooms(rooms) {
     let section;
     for (let room of rooms) {
-        let players = room.player_name.split(',')
+        let players = room.player_name.split(',');
+        let ids = room.player_id.split(',');
         let playersHtml = '';
-        for (let player of players) {
-            playersHtml += `<li class="player-datas">
-                                <span class="player-name">${player}</span>
-                                <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
+        for (let i = 0; i < players.length; i++) {
+            playersHtml += `<li class="player-datas" data-userId="${ids[i]}">
+                                <span class="player-name">${players[i]}</span>
+                                <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
                             </li>`
         }
         if (room.is_open === false) {
@@ -101,6 +103,12 @@ function addSocketConnectionListeners() {
         console.log('connection closed')
     });
     socket.addEventListener('save-my-id', (data) => {
+        let newMember = `<li class="player-datas" data-userId="${data.player_id}">
+                            <span class="player-name">${data.username}</span>
+                            <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
+                        </li>`;
+        document.querySelector('.room ul').insertAdjacentHTML('beforeend', newMember);
+        createUserProfile(data.username)
         localStorage.setItem('user_id', data.player_id)
         localStorage.setItem('owner_id', data.owner_id)
     });
@@ -137,9 +145,9 @@ function addSocketListenerCreatedRoom() {
         let createdRoom = `<div class="room" data-room="${event.room_id}">
                                 <p class="room-players">Players:</p>
                                 <ul class="players-icon">
-                                    <li class="player-datas">
+                                    <li class="player-datas" data-userId="${event.player_id}">
                                         <span class="player-name">${event.username}</span>
-                                        <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
+                                        <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
                                     </li>
                                 </ul>
                 
@@ -167,9 +175,9 @@ function addSocketListenerCreatedRoom() {
         let waitingRoomContent = `<div class="room" data-room="${roomId}">
                                     <p class="room-players">Players:</p>
                                     <ul class="players-icon">
-                                        <li class="player-datas">
+                                        <li class="player-datas" data-userId="${creatorId}">
                                             <span class="player-name">${creatorName}</span>
-                                            <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
+                                            <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
                                         </li>
                                     </ul>
         
@@ -183,9 +191,9 @@ function addSocketListenerCreatedRoom() {
 
     });
     socket.addEventListener('user-joined-room', (event) => {
-        let player = `<li class="player-datas">
+        let player = `<li class="player-datas" data-userId="${event.player_id}">
                             <span class="player-name">${event.username}</span>
-                            <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
+                            <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
                         </li>`
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
 
@@ -205,12 +213,12 @@ function joinRoom(event) {
         let userdata = {'username': username, 'room_id': roomId, 'owner_id': ownerId};
         socket.emit('join-room', userdata);
         event.target.parentNode.remove();
-        let newMember = `<li class="player-datas">
-                            <span class="player-name">${username}</span>
-                            <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
-                        </li>`;
-        document.querySelector('.room ul').insertAdjacentHTML('beforeend', newMember);
-        createUserProfile(username)
+        // let newMember = `<li class="player-datas" data-userId="${event.player_id}">
+        //                     <span class="player-name">${username}</span>
+        //                     <img class="avatar" src="static/avatars/smurf_3.png" width="40" height="40">
+        //                 </li>`;
+        // document.querySelector('.room ul').insertAdjacentHTML('beforeend', newMember);
+        // createUserProfile(username)
     }
 
 };
@@ -260,8 +268,11 @@ function slideButtonsEvent() {
     let slideButtons = document.querySelectorAll('.avatar-slide-button')
     for (let slideButton of slideButtons) {
         slideButton.addEventListener('click', function (event) {
-        let slideData = parseInt(slideButton.dataset.slide) + slideIndex
-        showSlideAvatars(slideData)
+            let slideData = parseInt(slideButton.dataset.slide) + slideIndex
+            let currentImage = showSlideAvatars(slideData);
+            if (localStorage['user_id']) {
+                socket.emit('refresh-image', {'userId': localStorage['user_id'], 'currentImage': currentImage});
+            }
         })
     }
 }
@@ -275,7 +286,20 @@ function showSlideAvatars(n) {
         x[i].style.display = "none";
     }
     x[slideIndex-1].style.display = "block";
+    return x[slideIndex-1].src.split('/').slice(-1)[0];
 }
 
+function addSocketListenerRefreshImage() {
+    socket.addEventListener('refresh_user_image', (data) => {
+        let users = document.querySelectorAll('.player-datas');
+        for (let user of users) {
+            if (user.dataset.userid === data.user_id) {
+                user.querySelector('img').remove();
+                let newImage = `<img class="avatar" src="static/avatars/${data.current_image}" width="40" height="40">`;
+                user.insertAdjacentHTML('beforeend', newImage);
+            }
+        }
+    });
+}
 
 init();
