@@ -6,25 +6,6 @@ function gameInit() {
     initRounds()
 }
 
-function initTimer() {
-    timeCounter = setInterval(function (){
-    let clock = document.querySelector("#clock-img");
-    let timerElement = document.querySelector(".time-number");
-    let currentTime = parseInt(timerElement.textContent);
-    if (currentTime <= 1){
-        //the round ends here
-        clearInterval(timeCounter);
-        changeCurrentRound();  //this function changes the rounds - needs to be moved once round changes are decided
-        timerElement.classList.remove("time-running-out");
-        timerElement.classList.remove("shake");
-        clock.classList.remove("shake")
-    }else if (currentTime <= 10){
-        timerElement.classList.add("time-running-out");
-        timerElement.classList.add("shake");
-        clock.classList.add("shake");
-    }
-    timerElement.textContent = (currentTime - 1).toString()}, 1000);
-}
 
 function getGameInfo(){
     let room_id = localStorage.getItem('room_id')
@@ -74,6 +55,26 @@ function displayPlayers(players){
 
 function setTimerLimit(timeLimit) {
     document.querySelector(".time-number").textContent = timeLimit
+}
+
+function initTimer() {
+    timeCounter = setInterval(function (){
+    let clock = document.querySelector("#clock-img");
+    let timerElement = document.querySelector(".time-number");
+    let currentTime = parseInt(timerElement.textContent);
+    if (currentTime <= 1){
+        //the round ends here
+        clearInterval(timeCounter);
+        changeCurrentRound();  //this function changes the rounds - needs to be moved once round changes are decided
+        timerElement.classList.remove("time-running-out");
+        timerElement.classList.remove("shake");
+        clock.classList.remove("shake")
+    }else if (currentTime <= 10){
+        timerElement.classList.add("time-running-out");
+        timerElement.classList.add("shake");
+        clock.classList.add("shake");
+    }
+    timerElement.textContent = (currentTime - 1).toString()}, 1000);
 }
 
 
