@@ -26,10 +26,13 @@ function useTheWord(word) {
 }
 
 function addSocketListenerPoints() {
-    let playerId = localStorage.getItem('player_id');
     socket.addEventListener('increase-points', data => {
-        let playerDiv = document.querySelector(`[data-playerid=${playerId}]`);
-        playerDiv.querySelector('.points').innerHTML = data;
+        let playerDivs = document.querySelectorAll(`.player`);
+        for (let playerDiv of playerDivs) {
+            if (data['player_id'] === playerDiv.dataset.playerid) {
+                playerDiv.querySelector('.points').innerHTML = data['points'];
+            }
+        }
     })
     socket.addEventListener('word-length', insertHashedWord)
 }
