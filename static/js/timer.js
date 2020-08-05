@@ -2,6 +2,7 @@ let timeCounter
 
 function gameInit() {
     getGameInfo()
+    initTimer()
 }
 
 
@@ -28,6 +29,13 @@ function initGameFlow(data){
     localStorage.setItem('max_rounds', rounds)
     localStorage.setItem('current_round', "1")
     initRounds(rounds);
+}
+
+function roundChangeGameFlow(){
+    let time = localStorage.getItem('drawing_time')
+    console.log(time)
+    setTimerLimit(time)
+    initTimer(true)
 }
 
 
@@ -61,7 +69,7 @@ function setTimerLimit(timeLimit) {
 }
 
 function displayDrawer() {
-    let drawer = localStorage.getItem("username")
+    let drawer = localStorage.getItem("drawer_name")
     let modal = document.querySelector(".modal");
     let modalTextContainer = document.querySelector("#modal-text-container");
     modalTextContainer.innerHTML = `${drawer} is drawing. GET READY!`
@@ -71,7 +79,7 @@ function displayDrawer() {
     }, 3000);
 }
 
-function initTimer() {
+function initTimer(roundChange=false) {
     //this function is the countdown for the timer
     displayDrawer();
     setTimeout(function () {
@@ -79,18 +87,23 @@ function initTimer() {
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
     let currentTime = parseInt(timerElement.textContent);
-    if (currentTime <= 1){
+    if (currentTime === 0){
         //the round ends here
         clearInterval(timeCounter);
-        changeCurrentRound();  //this function changes the rounds - needs to be moved once round changes are decided
         timerElement.classList.remove("time-running-out");
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
+        currentTime = parseInt(timerElement.textContent);
+        changeCurrentRound();  //this function changes the rounds - needs to be moved once round changes are decided
     }else if (currentTime <= 10){
         // this adds the animations to the clock
         timerElement.classList.add("time-running-out");
         timerElement.classList.add("shake");
         clock.classList.add("shake");
+    }
+    if (roundChange){
+        currentTime = parseInt(localStorage.getItem("drawing_time"))
+        roundChange = false
     }
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
     }, 3000)
@@ -115,11 +128,14 @@ function changeCurrentRound () {
     let newRound = document.querySelector(".empty");// class name needs to be updated
     newRound.textContent = `Round ${endRound} of ${maximumRounds}`
     localStorage.setItem('current_round', endRound.toString());
-
+    //update drawer
+    switchDrawer()
+    updateCurrentDrawer()
+    roundChangeGameFlow()
 }
 
 function switchDrawer(){
-    let currentDrawerId = localStorage.getItem("drawer");
+    let currentDrawerId = localStorage.getItem("drawer_id");
     let nextDrawerId = getNextDrawerId(currentDrawerId)
     let myId = localStorage.getItem("user_id");
     if (currentDrawerId === myId){
@@ -131,6 +147,7 @@ function switchDrawer(){
             },
             body: JSON.stringify(nextDrawerId)
         })
+            .then(response => response.json())
     }
 }
 
@@ -164,6 +181,7 @@ function updateCurrentDrawer(){
 
 function storeInfo(drawerInfo){
     localStorage.setItem("drawer_id", drawerInfo.id)
+    console.log(drawerInfo.name)
     localStorage.setItem("drawer_name", drawerInfo.name)
 }
 
