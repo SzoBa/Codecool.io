@@ -1,4 +1,6 @@
-canvasElements = {
+import {socket} from './socket.js'
+
+let canvasElements = {
     paint: false,
     drawColors: [],
     currentColor: "black",
@@ -11,25 +13,35 @@ canvasElements = {
 }
 
 function init() {
+    addSocketFunctionality();
     let canvas = document.querySelector("canvas");
-    canvas.addEventListener('mousedown', startDrawing)
-    canvas.addEventListener('mousemove', checkIfDrawing)
-    canvas.addEventListener('mouseup', endDrawing)
-    canvas.addEventListener('mouseleave', endDrawing)
-    let colorBoxes = document.querySelectorAll(".color-box")
-    for (let colorBox of colorBoxes){
-        colorBox.addEventListener('click', changeDrawingColor)
-    }
-    let sizeBoxes = document.querySelectorAll('.size-box')
-    for (let sizeBox of sizeBoxes){
-        sizeBox.addEventListener('click', changeDrawingSize)
-    }
-    let changeMarkerBtns = document.querySelectorAll(".change-marker")
-    for (let changeMarkerBtn of changeMarkerBtns) {
-        changeMarkerBtn.addEventListener('click', changeDrawingColor);
-    }
+    if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
+        canvas.addEventListener('mousedown', startDrawing)
+        canvas.addEventListener('mousemove', checkIfDrawing)
+        canvas.addEventListener('mouseup', endDrawing)
+        canvas.addEventListener('mouseleave', endDrawing)
+        let colorBoxes = document.querySelectorAll(".color-box")
+        for (let colorBox of colorBoxes) {
+            colorBox.addEventListener('click', changeDrawingColor)
+        }
+        let sizeBoxes = document.querySelectorAll('.size-box')
+        for (let sizeBox of sizeBoxes) {
+            sizeBox.addEventListener('click', changeDrawingSize)
+        }
+        let changeMarkerBtns = document.querySelectorAll(".change-marker")
+        for (let changeMarkerBtn of changeMarkerBtns) {
+            changeMarkerBtn.addEventListener('click', changeDrawingColor);
+        }
 
-    document.querySelector(".clear").addEventListener('click', clearCanvas);
+        document.querySelector(".clear").addEventListener('click', clearCanvas);
+    }
+}
+
+function addSocketFunctionality() {
+    socket.addEventListener('user-draw', function (data) {
+        canvasElements = JSON.parse(data)
+        draw()
+    })
 }
 
 function displayCurrentColour() {
@@ -61,6 +73,7 @@ function clearCanvas() {
     canvasElements.clickY = []
     canvasElements.drawColors = []
     canvasElements.drawSizes = []
+    socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
 function startDrawing(event) {
@@ -93,8 +106,9 @@ function addClick(x, y, dragging) {
     canvasElements.clickX.push(x);
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
-    canvasElements.drawColors.push(canvasElements.currentColor)
+    canvasElements.drawColors.push(canvasElements.currentColor);
     canvasElements.drawSizes.push(canvasElements.currentSize);
+    socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
 function draw() {

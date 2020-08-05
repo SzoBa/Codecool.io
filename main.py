@@ -23,7 +23,7 @@ def room():
   
 @app.route('/game')
 def game():
-  return render_template('game-page.html')
+    return render_template('game-page.html')
 
 
 @socketio.on('create-room')
@@ -73,6 +73,54 @@ def get_current_drawer():
     drawer_id = queries.get_drawer()
     return jsonify(drawer_id)
 
+
+
+@socketio.on('join-game-start')
+def join_game_start(room_id):
+    join_room(room_id)
+
+
+@socketio.on('drawing')
+def drawing(data):
+    response = json.loads(data)
+    emit('user-draw', json.dumps(response['data']), room=response['roomId'], include_self=False)
+
+
+@socketio.on('send-chat-message')
+def send_chat_message(data):
+    message_data = json.loads(data)
+    room_id = message_data.pop('room_id')
+    emit('new-chat-message', json.dumps(message_data), room=room_id, broadcast=True)
+
+
+@app.route('/solution/<room_id>')
+def get_solution(room_id):
+    return jsonify(queries.get_solution(room_id))
+
+
+@app.route('/get-word')
+def get_word():
+    room_id = request.args.get("room")
+    word_id = request.args.get("word")
+    word = queries.get_word(word_id, room_id)
+    return jsonify(word)
+
+
+@socketio.on('update-points')
+def update_points(data):
+    message_data = json.loads(data)
+    room_id = message_data.pop('room_id')
+    player_id = message_data.pop('player_id')
+    queries.update_points(player_id)
+    emit('increase-points', player_id, room=room_id)
+
+
+@socketio.on('word-length')
+def send_word_length(data):
+    word = data['word']
+    room_id = data['room_id']
+    length = len(word)
+    emit('word-length', length, room=room_id, broadcast=True)
 
 
 if __name__ == '__main__':

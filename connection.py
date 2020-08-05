@@ -45,5 +45,4 @@ def connection_handler(function):
         dict_cur.close()
         connection.close()
         return ret_value
-
     return wrapper
