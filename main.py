@@ -80,8 +80,9 @@ def get_solution(room_id):
 
 @app.route('/get-word')
 def get_word():
-    room_id = request.args.get("room_id")
-    word_id = request.args.get("word_number")
+    data = request.args.get("data")
+    room_id = data["room_id"]
+    word_id = data["word_number"]
     return queries.get_word(word_id, room_id)
 
 
