@@ -3,7 +3,9 @@ import {socket} from './socket.js'
 let timeCounter
 
 function gameInit() {
-    socket.addEventListener('update-drawer', updateCurrentDrawer)
+    socket.addEventListener('update-drawer', function () {
+        updateCurrentDrawer();
+    })
     getGameInfo()
     initTimer()
 }
@@ -93,14 +95,15 @@ function initTimer(roundChange=false) {
     let clock = document.querySelector("#clock-img");
     let timerElement = document.querySelector(".time-number");
     let currentTime = parseInt(timerElement.textContent);
-    if (currentTime === 0){
+    if (currentTime <= 0){
         //the round ends here
         clearInterval(timeCounter);
         timerElement.classList.remove("time-running-out");
         timerElement.classList.remove("shake");
         clock.classList.remove("shake")
         currentTime = parseInt(timerElement.textContent);
-        changeCurrentRound();  //this function changes the rounds - needs to be moved once round changes are decided
+        changeCurrentRound();
+        //this function changes the rounds - needs to be moved once round changes are decided
     }else if (currentTime <= 10){
         // this adds the animations to the clock
         timerElement.classList.add("time-running-out");
@@ -113,7 +116,6 @@ function initTimer(roundChange=false) {
     }
     timerElement.textContent = (currentTime - 1).toString()}, 1000);
     }, 3000)
-
 }
 
 
@@ -125,17 +127,22 @@ function initRounds(rounds) {
     roundsContainer.innerText = `Round 1 of ${rounds}`;
 }
 
-function changeCurrentRound () {
+function changeCurrentRound() {
     //updates the number of rounds displayed in top left corner
-    let endRound = document.querySelector(".empty").dataset.currentRound; // class name needs to be updated
-    let maximumRounds = document.querySelector(".empty").dataset.maxRounds; // class name needs to be updated
-    let currentRound = parseInt(endRound) + 1;
-    endRound = currentRound;
-    let newRound = document.querySelector(".empty");// class name needs to be updated
-    newRound.textContent = `Round ${endRound} of ${maximumRounds}`
-    localStorage.setItem('current_round', endRound.toString());
+    let players = document.querySelectorAll('.player');
+    let lastPlayerId = players[players.length - 1].dataset.playerid
+    if (localStorage.getItem('drawer_id') === lastPlayerId) {
+        let endRound = document.querySelector(".empty").dataset.currentRound; // class name needs to be updated
+        let maximumRounds = document.querySelector(".empty").dataset.maxRounds; // class name needs to be updated
+        let currentRound = parseInt(endRound) + 1;
+        document.querySelector(".empty").dataset.currentRound = currentRound.toString();
+        let newRound = document.querySelector(".empty");// class name needs to be updated
+        newRound.textContent = `Round ${currentRound.toString()} of ${maximumRounds}`
+        localStorage.setItem('current_round', endRound.toString());
+    }
     //update drawer
-    switchDrawer()}
+    switchDrawer()
+}
 
 function switchDrawer(){
     let currentDrawerId = localStorage.getItem("drawer_id");
@@ -180,6 +187,7 @@ function updateCurrentDrawer(){
         .then(response => response.json())
         .then(json_response => storeInfo(json_response));
 }
+
 
 function storeInfo(drawerInfo){
     localStorage.setItem("drawer_id", drawerInfo.id)
