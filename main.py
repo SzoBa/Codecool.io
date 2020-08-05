@@ -47,8 +47,8 @@ def join_to_room(data):
     avatar = data['avatar']
     player_id = queries.insert_new_player(player_name, room_id, avatar)
     join_room(int(room_id))
-    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id}
-    emit('save-my-id', {'player_id': player_id, 'owner_id': owner_id, 'username': player_name})
+    response_data = {'room_id': room_id, 'player_id': player_id, 'username': player_name, 'owner_id': owner_id, 'avatar': avatar}
+    emit('save-my-id', {'player_id': player_id, 'owner_id': owner_id, 'username': player_name, 'avatar': avatar})
     emit('user-joined-room', response_data, broadcast=True, include_self=False)
 
 
@@ -81,8 +81,8 @@ def refresh_image(data):
 @app.route('/get-avatar')
 def get_avatar():
     user_id = request.args['user_id']
-    avatar = queries.get_avatar(user_id)
-    if avatar:
+    if user_id != 'undefined':
+        avatar = queries.get_avatar(user_id)
         avatar_number = avatar['avatar'].split('_')[1].split('.')[0]
         return jsonify(avatar_number)
     return jsonify(1)

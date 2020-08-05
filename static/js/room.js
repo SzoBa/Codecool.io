@@ -118,10 +118,12 @@ function addSocketConnectionListeners() {
     socket.addEventListener('save-my-id', (data) => {
         let newMember = `<li class="player-datas" data-userId="${data.player_id}">
                             <span class="player-name">${data.username}</span>
-                            <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
+                            <img class="avatar" src="static/avatars/${data.avatar}" width="40" height="40">
                         </li>`;
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', newMember);
         createUserProfile(data.username)
+        let avatarNumber = data.avatar.split('_')[1].split('.')[0]
+        showSlideAvatars(avatarNumber)
         localStorage.setItem('user_id', data.player_id)
         localStorage.setItem('owner_id', data.owner_id)
     });
@@ -216,8 +218,8 @@ function addSocketListenerCreatedRoom() {
     socket.addEventListener('user-joined-room', (event) => {
         let player = `<li class="player-datas" data-userId="${event.player_id}">
                             <span class="player-name">${event.username}</span>
-                            <img class="avatar" src="static/avatars/smurf_1.png" width="40" height="40">
-                        </li>`
+                            <img class="avatar" src="static/avatars/${event.avatar}" width="40" height="40">
+                      </li>`
         document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
 
     });
