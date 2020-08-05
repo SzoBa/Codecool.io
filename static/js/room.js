@@ -232,7 +232,15 @@ function joinRoom(event) {
     let ownerId = event.target.dataset.creator;
     if (username) {
         localStorage['username'] = username;
-        let userdata = {'username': username, 'room_id': roomId, 'owner_id': ownerId};
+        let avatar;
+
+        let avatarOptions = document.querySelectorAll('.avatar-slide');
+        for (let avatarOption of avatarOptions) {
+            if (avatarOption.style.display === 'block') {
+                avatar = avatarOption.src.split('/').slice(-1)[0]
+            }
+        }
+        let userdata = {'username': username, 'room_id': roomId, 'owner_id': ownerId, 'avatar': avatar};
         socket.emit('join-room', userdata);
         event.target.parentNode.remove();
     }
@@ -244,11 +252,11 @@ function createUserProfile(userName) {
     let userProfileFirstPart;
 
     if (userName !== undefined) {
-        userProfileFirstPart =`
+        userProfileFirstPart = `
             <p class="col-title">Profile</p>
             <p id="user-name">Username: ${userName}</p>`
     } else {
-        userProfileFirstPart =`
+        userProfileFirstPart = `
             <p class="col-title">Profile</p>
             <div id="room_div_inner">
                 <label for="username">Username:</label>
@@ -305,13 +313,17 @@ function slideButtonsEvent() {
 function showSlideAvatars(n) {
     slideIndex = n;
     let x = document.getElementsByClassName("avatar-slide");
-    if (n > x.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = x.length}
+    if (n > x.length) {
+        slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = x.length
+    }
     for (let i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
-    x[slideIndex-1].style.display = "block";
-    return x[slideIndex-1].src.split('/').slice(-1)[0];
+    x[slideIndex - 1].style.display = "block";
+    return x[slideIndex - 1].src.split('/').slice(-1)[0];
 }
 
 function addSocketListenerRefreshImage() {
