@@ -21,5 +21,5 @@ function getWord() {
 }
 
 function useTheWord(word) {
-    console.log(word)
+    document.querySelector('.word').innerHTML = word;
 }
