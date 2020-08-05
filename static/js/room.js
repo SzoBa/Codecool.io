@@ -157,6 +157,7 @@ function addSocketListenerCreatedRoom() {
                 
                           </div>`;
         currentRoom.insertAdjacentHTML('beforeend', createdRoom);
+        document.querySelector('#username_button').remove();
         // let startButton = `<div id="start_game" class=""><button>START GAME</button></div>`
         // currentRoom.insertAdjacentHTML("beforeend", startButton);
         // let player = `<li>${event.username}</li>`
@@ -187,7 +188,7 @@ function addSocketListenerCreatedRoom() {
                                   </div>`;
         waitingRoom.insertAdjacentHTML('beforeend', waitingRoomContent);
         document.querySelector('#join_room_button').addEventListener('click', joinRoom);
-
+        document.querySelector('#username_button').remove();
 
     });
     socket.addEventListener('user-joined-room', (event) => {
