@@ -94,7 +94,13 @@ function displayRooms(rooms) {
             document.querySelector('#join_room_button').addEventListener('click', joinRoom);
         }
     }
-    createUserProfile(undefined)
+    let username = getUsernameById(localStorage['user_id']);
+    createUserProfile(username)
+}
+
+function getUsernameById(id) {
+    fetch(`get-username?user_id=${id}`)
+        .then(response => response.json())
 }
 
 function setAvatar() {
@@ -248,7 +254,6 @@ function joinRoom(event) {
     }
 
 };
-
 
 function createUserProfile(userName) {
     let userProfileFirstPart;
