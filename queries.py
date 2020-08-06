@@ -113,3 +113,19 @@ def get_username(cursor, user_id):
     '''
     cursor.execute(query, {'user_id': user_id})
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def set_room_params(cursor, room_data):
+    room_id = room_data['room_id']
+    round_number = room_data['round_number']
+    round_timer = room_data['round_timer']
+
+    query = '''
+            UPDATE room
+            SET  max_round = %(round_number)s, drawing_time = %(round_timer)s 
+            WHERE id = %(room_id)s
+            '''
+    cursor.execute(query, {'room_id': room_id,
+                           'round_number': round_number,
+                           'round_timer': round_timer})

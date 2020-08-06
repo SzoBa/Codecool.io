@@ -69,7 +69,7 @@ function displayRooms(rooms) {
                                             <div>
                                                 <label for="round">Rounds:</label>
         
-                                                <select name="round" id="round">
+                                                <select name="round" id="roundNumber">
                                                   <option class="option" value=1>1</option>
                                                   <option class="option" value=2>2</option>
                                                   <option class="option" value=3>3</option>
@@ -79,10 +79,10 @@ function displayRooms(rooms) {
                                             <div>
                                                 <label for="round">Drawing time:</label>
         
-                                                <select name="round" id="round">
-                                                  <option class="option" value=1>10</option>
-                                                  <option class="option" value=2>20</option>
-                                                  <option class="option" value=3>30</option>
+                                                <select name="round" id="roundTimer">
+                                                  <option class="option" value=10>10</option>
+                                                  <option class="option" value=20>20</option>
+                                                  <option class="option" value=30>30</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@ function addSocketListenerCreatedRoom() {
                                     <div>
                                         <label for="round">Rounds:</label>
 
-                                        <select name="round" id="round">
+                                        <select name="round" id="roundNumber">
                                           <option class="option" value=1>1</option>
                                           <option class="option" value=2>2</option>
                                           <option class="option" value=3>3</option>
@@ -215,10 +215,10 @@ function addSocketListenerCreatedRoom() {
                                     <div>
                                         <label for="round">Drawing time:</label>
 
-                                        <select name="round" id="round">
-                                          <option class="option" value=1>10</option>
-                                          <option class="option" value=2>20</option>
-                                          <option class="option" value=3>30</option>
+                                        <select name="round" id="roundTimer">
+                                          <option class="option" value=10>10</option>
+                                          <option class="option" value=20>20</option>
+                                          <option class="option" value=30>30</option>
                                         </select>
                                     </div>
                                 </div>
@@ -235,7 +235,10 @@ function addSocketListenerCreatedRoom() {
         // let player = `<li>${event.username}</li>`
         // document.querySelector('.room ul').insertAdjacentHTML('beforeend', player);
         document.querySelector('#start_game').addEventListener('click', (event) => {
-            let roomData = event.target.closest('#current_room').querySelector('.room').dataset.room;
+            let roomId = event.target.closest('#current_room').querySelector('.room').dataset.room;
+            let roundNumber = document.querySelector('#roundNumber').value;
+            let roundTimer = document.querySelector('#roundTimer').value;
+            let roomData = {room_id: roomId, round_number: roundNumber, round_timer: roundTimer};
             socket.emit('ready-to-start', roomData);
         });
         setAvatar();
