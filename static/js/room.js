@@ -346,7 +346,7 @@ function backgroundMusic() {
     let titleHeader = document.querySelector('.clearfix')
     let musicPlayer = `
         <audio controls loop class="background-music">
-            <source src="/static/audio/techno.mp3" type="audio/mp3" >
+            <source src="/static/audio/lofi.mp3" type="audio/mp3" >
         </audio>`
     titleHeader.insertAdjacentHTML('beforeend', musicPlayer)
 }
