@@ -1,4 +1,4 @@
-let socket = io('http://127.0.0.1:5000');
+let socket = io('https://thawing-castle-91338.herokuapp.com');
 let slideIndex = 1;
 
 

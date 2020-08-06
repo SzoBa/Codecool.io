@@ -1,4 +1,4 @@
-export let socket = io('http://127.0.0.1:5000');
+export let socket = io('https://thawing-castle-91338.herokuapp.com');
 // import {joinRoom} from "./room.js";
 
 function init() {
