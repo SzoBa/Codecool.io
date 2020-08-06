@@ -18,7 +18,7 @@ CREATE TABLE room (
     word text,
     max_round integer DEFAULT 3,
     round_counter integer DEFAULT 0,
-    drawing_time integer DEFAULT 10,
+    drawing_time integer DEFAULT 20,
     is_open boolean NOT NULL DEFAULT true
 );
 

@@ -48,7 +48,7 @@ function addSocketListenerCreatedRoom() {
         localStorage['owner_id'] = event.player_id;
         localStorage['drawer_name'] = event.username;
         localStorage['room_id'] = event.room_id;
-        localStorage['can_guess'] = true;
+        localStorage['can_guess'] = 'false';
         document.querySelector('#room_div').classList.add('display-none');
         let currentRoom = document.querySelector('#current_room');
         let createdRoom = `
@@ -104,7 +104,7 @@ function joinRoom(event) {
     let ownerId = event.target.closest('div').querySelector('#join_room_button').dataset.creator;
     if (username) {
         localStorage['username'] = username;
-        localStorage['can_guess'] = true;
+        localStorage['can_guess'] = 'true';
         let userdata = {'username': username, 'room_id': roomId, 'owner_id': ownerId};
         socket.emit('join-room', userdata);
         this.closest('div').querySelector('input').remove();

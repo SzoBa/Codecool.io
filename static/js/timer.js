@@ -150,14 +150,16 @@ function changeCurrentRound() {
 
 function switchDrawer(){
     let currentDrawerId = localStorage.getItem("drawer_id");
-    let nextDrawerId = getNextDrawerId(currentDrawerId)
+    let nextDrawerId = getNextDrawerId(currentDrawerId);
     let myId = localStorage.getItem("user_id");
+    localStorage.setItem('can_guess', 'true');
     if (myId === currentDrawerId) {
         canvas.clearCanvas();
         canvas.removeAllEventListeners();
     } else if (myId === nextDrawerId) {
+        localStorage.setItem('can_guess', 'false');
         canvas.addAllEventListeners();
-        game.init()
+        game.init();
     }
     if (currentDrawerId === myId){
 
