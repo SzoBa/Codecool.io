@@ -8,7 +8,6 @@ export async function gameInit() {
     socket.addEventListener('update-drawer', function () {
         updateCurrentDrawer();
     })
-    debugger;
     if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
         await game.getWord();
     }
@@ -47,7 +46,6 @@ function initGameFlow(data){
 
 function roundChangeGameFlow(){
     let time = localStorage.getItem('drawing_time')
-    console.log(time)
     setTimerLimit(time)
     clearInterval(timeCounter);
     initTimer(true)
@@ -95,7 +93,6 @@ function displayDrawer() {
 }
 
 function initTimer(roundChange=false) {
-    console.log('inittimer')
     //this function is the countdown for the timer
     displayDrawer();
     setTimeout(function () {
@@ -208,7 +205,6 @@ function updateCurrentDrawer(){
 
 function storeInfo(drawerInfo){
     localStorage.setItem("drawer_id", drawerInfo.id)
-    console.log(drawerInfo.name)
     localStorage.setItem("drawer_name", drawerInfo.name)
     if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
         game.getWord();

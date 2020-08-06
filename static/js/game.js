@@ -21,8 +21,6 @@ export async function getWord() {
 }
 
 export function useTheWord(word) {
-    console.log(word)
-    console.log('getWord')
     document.querySelector('.word').innerHTML = word;
     socket.emit('word-length', {word: word, room_id: localStorage.getItem('room_id')})
 }

@@ -43,7 +43,6 @@ function addListenerToButton() {
 
 function addSocketListenerCreatedRoom() {
     socket.addEventListener('own-room-created', (event) => {
-        console.log(event)
         localStorage['user_id'] = event.player_id;
         localStorage['owner_id'] = event.player_id;
         localStorage['drawer_id'] = event.player_id;
