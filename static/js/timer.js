@@ -238,7 +238,7 @@ function theEnd() {
     modalTextContainer.insertAdjacentHTML('beforeend', endingStateText);
     let endingListOfPlayers = document.querySelector('#endingPositions');
     for (let playerPosition of sortedPlayerPositions) {
-        let playerData = `<li>${playerPosition[0]} point(s)-  ${playerPosition[1]}</li>`
+        let playerData = `<li>${playerPosition[0]} point(s) -  ${playerPosition[1]}</li>`
         endingListOfPlayers.insertAdjacentHTML('beforeend', playerData);
     }
     let word = document.querySelector('.word');
