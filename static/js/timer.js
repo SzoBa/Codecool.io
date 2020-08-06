@@ -45,10 +45,16 @@ function initGameFlow(data){
 }
 
 function roundChangeGameFlow(){
+    let endRound = document.querySelector(".empty").dataset.currentRound;
+    let maximumRounds = document.querySelector(".empty").dataset.maxRounds;
     let time = localStorage.getItem('drawing_time')
     setTimerLimit(time)
     clearInterval(timeCounter);
-    initTimer(true)
+    if (endRound <= maximumRounds) {
+        initTimer(true)
+    } else {
+        theEnd();
+    }
 }
 
 
@@ -135,7 +141,7 @@ function initRounds(rounds) {
 function changeCurrentRound() {
     //updates the number of rounds displayed in top left corner
     let players = document.querySelectorAll('.player');
-    let lastPlayerId = players[players.length - 1].dataset.playerid
+    let lastPlayerId = players[players.length - 1].dataset.playerid;
     if (localStorage.getItem('drawer_id') === lastPlayerId) {
         let endRound = document.querySelector(".empty").dataset.currentRound; // class name needs to be updated
         let maximumRounds = document.querySelector(".empty").dataset.maxRounds; // class name needs to be updated
@@ -210,6 +216,33 @@ function storeInfo(drawerInfo){
         game.getWord();
     }
     roundChangeGameFlow()
+}
+
+function theEnd() {
+    let modalTextContainer = document.querySelector("#modal-text-container");
+    let modal = document.querySelector(".modal");
+    modal.style.display = "block";
+    let players = document.querySelectorAll('.player');
+    let playerPositions = [];
+    players.forEach((player)=> {
+        let actualData = []
+        let playerPoints = player.querySelector('.points').innerHTML;
+        actualData.push(parseInt(playerPoints));
+        actualData.push(player.querySelector('.player-name').innerHTML)
+        playerPositions.push(actualData);
+    })
+    let sortedPlayerPositions = playerPositions.sort((a, b) => {
+    return b[0] - a[0]});
+    let endingStateText = `<p>GAME OVER</p><ul id="endingPositions"></ul>`
+    modalTextContainer.innerHTML = '';
+    modalTextContainer.insertAdjacentHTML('beforeend', endingStateText);
+    let endingListOfPlayers = document.querySelector('#endingPositions');
+    for (let playerPosition of sortedPlayerPositions) {
+        let playerData = `<li>${playerPosition[0]} point(s)-  ${playerPosition[1]}</li>`
+        endingListOfPlayers.insertAdjacentHTML('beforeend', playerData);
+    }
+    let word = document.querySelector('.word');
+    word.innerHTML = ''
 }
 
 
