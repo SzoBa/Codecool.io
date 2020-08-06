@@ -257,7 +257,9 @@ function createUserProfile(userName) {
     if (userName !== undefined) {
         userProfileFirstPart = `
             <p class="col-title">Profile</p>
-            <p id="user-name">Username: ${userName}</p>`
+            <div class="username-container">
+                <p id="user-name" class="profile-username">${userName}</p>
+            </div>`
     } else {
         userProfileFirstPart = `
             <p class="col-title">Profile</p>
