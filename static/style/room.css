@@ -113,6 +113,7 @@ body {
     border-radius: 10px;
     background: rgba(243, 243, 243, 0.55);
     width: max-content;
+    margin: 10px;
 }
 
 .username-container {
@@ -196,7 +197,7 @@ input {
     margin: 10px;
 }
 
-#user-name, label {
+#user-name label {
     margin-left: 10px;
 }
 
