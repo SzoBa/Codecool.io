@@ -1,4 +1,3 @@
-// import {socket} from './roominit.js';
 let socket = io('http://127.0.0.1:5000');
 let slideIndex = 1;
 
@@ -7,17 +6,8 @@ function init() {
     createSocketRooms();
     loadRooms();
     backgroundMusic()
-    // addSocketConnectionListeners();
-    // addListenerToButton();
-    // addSocketListenerCreatedRoom();
 }
 
-function clearLocalStorage() {
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('username');
-    localStorage.removeItem('room_id');
-    localStorage.removeItem('owner_id');
-}
 
 function createSocketRooms() {
     socket.emit('create-existing-room', parseInt(localStorage['room_id']));
@@ -117,7 +107,6 @@ function displayRooms(rooms) {
         }
     }
     return getUsernameById(localStorage['user_id']);
-    // createUserProfile(username)
 }
 
 function getUsernameById(id) {
@@ -154,6 +143,8 @@ function addSocketConnectionListeners() {
         showSlideAvatars(avatarNumber)
         localStorage.setItem('user_id', data.player_id)
         localStorage.setItem('owner_id', data.owner_id)
+        localStorage.setItem('drawer_id', data.owner_id)
+        localStorage.setItem('drawer_name', data.drawer_name)
     });
 }
 
@@ -190,7 +181,11 @@ function addSocketListenerCreatedRoom() {
     socket.addEventListener('own-room-created', (event) => {
         localStorage['user_id'] = event.player_id;
         localStorage['owner_id'] = event.player_id;
+        localStorage['drawer_id'] = event.player_id;
+        localStorage['drawer_name'] = event.username;
         localStorage['room_id'] = event.room_id;
+        localStorage['can_guess'] = 'false';
+        //document.querySelector('#room_div').classList.add('display-none');
         let currentRoom = document.querySelector('#current_room');
         let createdRoom = `<div class="room" data-room="${event.room_id}">
                                 <p class="room-players">Players:</p>
@@ -288,6 +283,7 @@ function joinRoom(event) {
     let ownerId = event.target.dataset.creator;
     if (username) {
         localStorage['username'] = username;
+        localStorage['can_guess'] = 'true';
         let avatar;
 
         let avatarOptions = document.querySelectorAll('.avatar-slide');
@@ -305,10 +301,6 @@ function joinRoom(event) {
 
 function createUserProfile(userName) {
     let userProfileFirstPart;
-    // let userName;
-    // if (!userName) {
-    //     userName = undefined;
-    // }
     if (userName) {
         userProfileFirstPart = `
             <p class="col-title">Profile</p>
@@ -352,8 +344,6 @@ function createUserProfile(userName) {
     let userProfile = userProfileFirstPart + userProfileSecondPart
     let profileContainer = document.querySelector('.profile')
     profileContainer.innerHTML = userProfile
-    // profileContainer.insertAdjacentHTML('beforeend', userProfile)
-    // showSlideAvatars(slideIndex)
     slideButtonsEvent()
 };
 
