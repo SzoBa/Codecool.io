@@ -101,7 +101,6 @@ function displayRooms(rooms) {
             });
         } else {
             section = document.querySelector('#waiting_room');
-            section.querySelector('#username_button').remove();
             let newRoomContent = `<div class="room" data-room="${room.room_id}">
                             <p class="room-players">Players:</p>
                             <ul class="players-icon">
@@ -117,11 +116,18 @@ function displayRooms(rooms) {
             document.querySelector('#join_room_button').addEventListener('click', joinRoom);
         }
     }
-    createUserProfile(undefined)
+    return getUsernameById(localStorage['user_id']);
+    // createUserProfile(username)
+}
+
+function getUsernameById(id) {
+    return fetch(`get-username?user_id=${id}`)
+        .then(response => response.json())
+        .then(data => createUserProfile(data === null ? undefined : data.name))
 }
 
 function setAvatar() {
-    fetch(`get-avatar?user_id=${localStorage['user_id']}`)
+    return fetch(`get-avatar?user_id=${localStorage['user_id']}`)
         .then(response => response.json())
         .then(data => displayProfileAvatar(data))
 }
@@ -272,11 +278,13 @@ function joinRoom(event) {
 
 };
 
-
 function createUserProfile(userName) {
     let userProfileFirstPart;
-
-    if (userName !== undefined) {
+    // let userName;
+    // if (!userName) {
+    //     userName = undefined;
+    // }
+    if (userName) {
         userProfileFirstPart = `
             <p class="col-title">Profile</p>
             <div class="username-container">
