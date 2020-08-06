@@ -1,4 +1,4 @@
-let socket = io('https://thawing-castle-91338.herokuapp.com');
+let socket = io('http://fast-sierra-80105.herokuapp.com/');
 let slideIndex = 1;
 
 

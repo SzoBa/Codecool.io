@@ -1,4 +1,4 @@
-export let socket = io('https://thawing-castle-91338.herokuapp.com');
+export let socket = io('http://fast-sierra-80105.herokuapp.com/');
 
 export function init() {
     let roomId = localStorage.getItem('room_id');
