@@ -2,7 +2,9 @@ from flask import Flask, render_template, url_for, request, redirect, session, j
 from flask_socketio import SocketIO, join_room, leave_room, emit
 import json
 import queries
+from gevent import monkey
 
+monkey.patch_all()
 
 app = Flask(__name__)
 app.debug = True
