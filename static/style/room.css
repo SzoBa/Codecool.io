@@ -76,7 +76,7 @@ body {
 
 
 .profile {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .col-title {
@@ -104,6 +104,20 @@ body {
 
 .room-players {
     text-align: center;
+}
+
+.profile-username {
+    text-align: center;
+    padding: 5px;
+    border: 2px #278bc4 solid;
+    border-radius: 10px;
+    background: rgba(243, 243, 243, 0.55);
+    width: max-content;
+}
+
+.username-container {
+    display: flex;
+    justify-content: center;
 }
 
 .room ul li {
