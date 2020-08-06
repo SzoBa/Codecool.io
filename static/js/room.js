@@ -46,6 +46,7 @@ function addSocketListenerCreatedRoom() {
         console.log(event)
         localStorage['user_id'] = event.player_id;
         localStorage['owner_id'] = event.player_id;
+        localStorage['drawer_id'] = event.player_id;
         localStorage['drawer_name'] = event.username;
         localStorage['room_id'] = event.room_id;
         localStorage['can_guess'] = 'false';

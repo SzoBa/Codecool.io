@@ -8,6 +8,7 @@ export async function gameInit() {
     socket.addEventListener('update-drawer', function () {
         updateCurrentDrawer();
     })
+    debugger;
     if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
         await game.getWord();
     }
