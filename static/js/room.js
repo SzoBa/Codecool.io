@@ -86,7 +86,10 @@ function displayRooms(rooms) {
             section.insertAdjacentHTML("beforeend", newRoomContent);
             let startButton = document.querySelector('#start_game');
             startButton.addEventListener('click', (event) => {
-                let roomData = event.target.closest('#current_room').querySelector('.room').dataset.room;
+                let roomId = event.target.closest('#current_room').querySelector('.room').dataset.room;
+                let roundNumber = document.querySelector('#roundNumber').value;
+                let roundTimer = document.querySelector('#roundTimer').value;
+                let roomData = {room_id: roomId, round_number: roundNumber, round_timer: roundTimer};
                 socket.emit('ready-to-start', roomData);
             });
         } else {
