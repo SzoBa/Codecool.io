@@ -79,7 +79,6 @@ function displayRooms(rooms) {
             });
         } else {
             section = document.querySelector('#waiting_room');
-            section.querySelector('#username_button').remove();
             let newRoomContent = `<div class="room" data-room="${room.room_id}">
                             <p class="room-players">Players:</p>
                             <ul class="players-icon">
