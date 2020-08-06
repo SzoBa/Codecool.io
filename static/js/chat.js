@@ -8,19 +8,17 @@ function init() {
 }
 
 function chatInputField() {
-    if (localStorage.user_id !== localStorage.drawer_id) {
-        let inputField = document.querySelector('#chat-input');
-        let messageContainer = document.querySelector('.message-container');
-        messageContainer.scrollTop = messageContainer.scrollHeight;
-        inputField.addEventListener('keyup', function (event) {
-            if (event.keyCode === 13) {
-                event.preventDefault()
-                let chatMessage = inputField.value
-                let roomId = localStorage.getItem('room_id');
-                checkGuess(roomId, chatMessage)
-            }
-        })
-    }
+    let inputField = document.querySelector('#chat-input');
+    let messageContainer = document.querySelector('.message-container');
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+    inputField.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault()
+            let chatMessage = inputField.value
+            let roomId = localStorage.getItem('room_id');
+            checkGuess(roomId, chatMessage)
+        }
+    })
 }
 
 function chatSocketSetup() {
