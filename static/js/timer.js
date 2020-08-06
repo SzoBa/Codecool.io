@@ -61,7 +61,6 @@ function roundChangeGameFlow(){
 function displayPlayers(players){
     let playersContainer =  document.querySelector(".players-container");
     let playersToAdd = ``;
-    let smurfCount = 1;
     for (let i = 0; i < players.length;i++){
         let player = players[i];
         let playerInfo = `<div class="player" data-playerid="${player.player_id}">
@@ -70,14 +69,9 @@ function displayPlayers(players){
                             <span class="player-name">${player.name}</span>
                             <span class="points">${player.points}</span>
                         </div>
-                        <span><img src="static/avatars/smurf_${smurfCount}.png" width="40" height="40"></span>
+                        <span><img src="static/avatars/${player.avatar}" width="40" height="40"></span>
                         </div>`
         playersToAdd += playerInfo;
-        if (smurfCount < 20) {
-            smurfCount++;
-        } else {
-            smurfCount = 0
-        }
     }
     playersContainer.innerHTML = playersToAdd
 }
