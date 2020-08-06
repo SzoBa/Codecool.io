@@ -119,7 +119,7 @@ function displayRooms(rooms) {
 function getUsernameById(id) {
     return fetch(`get-username?user_id=${id}`)
         .then(response => response.json())
-        .then(data => createUserProfile(data))
+        .then(data => createUserProfile(data === null ? undefined : data.name))
 }
 
 function setAvatar() {
@@ -274,14 +274,12 @@ function joinRoom(event) {
 
 };
 
-function createUserProfile(data) {
+function createUserProfile(userName) {
     let userProfileFirstPart;
-    let userName;
-    if (data) {
-        userName = data.name;
-    } else {
-        userName = undefined;
-    }
+    // let userName;
+    // if (!userName) {
+    //     userName = undefined;
+    // }
     if (userName) {
         userProfileFirstPart = `
             <p class="col-title">Profile</p>
