@@ -101,8 +101,10 @@ def update_points(cursor, player_id):
             UPDATE player
             SET points = points + 1
             WHERE id = %(player_id)s
+            RETURNING player.points
             '''
     cursor.execute(query, {'player_id': player_id})
+    return cursor.fetchone()['points']
 
 
 @connection.connection_handler

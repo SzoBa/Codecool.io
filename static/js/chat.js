@@ -24,10 +24,15 @@ function chatInputField() {
 }
 
 function chatSocketSetup() {
-    socket.addEventListener('new-chat-message', (data)=> {
+    socket.addEventListener('new-chat-message', (data) => {
         let messageData = JSON.parse(data);
         let messageContainer = document.querySelector('.message-container');
-        let chatMessageDiv = `<div class="message">${messageData['username']}${messageData['message']}</div>`
+        let chatMessageDiv
+        if (messageData['guessed']) {
+            chatMessageDiv = `<div class="message guessed"><div>${messageData['username']}${messageData['message']}</div></div>`
+        } else {
+            chatMessageDiv = `<div class="message"><div><b>${messageData['username']}</b>${messageData['message']}</div></div>`
+        }
         messageContainer.insertAdjacentHTML('beforeend', chatMessageDiv);
         messageContainer.scrollTop = messageContainer.scrollHeight;
     })
@@ -41,17 +46,25 @@ function checkGuess(roomId, message) {
 
 function compareGuess(solution, message, roomId) {
     let username = localStorage.getItem('username');
-    if (solution.toLowerCase() === message.toLowerCase()) {
-        message = ` has guessed the word`;
-        socket.emit('update-points', JSON.stringify({room_id: roomId, player_id: localStorage.getItem('user_id')}));
+    let guessed = false;
+    if (localStorage.getItem('can_guess') === "true") {
+        if (solution.toLowerCase() === message.toLowerCase()) {
+            message = ` has guessed the word`;
+            guessed = true
+            localStorage['can_guess'] = false;
+            socket.emit('update-points', JSON.stringify({room_id: roomId, player_id: localStorage.getItem('user_id')}));
+        } else {
+            message = ': ' + message;
+        }
     } else {
         message = ': ' + message;
     }
     let data = {
-            message: message,
-            username: username,
-            room_id: roomId
-        }
+        message: message,
+        username: username,
+        room_id: roomId,
+        guessed: guessed
+    }
     socket.emit('send-chat-message', JSON.stringify(data));
     document.querySelector('#chat-input').value = '';
 }
