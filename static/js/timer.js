@@ -236,7 +236,9 @@ function theEnd() {
         endingListOfPlayers.insertAdjacentHTML('beforeend', playerData);
     }
     let word = document.querySelector('.word');
-    word.innerHTML = ''
+    word.innerHTML = '';
+    let round = document.querySelector('.round');
+    round.innerHTML = '';
 }
 
 
