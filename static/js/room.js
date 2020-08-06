@@ -66,21 +66,25 @@ function displayRooms(rooms) {
                                         </ul>
                                             
                                         <div class="game-datas">
-                                            <label for="round">Rounds:</label>
-    
-                                            <select name="round" id="round">
-                                              <option class="option" value=1>1</option>
-                                              <option class="option" value=2>2</option>
-                                              <option class="option" value=3>3</option>
-                                            </select>
+                                            <div>
+                                                <label for="round">Rounds:</label>
+        
+                                                <select name="round" id="round">
+                                                  <option class="option" value=1>1</option>
+                                                  <option class="option" value=2>2</option>
+                                                  <option class="option" value=3>3</option>
+                                                </select>
+                                            </div>
                                             
-                                            <label for="round">Drawing time:</label>
-    
-                                            <select name="round" id="round">
-                                              <option class="option" value=1>10</option>
-                                              <option class="option" value=2>20</option>
-                                              <option class="option" value=3>30</option>
-                                            </select>
+                                            <div>
+                                                <label for="round">Drawing time:</label>
+        
+                                                <select name="round" id="round">
+                                                  <option class="option" value=1>10</option>
+                                                  <option class="option" value=2>20</option>
+                                                  <option class="option" value=3>30</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         
                                         <div class="join">
