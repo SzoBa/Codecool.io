@@ -64,7 +64,25 @@ function displayRooms(rooms) {
                                         <ul class="players-icon">
                                             ${playersHtml}
                                         </ul>
-                        
+                                            
+                                        <div class="game-datas">
+                                            <label for="round">Rounds:</label>
+    
+                                            <select name="round" id="round">
+                                              <option class="option" value=1>1</option>
+                                              <option class="option" value=2>2</option>
+                                              <option class="option" value=3>3</option>
+                                            </select>
+                                            
+                                            <label for="round">Drawing time:</label>
+    
+                                            <select name="round" id="round">
+                                              <option class="option" value=1>10</option>
+                                              <option class="option" value=2>20</option>
+                                              <option class="option" value=3>30</option>
+                                            </select>
+                                        </div>
+                                        
                                         <div class="join">
                                             <button id="start_game">START GAME</button>
                                         </div>
@@ -346,7 +364,7 @@ function backgroundMusic() {
     let titleHeader = document.querySelector('.clearfix')
     let musicPlayer = `
         <audio controls loop class="background-music">
-            <source src="/static/audio/techno.mp3" type="audio/mp3" >
+            <source src="/static/audio/lofi.mp3" type="audio/mp3" >
         </audio>`
     titleHeader.insertAdjacentHTML('beforeend', musicPlayer)
 }
