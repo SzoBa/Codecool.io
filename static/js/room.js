@@ -97,13 +97,10 @@ function displayRooms(rooms) {
                                 ${playersHtml}
                             </ul>
 
-                            <div class="join">
-                                <button id="join_room_button" data-creator="${room.owner_id}">Join Room</button>
-                            </div>
-
                         </div>`;
             section.insertAdjacentHTML("beforeend", newRoomContent);
-            document.querySelector('#join_room_button').addEventListener('click', joinRoom);
+            checkForExistingUserId(localStorage['user_id'], room.owner_id);
+            // document.querySelector('#join_room_button').addEventListener('click', joinRoom);
         }
     }
     return getUsernameById(localStorage['user_id']);
@@ -113,6 +110,24 @@ function getUsernameById(id) {
     return fetch(`get-username?user_id=${id}`)
         .then(response => response.json())
         .then(data => createUserProfile(data === null ? undefined : data.name))
+}
+
+function checkForExistingUserId(id, owner_id) {
+    fetch(`get-username?user_id=${id}`)
+        .then(response => response.json())
+        .then(data => createJoinRoomButton(data === null ? undefined : data.name, owner_id))
+}
+
+function createJoinRoomButton(data, owner_id) {
+    if (!data) {
+        let section = document.querySelector('#waiting_room');
+        let content = `<div class="join">
+                     <button id="join_room_button" data-creator="${owner_id}">Join Room</button>
+                   </div>`;
+        section.querySelector('.room').insertAdjacentHTML("beforeend", content);
+        document.querySelector('#join_room_button').addEventListener('click', joinRoom);
+    }
+
 }
 
 function setAvatar() {
