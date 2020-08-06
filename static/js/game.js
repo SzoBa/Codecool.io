@@ -50,7 +50,6 @@ function updateOrder() {
     for (let container of pointContainers) {
         points.push([parseInt(container.innerHTML), parseInt(container.closest('.player').dataset.playerid)]);
     }
-    console.log(points);
     points.sort(function (a, b) {
         if (a[0] > b[0]) {
             return -1;
@@ -65,5 +64,4 @@ function updateOrder() {
                 container.innerHTML = `#${(i + 1).toString()}`;
         }
     }
-    console.log(points);
 }
