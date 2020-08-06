@@ -90,13 +90,12 @@ def get_avatar():
 
 
 @app.route('/get-username')
-def get_user_name():
+def get_username():
     user_id = request.args.get('user_id', None)
     if user_id and user_id != 'undefined':
         username = queries.get_username(user_id)
         return jsonify(username)
-    else:
-        return jsonify('')
+    return jsonify('')
 
 
 if __name__ == '__main__':

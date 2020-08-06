@@ -112,17 +112,18 @@ function displayRooms(rooms) {
             document.querySelector('#join_room_button').addEventListener('click', joinRoom);
         }
     }
-    let username = getUsernameById(localStorage['user_id']);
-    createUserProfile(username)
+    return getUsernameById(localStorage['user_id']);
+    // createUserProfile(username)
 }
 
 function getUsernameById(id) {
-    fetch(`get-username?user_id=${id}`)
+    return fetch(`get-username?user_id=${id}`)
         .then(response => response.json())
+        .then(data => createUserProfile(data))
 }
 
 function setAvatar() {
-    fetch(`get-avatar?user_id=${localStorage['user_id']}`)
+    return fetch(`get-avatar?user_id=${localStorage['user_id']}`)
         .then(response => response.json())
         .then(data => displayProfileAvatar(data))
 }
@@ -273,10 +274,15 @@ function joinRoom(event) {
 
 };
 
-function createUserProfile(userName) {
+function createUserProfile(data) {
     let userProfileFirstPart;
-
-    if (userName !== undefined) {
+    let userName;
+    if (data) {
+        userName = data.name;
+    } else {
+        userName = undefined;
+    }
+    if (userName) {
         userProfileFirstPart = `
             <p class="col-title">Profile</p>
             <p id="user-name">Username: ${userName}</p>`
