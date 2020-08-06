@@ -25,17 +25,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/modal.css') }}">
+
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/gameplay.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" defer></script>
-    <script type="module" src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>
-    <script type="module" src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
-    <script type="module" src="{{ url_for('static', filename='js/socket.js') }}" defer></script>
-
-    <!-- timer -->
-    <script src=" {{ url_for('static', filename='js/timer.js') }}" defer></script>
+{#    <script type="module" src="{{ url_for('static', filename='js/socket.js') }}" defer></script>#}
+{#    <script type="module" src=" {{ url_for('static', filename='js/canvas.js') }}" defer></script>#}
+{#    <script type="module" src="{{ url_for('static', filename='js/chat.js') }}" defer></script>#}
+{#    <script type="module" src="{{ url_for('static', filename='js/game.js') }}" defer></script>#}
+{#    <!-- timer -->#}
+{#    <script type="module" src=" {{ url_for('static', filename='js/timer.js') }}" defer></script>#}
+    <script type="module" src=" {{ url_for('static', filename='js/main.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/timer-animation.css') }}">
 </head>
 
@@ -59,8 +62,8 @@
                                        width="70" height="70" id="clock-img">
                     <div class="time-number">15</div>
                 </div>
-                <div class="word">_ _ _ _ &nbsp _ _ _</div>
-                <div class="empty">Round 2 of 3</div>
+                <div class="word"></div>
+                <div class="empty round">Round 2 of 3</div>
             </div>
             <div class="body">
                 <div class="players-container">
@@ -91,7 +94,7 @@
                 </div>
                 <div class="canvas-container">
                     <div class="canvas">
-                        <canvas width="800" height="390"></canvas>
+                        <canvas width="800" height="490"></canvas>
                     </div>
                     <div class="extras">
                         <div class="current-color"></div>
@@ -149,25 +152,18 @@
                 </div>
                 <div class="chat-container">
                     <div class="message-container">
-                        <div class="message">Message1</div>
-                        <div class="message">Message2</div>
-                        <div class="message">I have no idea what to do next</div>
-                        <div class="message">Message4</div>
-                        <div class="message">Message5</div>
-                        <div class="message">This message is a bit longer to see the box size</div>
-                        <div class="message">Message7</div>
-                        <div class="message">Message8</div>
-                        <div class="message">Message9</div>
-                        <div class="message">My guess is Codecole.io</div>
-                        <div class="message">Message11</div>
-                        <div class="message">You can scroll these down</div>
-                        <div class="message">Message13</div>
-                        <div class="message">Message14</div>
+                        <div class="message">You can write your guesses here...</div>
+
                     </div>
                     <div class="input-field">
                         <input id="chat-input" type="text">
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="end-round-modal" class="modal">
+            <div class="modal-content">
+                <p id="modal-text-container">Some text in the Modal..</p>
             </div>
         </div>
     </section>

@@ -12,29 +12,53 @@ let canvasElements = {
     beforeRubber: "black"
 }
 
-function init() {
+export function init(ownerId, userId) {
     addSocketFunctionality();
-    let canvas = document.querySelector("canvas");
-    if (localStorage.getItem('owner_id') === localStorage.getItem('user_id')) {
-        canvas.addEventListener('mousedown', startDrawing)
-        canvas.addEventListener('mousemove', checkIfDrawing)
-        canvas.addEventListener('mouseup', endDrawing)
-        canvas.addEventListener('mouseleave', endDrawing)
-        let colorBoxes = document.querySelectorAll(".color-box")
-        for (let colorBox of colorBoxes) {
-            colorBox.addEventListener('click', changeDrawingColor)
-        }
-        let sizeBoxes = document.querySelectorAll('.size-box')
-        for (let sizeBox of sizeBoxes) {
-            sizeBox.addEventListener('click', changeDrawingSize)
-        }
-        let changeMarkerBtns = document.querySelectorAll(".change-marker")
-        for (let changeMarkerBtn of changeMarkerBtns) {
-            changeMarkerBtn.addEventListener('click', changeDrawingColor);
-        }
-
-        document.querySelector(".clear").addEventListener('click', clearCanvas);
+    if (ownerId === userId) {
+        addAllEventListeners()
     }
+}
+
+export function addAllEventListeners() {
+    let canvas = document.querySelector("canvas");
+    canvas.addEventListener('mousedown', startDrawing)
+    canvas.addEventListener('mousemove', checkIfDrawing)
+    canvas.addEventListener('mouseup', endDrawing)
+    canvas.addEventListener('mouseleave', endDrawing)
+    let colorBoxes = document.querySelectorAll(".color-box")
+    for (let colorBox of colorBoxes) {
+        colorBox.addEventListener('click', changeDrawingColor)
+    }
+    let sizeBoxes = document.querySelectorAll('.size-box')
+    for (let sizeBox of sizeBoxes) {
+        sizeBox.addEventListener('click', changeDrawingSize)
+    }
+    let changeMarkerBtns = document.querySelectorAll(".change-marker")
+    for (let changeMarkerBtn of changeMarkerBtns) {
+        changeMarkerBtn.addEventListener('click', changeDrawingColor);
+    }
+    document.querySelector(".clear").addEventListener('click', clearCanvas);
+}
+
+export function removeAllEventListeners() {
+    let canvas = document.querySelector("canvas");
+    canvas.removeEventListener('mousedown', startDrawing)
+    canvas.removeEventListener('mousemove', checkIfDrawing)
+    canvas.removeEventListener('mouseup', endDrawing)
+    canvas.removeEventListener('mouseleave', endDrawing)
+    let colorBoxes = document.querySelectorAll(".color-box")
+    for (let colorBox of colorBoxes) {
+        colorBox.removeEventListener('click', changeDrawingColor)
+    }
+    let sizeBoxes = document.querySelectorAll('.size-box')
+    for (let sizeBox of sizeBoxes) {
+        sizeBox.removeEventListener('click', changeDrawingSize)
+    }
+    let changeMarkerBtns = document.querySelectorAll(".change-marker")
+    for (let changeMarkerBtn of changeMarkerBtns) {
+        changeMarkerBtn.removeEventListener('click', changeDrawingColor);
+    }
+    document.querySelector(".clear").removeEventListener('click', clearCanvas);
 }
 
 function addSocketFunctionality() {
@@ -61,11 +85,11 @@ function changeDrawingColor(event) {
     displayCurrentColour()
 }
 
-function changeDrawingSize(event) {
+export function changeDrawingSize(event) {
     canvasElements.currentSize = event.target.dataset.size;
 }
 
-function clearCanvas() {
+export function clearCanvas() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     canvasElements.clickDrag = []
@@ -76,7 +100,7 @@ function clearCanvas() {
     socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
-function startDrawing(event) {
+export function startDrawing(event) {
     // let mouseX = event.pageX - document.querySelector('.card').offsetLeft;
     // let mouseY = event.pageY - document.querySelector('.card').offsetTop;
     let cRect = document.querySelector("canvas").getBoundingClientRect();
@@ -98,11 +122,11 @@ function checkIfDrawing(event) {
     }
 }
 
-function endDrawing() {
+export function endDrawing() {
     canvasElements.paint = false;
 }
 
-function addClick(x, y, dragging) {
+export function addClick(x, y, dragging) {
     canvasElements.clickX.push(x);
     canvasElements.clickY.push(y);
     canvasElements.clickDrag.push(dragging);
@@ -111,7 +135,7 @@ function addClick(x, y, dragging) {
     socket.emit('drawing', JSON.stringify({data: canvasElements, roomId: localStorage.getItem('room_id')}))
 }
 
-function draw() {
+export function draw() {
     let context = document.querySelector("canvas").getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
@@ -144,4 +168,4 @@ function draw() {
     }
 }
 
-init();
+// init(localStorage.getItem('owner_id'), localStorage.getItem('user_id'));
