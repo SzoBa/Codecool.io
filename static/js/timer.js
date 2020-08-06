@@ -240,7 +240,3 @@ function theEnd() {
     let round = document.querySelector('.round');
     round.innerHTML = '';
 }
-
-
-
-// gameInit()
