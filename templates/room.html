@@ -53,7 +53,9 @@
             <div class="second-col">
                 <div id="waiting_room" class="waiting">
                     <p class="col-title">Waiting</p>
-                    <button type="button" id="username_button" class="start-new">Create new room</button>
+                    {% if not room_id %}
+                        <button type="button" id="username_button" class="start-new">Create new room</button>
+                    {% endif %}
                 </div>
             </div>
 
