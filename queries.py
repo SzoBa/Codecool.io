@@ -102,3 +102,14 @@ def get_avatar(cursor, user_id):
     '''
     cursor.execute(query, {'user_id': user_id})
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_username(cursor, user_id):
+    query = '''
+    SELECT name
+    FROM player
+    WHERE id = %(user_id)s;
+    '''
+    cursor.execute(query, {'user_id': user_id})
+    return cursor.fetchone()
