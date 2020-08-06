@@ -1,6 +1,7 @@
 button,
 input[type="submit"],
-input[type="button"] {
+input[type="button"],
+input[type="text"]{
     font-family: "Montserrat", sans-serif;
 
     padding: 4px 12px;
@@ -16,7 +17,9 @@ button:active,
 input[type="submit"]:hover,
 input[type="submit"]:active,
 input[type="button"]:hover,
-input[type="button"]:active {
+input[type="button"]:active,
+input[type="text"]:hover,
+input[type="text"]:active {
     cursor: pointer;
 
     color: rgb(203, 75, 70);
@@ -51,5 +54,13 @@ header input[type="button"]:active {
 
     border: #fff solid 2px;
     background: rgba(150, 150, 150, .25);
+    text-shadow: 0 0 4px rgba(255, 255, 255, .5), 0 0 6px rgba(255, 255, 255, .3);
+}
+
+input[type="text"] {
+    cursor: pointer;
+
+    border: #278bc4 solid 2px;
+    background: rgba(243, 243, 243, 0.55);
     text-shadow: 0 0 4px rgba(255, 255, 255, .5), 0 0 6px rgba(255, 255, 255, .3);
 }

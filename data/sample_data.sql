@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS public.player;
 CREATE TABLE player (
     id serial NOT NULL,
     name text,
-    password text,
+    avatar text DEFAULT 'smurf_1.png',
     room_id integer,
     points integer DEFAULT 0,
     is_drawer boolean NOT NULL DEFAULT false
@@ -18,7 +18,8 @@ CREATE TABLE room (
     word text,
     max_round integer DEFAULT 3,
     round_counter integer DEFAULT 0,
-    drawing_time integer DEFAULT 20,
+    drawing_time integer DEFAULT 60,
+    owner_id integer,
     is_open boolean NOT NULL DEFAULT true
 );
 
