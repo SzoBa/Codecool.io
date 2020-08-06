@@ -232,4 +232,12 @@ input {
     border: 2px #278bc4 solid;
     border-radius: 5px;
     background: rgba(243, 243, 243, 0.55);
+    margin: 10px;
+}
+
+.game-datas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
