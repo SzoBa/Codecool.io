@@ -159,7 +159,6 @@ function switchDrawer(){
     } else if (myId === nextDrawerId) {
         localStorage.setItem('can_guess', 'false');
         canvas.addAllEventListeners();
-        game.init();
     }
     if (currentDrawerId === myId){
 
