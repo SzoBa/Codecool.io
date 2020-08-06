@@ -10,7 +10,7 @@ export function init() {
 }
 
 export async function getWord() {
-    let wordNumber = Math.floor(Math.random() * 6801) + 1;
+    let wordNumber = Math.floor(Math.random() * 46) + 1;
     let roomId = localStorage.getItem('room_id');
     let url = '/get-word';
     fetch(`${url}?word=${wordNumber}&room=${roomId}`)
