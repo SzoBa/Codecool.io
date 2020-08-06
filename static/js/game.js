@@ -1,15 +1,15 @@
 import {socket} from './socket.js'
 
-init();
+// init();
 
-function init() {
+export function init() {
+    addSocketListenerPoints();
     if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
         getWord();
     }
-    addSocketListenerPoints();
 }
 
-export function getWord() {
+export async function getWord() {
     let wordNumber = Math.floor(Math.random() * 6801) + 1;
     let roomId = localStorage.getItem('room_id');
     let url = '/get-word';
@@ -21,11 +21,13 @@ export function getWord() {
 }
 
 export function useTheWord(word) {
+    console.log(word)
+    console.log('getWord')
     document.querySelector('.word').innerHTML = word;
     socket.emit('word-length', {word: word, room_id: localStorage.getItem('room_id')})
 }
 
-function addSocketListenerPoints() {
+export function addSocketListenerPoints() {
     socket.addEventListener('increase-points', data => {
         let playerDivs = document.querySelectorAll(`.player`);
         for (let playerDiv of playerDivs) {

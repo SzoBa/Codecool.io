@@ -4,17 +4,19 @@ import * as game from './game.js'
 
 let timeCounter
 
-function gameInit() {
+export async function gameInit() {
     socket.addEventListener('update-drawer', function () {
         updateCurrentDrawer();
     })
-    game.getWord();
-    getGameInfo()
+    if (localStorage.getItem('drawer_id') === localStorage.getItem('user_id')) {
+        await game.getWord();
+    }
+    await getGameInfo()
     initTimer()
 }
 
 
-function getGameInfo(){
+async function getGameInfo(){
     let drawer = localStorage.getItem("owner_id")
     localStorage.setItem('drawer_id', drawer)
     // fetch('/get-current-drawer')
@@ -92,6 +94,7 @@ function displayDrawer() {
 }
 
 function initTimer(roundChange=false) {
+    console.log('inittimer')
     //this function is the countdown for the timer
     displayDrawer();
     setTimeout(function () {
@@ -214,4 +217,4 @@ function storeInfo(drawerInfo){
 
 
 
-gameInit()
+// gameInit()

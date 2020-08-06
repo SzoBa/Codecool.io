@@ -12,7 +12,7 @@ let canvasElements = {
     beforeRubber: "black"
 }
 
-function init(ownerId, userId) {
+export function init(ownerId, userId) {
     addSocketFunctionality();
     if (ownerId === userId) {
         addAllEventListeners()
@@ -168,4 +168,4 @@ export function draw() {
     }
 }
 
-init(localStorage.getItem('owner_id'), localStorage.getItem('user_id'));
+// init(localStorage.getItem('owner_id'), localStorage.getItem('user_id'));

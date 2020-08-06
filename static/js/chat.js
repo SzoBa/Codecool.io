@@ -1,8 +1,8 @@
 import {socket} from './socket.js'
 
-init();
+// init();
 
-function init() {
+export function init() {
     chatInputField();
     chatSocketSetup();
 }
