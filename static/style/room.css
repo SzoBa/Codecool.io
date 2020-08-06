@@ -16,6 +16,10 @@ body {
     user-select: none;
 }
 
+#room_div_inner {
+    margin-left: 10px;
+}
+
 .display-none {
     display: none;
 }
@@ -76,7 +80,7 @@ body {
 
 
 .profile {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .col-title {
@@ -104,6 +108,21 @@ body {
 
 .room-players {
     text-align: center;
+}
+
+.profile-username {
+    text-align: center;
+    padding: 5px;
+    border: 2px #278bc4 solid;
+    border-radius: 10px;
+    background: rgba(243, 243, 243, 0.55);
+    width: max-content;
+    margin: 10px;
+}
+
+.username-container {
+    display: flex;
+    justify-content: center;
 }
 
 .room ul li {
@@ -182,7 +201,7 @@ input {
     margin: 10px;
 }
 
-#user-name, label {
+#user-name label {
     margin-left: 10px;
 }
 
