@@ -16,6 +16,10 @@ body {
     user-select: none;
 }
 
+#room_div_inner {
+    margin-left: 10px;
+}
+
 .display-none {
     display: none;
 }
