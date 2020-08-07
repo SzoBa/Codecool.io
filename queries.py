@@ -115,6 +115,7 @@ def get_players_data(cursor, room_id):
     FROM player
     JOIN room ON player.room_id = room.id
     WHERE room.id = %(room_id)s
+    ORDER BY player_id
     """
     cursor.execute(query, {"room_id": room_id})
     return cursor.fetchall()
@@ -213,6 +214,7 @@ def get_name_by_id(cursor, owner_id):
         """
     cursor.execute(query, {'owner_id': owner_id})
     return cursor.fetchone()['name']
+
 
 @connection.connection_handler
 def set_room_params(cursor, room_data):
