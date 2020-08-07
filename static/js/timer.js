@@ -235,8 +235,7 @@ function theEnd() {
         let playerData = `<li>${playerPosition[0]} point(s) -  ${playerPosition[1]}</li>`
         endingListOfPlayers.insertAdjacentHTML('beforeend', playerData);
     }
-    let word = document.querySelector('.word');
-    word.innerHTML = '';
+
     let round = document.querySelector('.round');
     round.innerHTML = '';
 }

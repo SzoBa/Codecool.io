@@ -32,5 +32,5 @@ INSERT INTO public.words (id, text) VALUES (20, 'request');
 INSERT INTO public.words (id, text) VALUES (21, 'server');
 INSERT INTO public.words (id, text) VALUES (22, 'accept');
 INSERT INTO public.words (id, text) VALUES (23, 'JSON');
-INSERT INTO public.words (id, text) VALUES (24, 'access');
+INSERT INTO public.words (id, text) VALUES (24, 'SCRUM');
 INSERT INTO public.words (id, text) VALUES (25, 'reset');
